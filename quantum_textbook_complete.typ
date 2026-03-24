@@ -2012,3 +2012,503 @@ Result: Beam splits into two (for spin-1/2), corresponding to $m = ±1/2$.
 
 #pagebreak()
 
+
+= Chapter 6: Identical Particles and Many-Body Systems (Dimension 3)
+
+== Introduction
+
+Up to now, we've considered single particles. But most interesting quantum systems involve many particles: atoms have multiple electrons, molecules contain many atoms, solids have ~10²³ particles. When particles are indistinguishable, quantum mechanics imposes strict symmetry requirements that have no classical analog.
+
+These symmetry requirements lead to two fundamentally different types of particles: *bosons* (symmetric wavefunctions) and *fermions* (antisymmetric wavefunctions). This distinction underlies the periodic table, determines whether matter is stable, explains superconductivity, and governs the behavior of quantum gases.
+
+== Indistinguishability in Classical vs Quantum Mechanics
+
+=== Classical Distinguishability
+
+Classically, identical particles can be tracked by following trajectories. Even if particles have identical intrinsic properties, we can label them: "This is particle 1, that is particle 2."
+
+Phase space for $N$ particles: $(bold(r)_1, bold(p)_1, ..., bold(r)_N, bold(p)_N)$
+
+=== Quantum Indistinguishability
+
+In quantum mechanics, there are no trajectories. If two particles have identical intrinsic properties (mass, charge, spin), they are *fundamentally indistinguishable*.
+
+Hilbert space for $N$ distinguishable particles:
+$ cal(H)_N = cal(H)_1 ⊗ cal(H)_2 ⊗ ... ⊗ cal(H)_N $
+
+But for indistinguishable particles, only *symmetric* or *antisymmetric* subspaces are physical.
+
+== Permutation Symmetry
+
+=== The Exchange Operator
+
+Define permutation operator $hat(P)_(i j)$ that exchanges particles $i$ and $j$:
+$ hat(P)_(i j) psi(bold(r)_1, ..., bold(r)_i, ..., bold(r)_j, ..., bold(r)_N) = psi(bold(r)_1, ..., bold(r)_j, ..., bold(r)_i, ..., bold(r)_N) $
+
+Properties:
+- Hermitian: $hat(P)_(i j)^† = hat(P)_(i j)$
+- $hat(P)_(i j)^2 = hat(I)$ (exchanging twice returns original)
+- Eigenvalues: $λ = ±1$
+
+Since particles are indistinguishable, $hat(P)_(i j)$ must commute with all physical operators:
+$ [hat(P)_(i j), hat(H)] = 0 $
+
+Therefore eigenstates of $hat(H)$ can be chosen as eigenstates of $hat(P)_(i j)$.
+
+#concept-box("Symmetrization Postulate")[
+  For a system of $N$ identical particles, the wavefunction must be either:
+  
+  *Symmetric* (eigenvalue +1): 
+  $ hat(P)_(i j) psi = +psi quad "for all" i, j $
+  These are *bosons* (integer spin: 0, 1, 2, ...)
+  
+  *Antisymmetric* (eigenvalue −1):
+  $ hat(P)_(i j) psi = -psi quad "for all" i, j $
+  These are *fermions* (half-integer spin: 1/2, 3/2, ...)
+  
+  This is the *spin-statistics theorem*, proven rigorously in relativistic quantum field theory.
+]
+
+== Two-Particle Systems
+
+=== Symmetric States (Bosons)
+
+For two identical bosons:
+$ psi^+(bold(r)_1, bold(r)_2) = (1)/(sqrt(2))(phi_a(bold(r)_1) phi_b(bold(r)_2) + phi_a(bold(r)_2) phi_b(bold(r)_1)) $
+
+If $phi_a = phi_b$:
+$ psi^+(bold(r)_1, bold(r)_2) = phi_a(bold(r)_1) phi_a(bold(r)_2) $
+
+Multiple bosons CAN occupy the same quantum state.
+
+=== Antisymmetric States (Fermions)
+
+For two identical fermions:
+$ psi^-(bold(r)_1, bold(r)_2) = (1)/(sqrt(2))(phi_a(bold(r)_1) phi_b(bold(r)_2) - phi_a(bold(r)_2) phi_b(bold(r)_1)) $
+
+If $phi_a = phi_b$:
+$ psi^-(bold(r)_1, bold(r)_2) = 0 $
+
+This is the *Pauli exclusion principle*: No two fermions can occupy the same quantum state!
+
+#example-box("6.1")[
+  Two electrons (spin-1/2 fermions) in a 1D box:
+  
+  Complete wavefunction = spatial × spin
+  
+  If spins are parallel (both $|↑〉$ or both $|↓〉$):
+  Spin part is symmetric, so spatial part MUST be antisymmetric:
+  $ psi_"space"^- (x_1, x_2) = (1)/(sqrt(2))(phi_n(x_1) phi_m(x_2) - phi_n(x_2) phi_m(x_1)) $
+  with $n ≠ m$ (different spatial states required).
+  
+  If spins are antiparallel (singlet state):
+  Spin part is antisymmetric, so spatial part MUST be symmetric:
+  $ psi_"space"^+ (x_1, x_2) = (1)/(sqrt(2))(phi_n(x_1) phi_m(x_2) + phi_n(x_2) phi_m(x_1)) $
+  Can have $n = m$ (same spatial state allowed).
+]
+
+== Slater Determinants
+
+=== N Fermions
+
+For $N$ fermions in single-particle states $phi_1, phi_2, ..., phi_N$, the properly antisymmetrized wavefunction is:
+
+$ psi(bold(r)_1, ..., bold(r)_N) = (1)/(sqrt(N!)) mat(delim: "|",
+  phi_1(bold(r)_1), phi_1(bold(r)_2), ..., phi_1(bold(r)_N);
+  phi_2(bold(r)_1), phi_2(bold(r)_2), ..., phi_2(bold(r)_N);
+  dots.v, dots.v, dots.down, dots.v;
+  phi_N(bold(r)_1), phi_N(bold(r)_2), ..., phi_N(bold(r)_N)
+) $
+
+This is a *Slater determinant*.
+
+Properties:
+1. Automatically antisymmetric under particle exchange
+2. Vanishes if any two single-particle states are identical (Pauli exclusion)
+3. Normalization factor: $1\/sqrt(N!)$
+
+== Exchange Interaction
+
+Even without direct interactions, indistinguishability creates an effective "exchange force."
+
+#example-box("6.2")[
+  Two electrons in hydrogen molecule $H_2$:
+  
+  Neglecting Coulomb repulsion, Hamiltonian:
+  $ hat(H) = hat(H)_1 + hat(H)_2 $
+  
+  where $hat(H)_i$ is single-electron Hamiltonian (attraction to both nuclei).
+  
+  Spatial wavefunctions centered on nuclei A and B: $phi_A$, $phi_B$
+  
+  Singlet (antisymmetric spin, symmetric space):
+  $ psi_"singlet" = (1)/(sqrt(2))(phi_A(1) phi_B(2) + phi_A(2) phi_B(1)) ⊗ (1)/(sqrt(2))(|↑↓〉- |↓↑〉) $
+  
+  Triplet (symmetric spin, antisymmetric space):
+  $ psi_"triplet" = (1)/(sqrt(2))(phi_A(1) phi_B(2) - phi_A(2) phi_B(1)) ⊗ "triplet spin" $
+  
+  Energy difference:
+  $ E_"singlet" - E_"triplet" = -2K $
+  
+  where $K = integral phi_A^* (1) phi_B^* (2) V(1,2) phi_B(1) phi_A(2) d^3 r_1 d^3 r_2$ is the *exchange integral*.
+  
+  Singlet is lower energy → chemical bond forms!
+]
+
+== Second Quantization
+
+=== Creation and Annihilation Operators
+
+Instead of tracking particle positions, track occupation numbers of single-particle states.
+
+*Fock space:*
+$ cal(F) = cal(H)_0 ⊕ cal(H)_1 ⊕ cal(H)_2 ⊕ ... $
+
+Occupation number representation: $ |n_1, n_2, n_3, ...〉$ where $n_i$ = number of particles in state $i$.
+
+*Bosons:* $n_i = 0, 1, 2, 3, ...$ (unlimited)
+
+*Fermions:* $n_i = 0, 1$ only (Pauli exclusion)
+
+=== Boson Operators
+
+Creation: $hat(a)_i^† |n_i〉= sqrt(n_i + 1) |n_i + 1〉$
+
+Annihilation: $hat(a)_i |n_i〉= sqrt(n_i) |n_i - 1〉$
+
+Commutators:
+$ [hat(a)_i, hat(a)_j^†] = delta_(i j), quad [hat(a)_i, hat(a)_j] = 0, quad [hat(a)_i^†, hat(a)_j^†] = 0 $
+
+Number operator: $hat(N)_i = hat(a)_i^† hat(a)_i$
+
+=== Fermion Operators
+
+Creation: $hat(c)_i^† |n_i〉= (-1)^(sum_(j<i) n_j) sqrt(1 - n_i) |n_i + 1〉$
+
+Annihilation: $hat(c)_i |n_i〉= (-1)^(sum_(j<i) n_j) sqrt(n_i) |n_i - 1〉$
+
+Anticommutators:
+$ {hat(c)_i, hat(c)_j^†} = delta_(i j), quad {hat(c)_i, hat(c)_j} = 0, quad {hat(c)_i^†, hat(c)_j^†} = 0 $
+
+The anticommutators automatically enforce Pauli exclusion: $hat(c)_i^† hat(c)_i^† = 0$.
+
+== Applications
+
+=== Helium Atom Ground State
+
+Two electrons, Hamiltonian:
+$ hat(H) = -(ℏ^2)/(2m) nabla_1^2 - (ℏ^2)/(2m) nabla_2^2 - (2e^2)/(r_1) - (2e^2)/(r_2) + (e^2)/(|bold(r)_1 - bold(r)_2|) $
+
+Ground state: Both electrons in 1s orbital, spins must be antiparallel (singlet):
+$ psi_0(bold(r)_1, bold(r)_2) = phi_(1s)(bold(r)_1) phi_(1s)(bold(r)_2) (|↑↓〉- |↓↑〉)/(sqrt(2)) $
+
+Without electron-electron repulsion: $E ≈ 2 × (-54.4 "eV") = -108.8 "eV"$
+
+With repulsion (variational calculation): $E ≈ -79 "eV"$
+
+Experimental: $E = -79.0 "eV"$ ✓
+
+=== Periodic Table Structure
+
+Electrons fill atomic orbitals following:
+1. Pauli exclusion principle
+2. Aufbau principle (lowest energy first)
+3. Hund's rules (maximize total spin for degenerate orbitals)
+
+Shell structure: 1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s² ...
+
+Noble gases have closed shells → chemically inert.
+
+== Chapter Summary
+
+- Identical particles are fundamentally indistinguishable in quantum mechanics
+- Wavefunctions must be symmetric (bosons) or antisymmetric (fermions) under particle exchange
+- Spin-statistics theorem: Integer spin → bosons, half-integer spin → fermions
+- Pauli exclusion principle: No two fermions in same quantum state
+- Slater determinants properly antisymmetrize fermion wavefunctions
+- Exchange interaction arises from indistinguishability, not direct forces
+- Second quantization uses creation/annihilation operators, natural for many-body systems
+- Fock space describes variable particle number
+- Applications: chemical bonds, helium atom, periodic table structure
+
+== Exercises
+
+#exercise-box("6.1")[
+  Write the properly symmetrized/antisymmetrized wavefunction for two identical particles in states $phi_a$ and $phi_b$ for:
+  a) Two bosons
+  b) Two fermions
+  
+  What happens if $phi_a = phi_b$ in each case?
+]
+
+#exercise-box("6.2")[
+  For the Slater determinant of three fermions, explicitly write out all 6 terms and verify antisymmetry under exchange of any two particles.
+]
+
+#exercise-box("6.3")[
+  Show that $hat(c)_i^† hat(c)_i^† = 0$ using the anticommutation relations ${hat(c)_i, hat(c)_i^†} = 1$ and ${hat(c)_i^†, hat(c)_i^†} = 0$.
+]
+
+#exercise-box("6.4")[
+  Calculate the ground state energy of the helium atom in the approximation that neglects electron-electron repulsion. Compare with the experimental value.
+]
+
+#exercise-box("6.5")[
+  For two spin-1/2 fermions, show that:
+  - Singlet state has antisymmetric spin, must have symmetric spatial part
+  - Triplet states have symmetric spin, must have antisymmetric spatial part
+]
+
+#exercise-box("6.6")[
+  Express the number operator $hat(N) = sum_i hat(a)_i^† hat(a)_i$ in terms of field operators and show it commutes with the Hamiltonian for non-interacting particles.
+]
+
+#exercise-box("6.7")[
+  *Challenge:* Derive the exchange integral $K$ for two electrons and show that singlet has lower energy than triplet for typical molecular potentials.
+]
+
+#pagebreak()
+
+= Chapter 7: Approximation Methods—Perturbation Theory (Dimension 9)
+
+== Introduction
+
+Most quantum systems cannot be solved exactly. The hydrogen atom, harmonic oscillator, and particle in a box are exceptional—they have enough symmetry for analytical solutions. For everything else, we need approximation methods.
+
+Perturbation theory is the workhorse of quantum mechanics. The idea: start with a solvable "unperturbed" problem, then treat the "perturbation" as a small correction. Expand in powers of a small parameter, calculate corrections order by order.
+
+This chapter covers time-independent and time-dependent perturbation theory, leading to Fermi's golden rule—one of the most useful results in all of physics.
+
+== Time-Independent Perturbation Theory
+
+=== Non-Degenerate Case
+
+Hamiltonian:
+$ hat(H) = hat(H)_0 + lambda hat(H)_1 $
+
+where:
+- $hat(H)_0$ is solvable: $hat(H)_0 |n^((0))〉= E_n^((0)) |n^((0))〉$
+- $lambda$ is a small dimensionless parameter
+- $hat(H)_1$ is the perturbation
+
+Expand energy and eigenstates in powers of $lambda$:
+$ E_n &= E_n^((0)) + lambda E_n^((1)) + lambda^2 E_n^((2)) + ... \
+|n〉&= |n^((0))〉+ lambda |n^((1))〉+ lambda^2 |n^((2))〉+ ... $
+
+#concept-box("First-Order Perturbation Theory")[
+  Energy correction:
+  $ E_n^((1)) = 〈n^((0)) | hat(H)_1 | n^((0))〉$
+  
+  State correction:
+  $ |n^((1))〉= sum_(k ≠ n) (〈k^((0)) | hat(H)_1 | n^((0))〉)/(E_n^((0)) - E_k^((0))) |k^((0))〉$
+  
+  The perturbation mixes in other unperturbed states, with amplitudes inversely proportional to energy differences.
+]
+
+*Derivation:*
+
+Schrödinger equation:
+$ (hat(H)_0 + lambda hat(H)_1)(|n^((0))〉+ lambda |n^((1))〉+ ...) = (E_n^((0)) + lambda E_n^((1)) + ...)(|n^((0))〉+ lambda |n^((1))〉+ ...) $
+
+Order $lambda^0$: $hat(H)_0 |n^((0))〉= E_n^((0)) |n^((0))〉$ ✓ (satisfied by assumption)
+
+Order $lambda^1$:
+$ hat(H)_0 |n^((1))〉+ hat(H)_1 |n^((0))〉= E_n^((0)) |n^((1))〉+ E_n^((1)) |n^((0))〉$
+
+Project onto $〈n^((0))|$:
+$ 〈n^((0)) | hat(H)_0 | n^((1))〉+ 〈n^((0)) | hat(H)_1 | n^((0))〉= E_n^((0)) 〈n^((0)) | n^((1))〉+ E_n^((1)) $
+
+Using $hat(H)_0^† = hat(H)_0$:
+$ E_n^((0)) 〈n^((0)) | n^((1))〉+ 〈n^((0)) | hat(H)_1 | n^((0))〉= E_n^((0)) 〈n^((0)) | n^((1))〉+ E_n^((1)) $
+
+Therefore:
+$ E_n^((1)) = 〈n^((0)) | hat(H)_1 | n^((0))〉$
+
+For state correction, expand $ |n^((1))〉= sum_k c_k |k^((0))〉$ and project onto $〈k^((0))|$ with $k ≠ n$:
+$ c_k = (〈k^((0)) | hat(H)_1 | n^((0))〉)/(E_n^((0)) - E_k^((0))) $
+
+#example-box("7.1")[
+  Anharmonic oscillator: $hat(H) = hat(H)_0 + lambda x^4$ where $hat(H)_0$ is harmonic oscillator.
+  
+  Ground state energy correction:
+  $ E_0^((1)) = 〈0 | x^4 | 0〉$
+  
+  Using $x = sqrt((ℏ)/(2m omega))(hat(a) + hat(a)^†)$:
+  $ x^4 = ((ℏ)/(2m omega))^2 (hat(a) + hat(a)^†)^4 $
+  
+  Expanding and using $hat(a) |0〉= 0$, $hat(a)^† |0〉= |1〉$:
+  $ E_0^((1)) = ((ℏ)/(2m omega))^2 〈0 | (hat(a) + hat(a)^†)^4 | 0〉= (3ℏ^2)/(4m^2 omega^2) $
+]
+
+=== Second-Order Energy Correction
+
+$ E_n^((2)) = sum_(k ≠ n) (|〈k^((0)) | hat(H)_1 | n^((0))〉|^2)/(E_n^((0)) - E_k^((0))) $
+
+Note: Sum includes both $E_k < E_n$ (negative denominators, positive contribution to energy) and $E_k > E_n$ (positive denominators, negative contribution).
+
+Generally: Perturbations lower ground state energy, raise excited state energies.
+
+=== Degenerate Perturbation Theory
+
+If unperturbed level $E_n^((0))$ is degenerate with multiplicity $g$, first-order formulas fail (denominators vanish).
+
+Solution: Diagonalize $hat(H)_1$ within the degenerate subspace.
+
+*Procedure:*
+1. Find all states $ |n, alpha〉$ ($alpha = 1, ..., g$) with energy $E_n^((0))$
+2. Construct $g times g$ matrix: $H_(1, alpha beta) = 〈n, alpha | hat(H)_1 | n, beta〉$
+3. Diagonalize: Find eigenvalues $E_n^((1), alpha)$ and eigenvectors
+4. Use these as "correct zeroth-order" states
+
+#example-box("7.2")[
+  Hydrogen atom in electric field $bold(E) = E_0 hat(z)$ (Stark effect):
+  
+  Perturbation: $hat(H)_1 = e E_0 z$
+  
+  Ground state ($n=1$, non-degenerate):
+  $ E_1^((1)) = 〈1s | e E_0 z | 1s〉= 0 $ (by parity)
+  
+  Second-order correction gives polarizability.
+  
+  First excited state ($n=2$, 4-fold degenerate: 2s, 2p_0, 2p_±1):
+  
+  Matrix elements: $〈2s | z | 2p_0〉≠ 0$ (both have $m=0$)
+  
+  Diagonalizing $hat(H)_1$ in this subspace splits degeneracy:
+  Linear Stark effect (first-order energy shift).
+]
+
+== Time-Dependent Perturbation Theory
+
+=== Interaction Picture Formulation
+
+Time-dependent Hamiltonian:
+$ hat(H)(t) = hat(H)_0 + hat(H)_"int"(t) $
+
+In interaction picture:
+$ i ℏ (d)/(d t) |psi_I(t)〉= hat(H)_I(t) |psi_I(t)〉$
+
+where $hat(H)_I(t) = U_0^†(t) hat(H)_"int"(t) U_0(t)$.
+
+Formal solution:
+$ |psi_I(t)〉= hat(U)_I(t, t_0) |psi_I(t_0)〉$
+
+where time evolution operator:
+$ hat(U)_I(t, t_0) = T exp(-(i)/(ℏ) integral_(t_0)^t hat(H)_I(t') d t') $
+
+($T$ = time-ordering operator)
+
+=== Perturbative Expansion
+
+Expand in powers of $hat(H)_"int"$:
+$ hat(U)_I(t, t_0) = 1 - (i)/(ℏ) integral_(t_0)^t hat(H)_I(t_1) d t_1 + ((-i)/(ℏ))^2 integral_(t_0)^t d t_1 integral_(t_0)^(t_1) d t_2 hat(H)_I(t_1) hat(H)_I(t_2) + ... $
+
+If initially in eigenstate $ |i〉$ of $hat(H)_0$, transition amplitude to $ |f〉$:
+
+*First order:*
+$ c_(f i)^((1))(t) = -(i)/(ℏ) integral_(t_0)^t 〈f | hat(H)_I(t') | i〉d t' $
+
+=== Constant Perturbation Turned On at $t=0$
+
+$ hat(H)_"int" = cases(
+  0 quad & t < 0,
+  hat(V) quad & t >= 0
+) $
+
+Transition amplitude:
+$ c_(f i)(t) = -(i)/(ℏ) integral_0^t 〈f | hat(V) | i〉e^(i omega_(f i) t') d t' $
+
+where $omega_(f i) = (E_f - E_i)/ℏ$.
+
+Evaluating integral:
+$ c_(f i)(t) = -(i)/(ℏ) V_(f i) (e^(i omega_(f i) t) - 1)/(i omega_(f i)) = -V_(f i) (e^(i omega_(f i) t) - 1)/(ℏ omega_(f i)) $
+
+Transition probability:
+$ P_(i → f)(t) = |c_(f i)(t)|^2 = (|V_(f i)|^2)/(ℏ^2 omega_(f i)^2) dot 2(1 - cos(omega_(f i) t)) = (4 |V_(f i)|^2)/(ℏ^2 omega_(f i)^2) sin^2((omega_(f i) t)/2) $
+
+== Fermi's Golden Rule
+
+For transitions to a continuum of final states with density $rho(E_f)$:
+
+Total transition rate:
+$ Gamma_(i → f) = (2pi)/(ℏ) |V_(f i)|^2 rho(E_f) $
+
+This is *Fermi's golden rule*, valid for:
+- Weak perturbation
+- Long times ($t >> ℏ/(E_f - E_i)$)
+- Continuum or near-continuum of final states
+
+#concept-box("Fermi's Golden Rule")[
+  Transition rate from initial state $ |i〉$ to final states in energy range:
+  
+  $ (d Gamma)/(d E_f) = (2pi)/(ℏ) |〈f | hat(V) | i〉|^2 rho(E_f) $
+  
+  where $rho(E_f)$ is density of final states.
+  
+  Units: $[Gamma] = "time"^(-1)$ (inverse lifetime)
+]
+
+#example-box("7.3")[
+  Spontaneous emission from excited atom:
+  
+  Atom in excited state $ |e〉$, photon vacuum $ |0〉$
+  
+  Final state: Atom in ground state $ |g〉$, one photon $ |bold(k), epsilon〉$
+  
+  Perturbation: Electron-photon interaction (electric dipole approximation)
+  $ hat(V) ∼ bold(d) dot bold(E) $
+  
+  Matrix element:
+  $ V_(f i) ∝ 〈g | bold(d) | e〉dot 〈1_(bold(k), epsilon) | bold(E) | 0〉$
+  
+  Photon density of states: $rho(omega) ∝ omega^2$
+  
+  Decay rate:
+  $ Gamma = (omega^3)/(3pi epsilon_0 ℏ c^3) |〈g | bold(d) | e〉|^2 $
+  
+  For hydrogen 2p→1s: $Gamma ≈ 6 × 10^8 "s"^(-1)$ → lifetime $tau = 1\/Gamma ≈ 1.6 "ns"$
+]
+
+== Chapter Summary
+
+- Perturbation theory handles small deviations from solvable problems
+- Time-independent: Expand $E_n = E_n^((0)) + lambda E_n^((1)) + lambda^2 E_n^((2)) + ...$
+- First-order energy: $E_n^((1)) = 〈n^((0)) | hat(H)_1 | n^((0))〉$
+- Second-order: $E_n^((2)) = sum_(k≠n) |〈k^((0)) | hat(H)_1 | n^((0))〉|^2 \/ (E_n^((0)) - E_k^((0)))$
+- Degenerate case requires diagonalizing $hat(H)_1$ within degenerate subspace
+- Time-dependent perturbation theory gives transition amplitudes
+- Fermi's golden rule: $Gamma = (2pi)/(ℏ) |V_(f i)|^2 rho(E_f)$ for continuum transitions
+- Applications: Stark effect, Zeeman effect, spontaneous emission, scattering
+
+== Exercises
+
+#exercise-box("7.1")[
+  For harmonic oscillator with perturbation $hat(H)_1 = lambda x^3$:
+  a) Calculate $E_0^((1))$ and $E_1^((1))$
+  b) Find $ |0^((1))〉$ to first order
+]
+
+#exercise-box("7.2")[
+  Hydrogen atom in weak uniform electric field $bold(E) = E_0 hat(z)$:
+  a) Show $E_1^((1)) = 0$ by parity
+  b) Calculate $E_1^((2))$ (second-order Stark effect)
+  c) For $n=2$ states, set up degenerate perturbation theory matrix
+]
+
+#exercise-box("7.3")[
+  Verify Fermi's golden rule gives correct units and interpret the factors:
+  - Why $rho(E_f)$ (density of states)?
+  - Why $|V_(f i)|^2$ (matrix element squared)?
+  - Why factor $2pi/ℏ$?
+]
+
+#exercise-box("7.4")[
+  Calculate the lifetime of hydrogen 2p state using Fermi's golden rule for spontaneous emission. Compare with experimental value $tau ≈ 1.6 "ns"$.
+]
+
+#exercise-box("7.5")[
+  *Challenge:* Derive the time-energy uncertainty relation from time-dependent perturbation theory by analyzing the width of the resonance.
+]
+
+#pagebreak()
+
