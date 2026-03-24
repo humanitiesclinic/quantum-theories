@@ -1024,3 +1024,442 @@ These refinements, explored in later chapters, showcase how quantum mechanics pr
 
 #pagebreak()
 
+
+= Chapter 3: Mathematical Foundations of Quantum Mechanics
+
+== Introduction
+
+Before exploring the variations in our 11-dimensional framework, we must establish the mathematical machinery that underlies all of quantum theory. This chapter develops the essential tools: Hilbert spaces, operators, measurement theory, and the foundational postulates of quantum mechanics.
+
+Unlike classical mechanics, where states are points in phase space, quantum states are vectors (or more precisely, rays) in an infinite-dimensional complex vector space. This mathematical structure, combined with the probability interpretation, gives quantum mechanics its distinctive character.
+
+== Hilbert Spaces
+
+=== Definition and Structure
+
+A Hilbert space $cal(H)$ is a complete inner product space over the complex numbers. For quantum mechanics:
+
+#concept-box("Hilbert Space Structure")[
+  A Hilbert space must have:
+  
+  1. *Vector space structure:* Linear combinations of states are states
+     $ alpha |psi〉+ beta |phi〉in cal(H) quad "for" alpha, beta in CC$
+  
+  2. *Inner product:* $〈phi | psi〉in CC$ satisfying:
+     - Conjugate symmetry: $〈phi | psi〉= 〈psi | phi〉^*$
+     - Linearity: $〈phi | alpha psi_1 + beta psi_2〉= alpha〈phi | psi_1〉+ beta〈phi | psi_2〉$
+     - Positive definiteness: $〈psi | psi〉>= 0$ with equality iff $ |psi〉= 0$
+  
+  3. *Completeness:* Every Cauchy sequence converges
+  
+  4. *Separability:* Countable dense subset exists (for quantum mechanics)
+]
+
+The norm induced by the inner product is $|| psi|| = sqrt(〈psi | psi〉)$.
+
+=== Examples of Hilbert Spaces
+
+*Finite-dimensional:* $CC^n$ with standard inner product
+$ 〈phi | psi〉= sum_(i=1)^n phi_i^* psi_i $
+
+Used for spin systems, qubits, finite-level atoms.
+
+*$L^2(RR^3)$:* Square-integrable functions
+$ cal(H) = {psi: RR^3 → CC : integral_RR^3 |psi(bold(r))|^2 d^3 r < ∞} $
+
+Inner product:
+$ 〈phi | psi〉= integral_RR^3 phi^* (bold(r)) psi(bold(r)) d^3 r $
+
+This is the primary Hilbert space for single-particle quantum mechanics.
+
+*Fock space:* Direct sum for variable particle number
+$ cal(F) = CC ⊕ cal(H)_1 ⊕ cal(H)_2 ⊕ ... $
+
+Essential for quantum field theory (covered in Chapter 10).
+
+#example-box("3.1")[
+  For a particle in a 1D box of length $L$, the Hilbert space is $L^2([0,L])$.
+  
+  Energy eigenstates:
+  $ psi_n(x) = sqrt(2/L) sin((n pi x)/L), quad n = 1,2,3,... $
+  
+  These form an orthonormal basis:
+  $ 〈psi_m | psi_n〉= integral_0^L psi_m^* (x) psi_n(x) d x = delta_(m n) $
+  
+  Any state can be expanded:
+  $ |psi〉= sum_(n=1)^∞ c_n |psi_n〉, quad c_n = 〈psi_n | psi〉$
+]
+
+=== Dirac Notation
+
+Paul Dirac introduced the bra-ket notation, which elegantly separates vectors from functionals:
+
+- *Ket:* $ |psi〉in cal(H)$ is a state vector
+- *Bra:* $〈psi |in cal(H)^*$ is the dual (a linear functional)
+- *Inner product:* $〈phi | psi〉in CC$ is the action of $〈phi |$ on $ |psi〉$
+- *Outer product:* $ |psi〉〈phi |$ is an operator on $cal(H)$
+
+The bra corresponding to $ |psi〉$ is defined by:
+$ 〈phi |psi〉≡〈psi | phi〉^* $
+
+This notation makes calculations transparent and emphasizes the physical meaning.
+
+== Operators on Hilbert Space
+
+=== Linear Operators
+
+An operator $hat(A): cal(H) → cal(H)$ is linear if:
+$ hat(A)(alpha |psi〉+ beta |phi〉) = alpha hat(A) |psi〉+ beta hat(A) |phi〉$
+
+In Dirac notation, matrix elements are:
+$ A_(i j) = 〈phi_i | hat(A) | phi_j〉$
+
+#example-box("3.2")[
+  Position operator $hat(x)$ in position representation:
+  $ hat(x) psi(x) = x psi(x) $
+  
+  Acts by multiplication. Matrix element between momentum eigenstates:
+  $ 〈p' | hat(x) | p〉= i ℏ (d)/(d p) delta(p - p') $
+  
+  Momentum operator $hat(p) = -i ℏ d/(d x)$ in position representation:
+  $ hat(p) psi(x) = -i ℏ (d psi)/(d x) $
+]
+
+=== Hermitian (Self-Adjoint) Operators
+
+The adjoint $hat(A)^†$ of operator $hat(A)$ satisfies:
+$ 〈phi | hat(A) psi〉= 〈hat(A)^† phi | psi〉$
+
+An operator is *Hermitian* (or self-adjoint) if $hat(A)^† = hat(A)$.
+
+#concept-box("Fundamental Theorem")[
+  Hermitian operators have:
+  
+  1. *Real eigenvalues:* If $hat(A) |a〉= a |a〉$, then $a in RR$
+  
+  2. *Orthogonal eigenvectors:* If $hat(A) |a〉= a |a〉$ and $hat(A) |b〉= b |b〉$ with $a ≠ b$, then $〈a | b〉= 0$
+  
+  3. *Complete basis:* Eigenvectors span the Hilbert space (for bounded operators)
+  
+  These properties make Hermitian operators suitable for representing physical observables.
+]
+
+*Proof of reality:* 
+$ a = (〈a | hat(A) | a〉)/(〈a | a〉) = (〈hat(A) a | a〉)/(〈a | a〉) = (〈a | hat(A)^† | a〉)/(〈a | a〉)^* = a^* $
+
+Therefore $a = a^*$, so $a in RR$.
+
+=== Unitary Operators
+
+An operator $hat(U)$ is unitary if:
+$ hat(U)^† hat(U) = hat(U) hat(U)^† = hat(I) $
+
+Unitary operators:
+- Preserve inner products: $〈hat(U) phi | hat(U) psi〉= 〈phi | psi〉$
+- Preserve norms: $||hat(U) psi|| = ||psi||$
+- Represent symmetry transformations and time evolution
+
+The time evolution operator $U(t) = e^(-i hat(H) t / ℏ)$ is unitary because $hat(H)$ is Hermitian.
+
+=== Projection Operators
+
+For a normalized state $ |psi〉$, the projection operator is:
+$ hat(P)_psi = |psi〉〈psi |$
+
+Properties:
+- Hermitian: $hat(P)^† = hat(P)$
+- Idempotent: $hat(P)^2 = hat(P)$
+- Projects onto subspace spanned by $ |psi〉$
+
+Used extensively in measurement theory.
+
+== Commutators and Uncertainty Relations
+
+=== The Commutator
+
+The commutator of two operators:
+$ [hat(A), hat(B)] = hat(A) hat(B) - hat(B) hat(A) $
+
+If $[hat(A), hat(B)] = 0$, the operators commute and can be simultaneously diagonalized.
+
+Key examples:
+
+*Canonical commutation relations:*
+$ [hat(x)_i, hat(p)_j] = i ℏ delta_(i j) $
+
+*Angular momentum:*
+$ [hat(L)_i, hat(L)_j] = i ℏ epsilon_(i j k) hat(L)_k $
+
+*Harmonic oscillator:*
+$ [hat(a), hat(a)^†] = 1 $
+
+where $hat(a) = (hat(x) + i hat(p))/(sqrt(2))$ (in appropriate units).
+
+=== Heisenberg Uncertainty Principle
+
+For any two observables $hat(A)$ and $hat(B)$:
+
+#concept-box("Generalized Uncertainty Relation")[
+  $ Delta A dot Delta B >= (1)/(2) |〈[hat(A), hat(B)]〉| $
+  
+  where:
+  - $Delta A = sqrt(〈hat(A)^2〉- 〈hat(A)〉^2)$ is the standard deviation
+  - $〈...〉$ denotes expectation value in the state of interest
+]
+
+*Proof sketch:*
+
+Define $|alpha〉= (hat(A) - 〈hat(A)〉) |psi〉$ and $ |beta〉= (hat(B) - 〈hat(B)〉) |psi〉$.
+
+By Schwarz inequality:
+$ ||alpha||^2 dot ||beta||^2 >= |〈alpha | beta〉|^2 $
+
+The left side gives $(Delta A)^2 (Delta B)^2$.
+
+The right side can be written as:
+$ |〈alpha | beta〉|^2 = |〈psi | (hat(A) - 〈hat(A)〉)(hat(B) - 〈hat(B)〉) | psi〉|^2 $
+
+Separating into symmetric and antisymmetric parts:
+$ 〈alpha | beta〉= (1)/(2)〈{hat(A), hat(B)}〉+ (1)/(2)〈[hat(A), hat(B)]〉$
+
+where ${hat(A), hat(B)} = hat(A) hat(B) + hat(B) hat(A)$ is the anticommutator.
+
+Using $|z|^2 >= |"Im"(z)|^2 = ((z - z^*) / (2i))^2$:
+
+$ |〈alpha | beta〉|^2 >= ((1)/(2) |〈[hat(A), hat(B)]〉|)^2 $
+
+Therefore:
+$ Delta A dot Delta B >= (1)/(2) |〈[hat(A), hat(B)]〉| $
+
+#example-box("3.3")[
+  For position and momentum:
+  $ [hat(x), hat(p)] = i ℏ $
+  
+  Therefore:
+  $ Delta x dot Delta p >= (ℏ)/(2) $
+  
+  This is the famous Heisenberg uncertainty principle. It's not a statement about measurement disturbance, but a fundamental property of quantum states.
+  
+  The minimum uncertainty state (equality) is a Gaussian wavepacket, such as the harmonic oscillator ground state.
+]
+
+=== Time-Energy Uncertainty
+
+For time-independent systems, there's a related uncertainty relation:
+$ Delta E dot Delta t >= (ℏ)/(2) $
+
+where $Delta t$ is the characteristic time for expectation values to change significantly:
+$ Delta t = (Delta A)/(|d〈hat(A)〉\/ d t|) $
+
+This relates energy uncertainty to the timescale of dynamics.
+
+== The Postulates of Quantum Mechanics
+
+Having developed the mathematical framework, we can now state the fundamental postulates:
+
+#concept-box("The Five Postulates")[
+  *Postulate 1 (States):* The state of a quantum system is represented by a unit vector $ |psi〉$ in a Hilbert space $cal(H)$. Physically equivalent states differ only by a phase factor $e^(i theta)$.
+  
+  *Postulate 2 (Observables):* Physical observables correspond to Hermitian operators on $cal(H)$. The possible measurement outcomes are the eigenvalues of the operator.
+  
+  *Postulate 3 (Measurement):* When measuring observable $hat(A)$ on state $ |psi〉$:
+  - The probability of obtaining eigenvalue $a_n$ is $|〈a_n | psi〉|^2$
+  - After measurement yielding $a_n$, the state collapses to $ |a_n〉$
+  
+  *Postulate 4 (Time Evolution):* The time evolution of a closed system is governed by the Schrödinger equation:
+  $ i ℏ (d |psi〉)/(d t) = hat(H) |psi〉$
+  where $hat(H)$ is the Hamiltonian operator.
+  
+  *Postulate 5 (Composite Systems):* The Hilbert space of a composite system is the tensor product of the component Hilbert spaces:
+  $ cal(H)_"total" = cal(H)_A ⊗ cal(H)_B $
+]
+
+These postulates, though concise, contain the entire structure of quantum mechanics. Everything else—interference, entanglement, uncertainty—follows from them.
+
+== Measurement Theory
+
+=== The Born Rule
+
+Given a normalized state $ |psi〉= sum_n c_n |phi_n〉$ where $ |phi_n〉$ are eigenstates of observable $hat(A)$ with eigenvalues $a_n$:
+
+Probability of measuring $a_n$:
+$ P(a_n) = |c_n|^2 = |〈phi_n | psi〉|^2 $
+
+Expectation value:
+$ 〈hat(A)〉= sum_n a_n P(a_n) = sum_n a_n |〈phi_n | psi〉|^2 = 〈psi | hat(A) | psi〉$
+
+This is the *Born rule*, fundamental to quantum probability.
+
+=== Measurement and Collapse
+
+The measurement process has two distinct aspects:
+
+1. *Probabilistic outcome:* Measurement of $hat(A)$ yields eigenvalue $a_n$ with probability $|〈a_n | psi〉|^2$
+
+2. *State reduction:* After measurement, the state becomes:
+   $ |psi〉→ |psi'〉= ( |a_n〉〈a_n | psi〉)/(|〈a_n | psi〉|) = |a_n〉$
+   
+This "collapse" is instantaneous and non-unitary, unlike Schrödinger evolution.
+
+#example-box("3.4")[
+  Stern-Gerlach experiment: Measure spin of electron along $z$-axis.
+  
+  Initial state: $ |psi〉= (1)/(sqrt(2))(|↑〉+ |↓〉)$
+  
+  Observable: $hat(S)_z = (ℏ)/(2) σ_z$ with eigenvalues $±ℏ/2$
+  
+  Probabilities:
+  $ P(↑) = |〈↑| psi〉|^2 = 1/2, quad P(↓) = |〈↓| psi〉|^2 = 1/2 $
+  
+  If measurement yields "spin up" ($+ℏ/2$), state after measurement:
+  $ |psi'〉= |↑〉$
+  
+  Subsequent measurement of $hat(S)_z$ will yield "spin up" with certainty.
+]
+
+=== Compatible and Incompatible Observables
+
+Two observables $hat(A)$ and $hat(B)$ are *compatible* if $[hat(A), hat(B)] = 0$.
+
+Compatible observables:
+- Can be simultaneously measured
+- Share a common eigenbasis
+- Uncertainty relation becomes equality: $Delta A dot Delta B = 0$ is possible
+
+Incompatible observables ($[hat(A), hat(B)] ≠ 0$):
+- Cannot be simultaneously measured with arbitrary precision
+- No common eigenbasis
+- Fundamental quantum uncertainty: $Delta A dot Delta B >= (ℏ)/(2) |[hat(A), hat(B)]|$
+
+== Basis Representations
+
+=== Position Representation
+
+Eigenstates of position: $hat(bold(r)) |bold(r)〉= bold(r) |bold(r)〉$
+
+Completeness:
+$ integral d^3 r |bold(r)〉〈bold(r)| = hat(I) $
+
+Any state can be expanded:
+$ |psi〉= integral d^3 r |bold(r)〉〈bold(r) | psi〉= integral d^3 r psi(bold(r)) |bold(r)〉$
+
+where $psi(bold(r)) = 〈bold(r) | psi〉$ is the position-space wavefunction.
+
+=== Momentum Representation
+
+Eigenstates of momentum: $hat(bold(p)) |bold(p)〉= bold(p) |bold(p)〉$
+
+Completeness:
+$ integral d^3 p |bold(p)〉〈bold(p)| = hat(I) $
+
+Momentum-space wavefunction:
+$ tilde(psi)(bold(p)) = 〈bold(p) | psi〉$
+
+=== Fourier Transform Connection
+
+The two representations are connected by Fourier transform:
+
+$ tilde(psi)(bold(p)) = (1)/((2pi ℏ)^(3/2)) integral d^3 r space e^(-i bold(p) dot bold(r) / ℏ) psi(bold(r)) $
+
+$ psi(bold(r)) = (1)/((2pi ℏ)^(3/2)) integral d^3 p space e^(i bold(p) dot bold(r) / ℏ) tilde(psi)(bold(p)) $
+
+The overlap between position and momentum eigenstates:
+$ 〈bold(r) | bold(p)〉= (1)/((2pi ℏ)^(3/2)) e^(i bold(p) dot bold(r) / ℏ) $
+
+#example-box("3.5")[
+  Gaussian wavepacket in position space:
+  $ psi(x) = ((2 alpha)/(pi))^(1/4) e^(-alpha x^2) $
+  
+  Fourier transforming to momentum space:
+  $ tilde(psi)(p) = (1)/((2pi alpha ℏ^2))^(1/4) e^(-p^2 / (4 alpha ℏ^2)) $
+  
+  Also Gaussian! This is why Gaussian states minimize the uncertainty product.
+  
+  Widths: $Delta x = 1/(2sqrt(alpha))$, $Delta p = sqrt(alpha) ℏ$
+  
+  Product: $Delta x Delta p = ℏ/2$ ✓ (minimum uncertainty)
+]
+
+== Chapter Summary
+
+- Quantum states are vectors in a complex Hilbert space $cal(H)$ with inner product structure
+- Key examples: $CC^n$ (finite-dimensional), $L^2(RR^3)$ (single particle), Fock space (field theory)
+- Dirac notation separates kets $ |psi〉$ (vectors) from bras $〈psi |$ (dual functionals)
+- Physical observables correspond to Hermitian operators with real eigenvalues
+- Unitary operators preserve inner products and represent symmetries/time evolution
+- Commutator $[hat(A), hat(B)]$ measures non-commutativity, leads to uncertainty relations
+- Heisenberg uncertainty: $Delta A Delta B >= (1)/(2) |〈[hat(A), hat(B)]〉|$
+- Five postulates encode the complete structure of quantum mechanics
+- Born rule: Probability $P(a_n) = |〈a_n | psi〉|^2$, expectation $〈hat(A)〉= 〈psi | hat(A) | psi〉$
+- Measurement causes state collapse (reduction) to eigenstate
+- Position and momentum representations connected by Fourier transform
+
+== Exercises
+
+#exercise-box("3.1")[
+  Prove that the eigenvalues of a Hermitian operator are real. Then prove that eigenvectors corresponding to different eigenvalues are orthogonal.
+]
+
+#exercise-box("3.2")[
+  Show that the time evolution operator $U(t) = e^(-i hat(H) t / ℏ)$ is unitary given that $hat(H)$ is Hermitian. (Hint: Use $e^(A^†) = (e^A)^†$)
+]
+
+#exercise-box("3.3")[
+  Calculate the commutator $[hat(x)^2, hat(p)]$ and $[hat(x), hat(p)^2]$. Use these to find $[hat(x)^2, hat(p)^2]$.
+]
+
+#exercise-box("3.4")[
+  For angular momentum operators satisfying $[hat(L)_i, hat(L)_j] = i ℏ epsilon_(i j k) hat(L)_k$:
+  
+  a) Show that $[hat(L)^2, hat(L)_z] = 0$ where $hat(L)^2 = hat(L)_x^2 + hat(L)_y^2 + hat(L)_z^2$
+  b) What does this imply about simultaneous measurability?
+  c) Can $hat(L)_x$ and $hat(L)_z$ be simultaneously measured?
+]
+
+#exercise-box("3.5")[
+  A particle is in the state:
+  $ |psi〉= (3)/(sqrt(50)) |1〉+ (4)/(sqrt(50)) |2〉+ (5)/(sqrt(50)) |3〉$
+  
+  where $ |n〉$ are energy eigenstates with energies $E_n = n^2 ℏ omega$.
+  
+  a) Verify normalization
+  b) Calculate $〈hat(H)〉$
+  c) Calculate $Delta E$
+  d) What are the probabilities of measuring each energy?
+]
+
+#exercise-box("3.6")[
+  Prove the Schwarz inequality: $|〈phi | psi〉|^2 <= 〈phi | phi〉〈psi | psi〉$
+  
+  (Hint: Consider $〈phi + lambda psi | phi + lambda psi〉>= 0$ for all $lambda in CC$)
+]
+
+#exercise-box("3.7")[
+  For a state $ |psi〉$ that is NOT an eigenstate of $hat(A)$, show that after measurement of $hat(A)$ yielding eigenvalue $a_n$, a second immediate measurement of $hat(A)$ will yield $a_n$ with probability 1.
+]
+
+#exercise-box("3.8")[
+  The number operator for harmonic oscillator is $hat(N) = hat(a)^† hat(a)$ where $[hat(a), hat(a)^†] = 1$.
+  
+  a) Show $[hat(N), hat(a)] = -hat(a)$ and $[hat(N), hat(a)^†] = hat(a)^†$
+  b) If $ |n〉$ is eigenstate of $hat(N)$ with eigenvalue $n$, show that $hat(a)^† |n〉$ is eigenstate with eigenvalue $n+1$
+  c) Show that $hat(a) |n〉= sqrt(n) |n-1〉$ and $hat(a)^† |n〉= sqrt(n+1) |n+1〉$
+]
+
+#exercise-box("3.9")[
+  *Challenge:* Derive the time-energy uncertainty relation $Delta E Delta t >= ℏ/2$ where:
+  $ Delta t = (Delta A)/(|d〈hat(A)〉/ d t|) $
+  
+  Start from the standard uncertainty relation for $hat(H)$ and an arbitrary observable $hat(A)$.
+]
+
+#exercise-box("3.10")[
+  *Challenge:* Consider a qubit in state $ |psi〉= cos(theta/2) |0〉+ e^(i phi) sin(theta/2) |1〉$ (Bloch sphere representation).
+  
+  a) Calculate $〈hat(sigma)_x〉$, $〈hat(sigma)_y〉$, $〈hat(sigma)_z〉$
+  b) Show these form a vector of length 1 (Bloch vector)
+  c) For what values of $theta$ and $phi$ is $Delta sigma_x Delta sigma_y$ minimized?
+]
+
+#pagebreak()
+
