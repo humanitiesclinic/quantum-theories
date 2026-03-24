@@ -1463,3 +1463,552 @@ $ 〈bold(r) | bold(p)〉= (1)/((2pi ℏ)^(3/2)) e^(i bold(p) dot bold(r) / ℏ)
 
 #pagebreak()
 
+
+= Part II: Dimension Variations—Building the Quantum Landscape
+
+#align(center)[
+  #v(3cm)
+  #text(size: 28pt, weight: "bold")[
+    Part II
+  ]
+  
+  #v(1cm)
+  
+  #text(size: 20pt)[
+    Dimension Variations: \
+    Building the Quantum Landscape
+  ]
+  
+  #v(3cm)
+]
+
+#pagebreak()
+
+= Chapter 4: Pictures of Quantum Mechanics (Dimension 4)
+
+== Introduction
+
+One of the most elegant features of quantum mechanics is that time dependence can be placed in different locations: in the states, in the operators, or split between both. These are called "pictures" of quantum mechanics, and they are all mathematically equivalent—merely different perspectives on the same physics.
+
+The choice of picture is a matter of computational convenience. For some problems, the Schrödinger picture is natural; for others, the Heisenberg or interaction picture simplifies calculations dramatically. Understanding all three pictures and how to transform between them is essential for mastering quantum mechanics.
+
+== The Schrödinger Picture
+
+=== Time Evolution of States
+
+In the Schrödinger picture (the one we've used so far), states evolve in time while operators remain constant:
+
+$ |psi_S(t)〉= U(t) |psi_S(0)〉$
+
+where $U(t) = e^(-i hat(H) t / ℏ)$ is the time evolution operator.
+
+Operators are time-independent:
+$ hat(A)_S (t) = hat(A)_S(0) ≡ hat(A)_S $
+
+The Schrödinger equation governs state evolution:
+$ i ℏ (d)/(d t) |psi_S(t)〉= hat(H)_S |psi_S(t)〉$
+
+=== Expectation Values
+
+$ 〈hat(A)〉(t) = 〈psi_S(t) | hat(A)_S | psi_S(t)〉$
+
+Time dependence comes entirely from the evolving state $ |psi_S(t)〉$.
+
+== The Heisenberg Picture
+
+=== Time Evolution of Operators
+
+In the Heisenberg picture, we transfer all time dependence to the operators:
+
+States are constant:
+$ |psi_H〉= |psi_S(0)〉$
+
+Operators evolve:
+$ hat(A)_H(t) = U^†(t) hat(A)_S U(t) = e^(i hat(H) t / ℏ) hat(A)_S e^(-i hat(H) t / ℏ) $
+
+#concept-box("Heisenberg Equation of Motion")[
+  Operators in the Heisenberg picture obey:
+  
+  $ (d hat(A)_H)/(d t) = (i)/(ℏ) [hat(H), hat(A)_H] + ((∂ hat(A)_H)/(∂ t))_"explicit" $
+  
+  The last term is non-zero only if the operator has explicit time dependence in the Schrödinger picture.
+]
+
+*Derivation:*
+
+$ (d hat(A)_H)/(d t) = (d)/(d t) (e^(i hat(H) t / ℏ) hat(A)_S e^(-i hat(H) t / ℏ)) $
+
+Using product rule and $d/(d t) e^(±i hat(H) t / ℏ) = ±(i)/(ℏ) hat(H) e^(±i hat(H) t / ℏ)$:
+
+$ = (i)/(ℏ) hat(H) e^(i hat(H) t / ℏ) hat(A)_S e^(-i hat(H) t / ℏ) - (i)/(ℏ) e^(i hat(H) t / ℏ) hat(A)_S hat(H) e^(-i hat(H) t / ℏ) $
+
+$ = (i)/(ℏ) (hat(H) hat(A)_H - hat(A)_H hat(H)) = (i)/(ℏ) [hat(H), hat(A)_H] $
+
+#example-box("4.1")[
+  Free particle Hamiltonian: $hat(H) = (hat(p)^2)/(2m)$
+  
+  Position operator evolution:
+  
+  $ (d hat(x)_H)/(d t) = (i)/(ℏ) [hat(H), hat(x)_H] = (i)/(ℏ) [(hat(p)^2)/(2m), hat(x)] $
+  
+  Using $[hat(p)^2, hat(x)] = -2i ℏ hat(p)$:
+  
+  $ (d hat(x)_H)/(d t) = (hat(p)_H)/m $
+  
+  This is the quantum analog of classical velocity! Integrating:
+  
+  $ hat(x)_H(t) = hat(x)_H(0) + (hat(p)_H(0))/m t $
+  
+  For momentum:
+  $ (d hat(p)_H)/(d t) = (i)/(ℏ) [hat(H), hat(p)_H] = 0 $
+  
+  So momentum is conserved (as expected for free particle).
+]
+
+=== Equivalence of Pictures
+
+Expectation values are picture-independent:
+
+$〈hat(A)〉(t) = 〈psi_H | hat(A)_H(t) | psi_H〉= 〈psi_S(t) | hat(A)_S | psi_S(t)〉$
+
+Proof:
+$ 〈psi_H | hat(A)_H(t) | psi_H〉&= 〈psi_S(0) | U^†(t) hat(A)_S U(t) | psi_S(0)〉\
+&= 〈U(t) psi_S(0) | hat(A)_S | U(t) psi_S(0)〉\
+&= 〈psi_S(t) | hat(A)_S | psi_S(t)〉$
+
+== The Interaction Picture
+
+=== Motivation: Perturbation Theory
+
+For time-dependent perturbations, split the Hamiltonian:
+$ hat(H) = hat(H)_0 + hat(H)_"int"(t) $
+
+where:
+- $hat(H)_0$ is solvable (eigenstates known)
+- $hat(H)_"int"(t)$ is a perturbation
+
+The interaction picture is designed for this situation.
+
+=== Definition
+
+States evolve only due to interaction:
+$ |psi_I(t)〉= U_0^†(t) |psi_S(t)〉$
+
+where $U_0(t) = e^(-i hat(H)_0 t / ℏ)$.
+
+Operators evolve due to free Hamiltonian:
+$ hat(A)_I(t) = U_0^†(t) hat(A)_S U_0(t) $
+
+Interaction Hamiltonian in interaction picture:
+$ hat(H)_I(t) = U_0^†(t) hat(H)_"int"(t) U_0(t) $
+
+=== Equation of Motion
+
+For states:
+$ i ℏ (d)/(d t) |psi_I(t)〉= hat(H)_I(t) |psi_I(t)〉$
+
+This is the starting point for time-dependent perturbation theory!
+
+*Derivation:*
+
+$ i ℏ (d)/(d t) |psi_I〉&= i ℏ (d)/(d t) (U_0^† |psi_S〉) \
+&= i ℏ ((d U_0^†)/(d t) |psi_S〉+ U_0^† (d |psi_S〉)/(d t)) \
+&= hat(H)_0 U_0^† |psi_S〉+ U_0^† hat(H) |psi_S〉\
+&= hat(H)_0 |psi_I〉+ U_0^†(hat(H)_0 + hat(H)_"int") |psi_S〉\
+&= U_0^† hat(H)_"int" U_0 |psi_I〉= hat(H)_I |psi_I〉$
+
+#concept-box("Picture Summary")[
+  *Schrödinger:*
+  - States evolve: $ |psi_S(t)〉$
+  - Operators static: $hat(A)_S$
+  - Equation: $i ℏ d/(d t) |psi_S〉= hat(H) |psi_S〉$
+  
+  *Heisenberg:*
+  - States static: $ |psi_H〉$
+  - Operators evolve: $hat(A)_H(t)$
+  - Equation: $d/(d t) hat(A)_H = (i)/(ℏ)[hat(H), hat(A)_H]$
+  
+  *Interaction:*
+  - States evolve (from interaction): $ |psi_I(t)〉$
+  - Operators evolve (from free part): $hat(A)_I(t)$
+  - Equation: $i ℏ d/(d t) |psi_I〉= hat(H)_I |psi_I〉$
+]
+
+== Applications
+
+=== Harmonic Oscillator in Heisenberg Picture
+
+Hamiltonian: $hat(H) = ℏ omega (hat(a)^† hat(a) + 1/2)$
+
+Commutators: $[hat(a), hat(a)^†] = 1$, $[hat(H), hat(a)] = -ℏ omega hat(a)$, $[hat(H), hat(a)^†] = ℏ omega hat(a)^†$
+
+Heisenberg equations:
+$ (d hat(a)_H)/(d t) = (i)/(ℏ)[hat(H), hat(a)_H] = -i omega hat(a)_H $
+
+Solution:
+$ hat(a)_H(t) = hat(a)(0) e^(-i omega t) $
+
+Similarly:
+$ hat(a)_H^†(t) = hat(a)^†(0) e^(i omega t) $
+
+Position and momentum:
+$ hat(x)_H(t) = sqrt((ℏ)/(2m omega)) (hat(a)_H(t) + hat(a)_H^†(t)) = hat(x)(0) cos(omega t) + (hat(p)(0))/(m omega) sin(omega t) $
+
+This is exactly the classical solution!
+
+#example-box("4.2")[
+  Expectation values for coherent state $ |alpha〉$ (eigenstate of $hat(a)$):
+  
+  $ 〈hat(x)〉(t) = sqrt((2ℏ)/(m omega)) "Re"(alpha e^(-i omega t)) $
+  
+  $ 〈hat(p)〉(t) = sqrt(2m ℏ omega) "Im"(alpha e^(-i omega t)) $
+  
+  These oscillate sinusoidally, like a classical particle! This is why coherent states are "most classical."
+]
+
+=== Perturbation Theory in Interaction Picture
+
+For weak perturbation, expand:
+$ |psi_I(t)〉= |psi_I^((0))(t)〉+ |psi_I^((1))(t)〉+ |psi_I^((2))(t)〉+ ... $
+
+To first order:
+$ |psi_I^((1))(t)〉= -(i)/(ℏ) integral_0^t d t' hat(H)_I(t') |psi_I^((0))(t')〉$
+
+If initially in eigenstate $ |i〉$ of $hat(H)_0$:
+
+Transition amplitude to final state $ |f〉$:
+$ c_(f i)(t) = 〈f | psi_I(t)〉≈ -(i)/(ℏ) integral_0^t d t' 〈f | hat(H)_I(t') | i〉$
+
+This is the foundation of Fermi's golden rule (Chapter 9).
+
+== Chapter Summary
+
+- Three pictures are mathematically equivalent, differ only in bookkeeping of time dependence
+- *Schrödinger picture:* States evolve ($i ℏ d/(d t) |psi〉= hat(H) |psi〉$), operators static
+- *Heisenberg picture:* Operators evolve ($d/(d t) hat(A)_H = (i)/(ℏ)[hat(H), hat(A)_H]$), states static  
+- *Interaction picture:* Both evolve, useful for perturbation theory
+- Transformation: $hat(A)_H(t) = U^†(t) hat(A)_S U(t)$, $ |psi_I(t)〉= U_0^†(t) |psi_S(t)〉$
+- Expectation values identical in all pictures
+- Heisenberg picture gives classical equations of motion for observables
+- Interaction picture natural for time-dependent perturbation theory
+
+== Exercises
+
+#exercise-box("4.1")[
+  Verify that $〈hat(A)〉(t) = 〈psi_H | hat(A)_H(t) | psi_H〉= 〈psi_S(t) | hat(A)_S | psi_S(t)〉$ by explicit calculation.
+]
+
+#exercise-box("4.2")[
+  For free particle with $hat(H) = (hat(p)^2)/(2m)$:
+  
+  a) Find $hat(p)_H(t)$ using Heisenberg equation
+  b) Find $hat(x)_H(t)$ using result from (a)
+  c) Calculate commutator $[hat(x)_H(t), hat(p)_H(t)]$
+]
+
+#exercise-box("4.3")[
+  Show that the Heisenberg equation of motion reduces to Ehrenfest's theorem:
+  $ m (d)/(d t)〈hat(x)〉= 〈hat(p)〉, quad (d)/(d t)〈hat(p)〉= -〈(d V)/(d x)〉$
+]
+
+#exercise-box("4.4")[
+  For harmonic oscillator, verify:
+  $ hat(x)_H(t) = hat(x)(0) cos(omega t) + (hat(p)(0))/(m omega) sin(omega t) $
+  
+  by solving the Heisenberg equations of motion.
+]
+
+#exercise-box("4.5")[
+  In the interaction picture with $hat(H) = hat(H)_0 + hat(H)_"int"$:
+  
+  a) Derive: $i ℏ d/(d t) |psi_I〉= hat(H)_I |psi_I〉$
+  b) Show: $d/(d t) hat(A)_I = (i)/(ℏ)[hat(H)_0, hat(A)_I] + ((∂ hat(A)_I)/(∂ t))_"explicit"$
+]
+
+#exercise-box("4.6")[
+  Transform the Pauli matrices $σ_x, σ_y, σ_z$ to the Heisenberg picture for Hamiltonian $hat(H) = (ℏ omega)/2 σ_z$.
+  
+  Find the time evolution and interpret physically (precession).
+]
+
+#pagebreak()
+
+= Chapter 5: Spin and Angular Momentum (Dimension 7)
+
+== Introduction
+
+Spin is perhaps the most purely quantum mechanical concept in physics. Unlike position or momentum, which have classical analogs, spin has no classical counterpart—it emerges naturally only in the relativistic quantum theory developed by Dirac.
+
+Yet spin is ubiquitous: electrons, protons, and neutrons all have spin-1/2; photons have spin-1; and the hypothetical graviton has spin-2. Understanding spin is essential for atomic physics, solid-state physics, nuclear physics, and quantum information.
+
+== Angular Momentum in Quantum Mechanics
+
+=== Commutation Relations
+
+Orbital angular momentum: $hat(bold(L)) = hat(bold(r)) × hat(bold(p))$
+
+Components satisfy:
+$ [hat(L)_i, hat(L)_j] = i ℏ epsilon_(i j k) hat(L)_k $
+
+where $epsilon_(i j k)$ is the Levi-Civita symbol.
+
+Any angular momentum (orbital or spin) must satisfy these commutation relations.
+
+#concept-box("General Angular Momentum")[
+  For any angular momentum $hat(bold(J))$:
+  
+  1. Commutators: $[hat(J)_i, hat(J)_j] = i ℏ epsilon_(i j k) hat(J)_k$
+  
+  2. Total angular momentum squared: $hat(J)^2 = hat(J)_x^2 + hat(J)_y^2 + hat(J)_z^2$
+  
+  3. Key property: $[hat(J)^2, hat(J)_i] = 0$ for all $i$
+  
+  This means $hat(J)^2$ and one component (conventionally $hat(J)_z$) can be simultaneously diagonalized.
+]
+
+=== Eigenvalues and Eigenstates
+
+Simultaneous eigenstates of $hat(J)^2$ and $hat(J)_z$:
+$ hat(J)^2 |j, m〉&= ℏ^2 j(j+1) |j, m〉\
+hat(J)_z |j, m〉&= ℏ m |j, m〉$
+
+where:
+- $j = 0, 1/2, 1, 3/2, 2, ...$ (integer or half-integer)
+- $m = -j, -j+1, ..., j-1, j$ (2j+1 values)
+
+=== Ladder Operators
+
+Define:
+$ hat(J)_± = hat(J)_x ± i hat(J)_y $
+
+Properties:
+$ [hat(J)_z, hat(J)_±] = ±ℏ hat(J)_± \
+[hat(J)_+, hat(J)_-] = 2ℏ hat(J)_z \
+hat(J)^2 = hat(J)_+ hat(J)_- + hat(J)_z^2 - ℏ hat(J)_z $
+
+Action on eigenstates:
+$ hat(J)_± |j, m〉= ℏ sqrt(j(j+1) - m(m±1)) |j, m±1〉$
+
+These "raise" or "lower" $m$ by one unit.
+
+== Spin-1/2: The Fundamental Case
+
+=== Spin States
+
+For spin-1/2 particles (electrons, protons, neutrons):
+- $j = 1/2$
+- $m = ±1/2$
+- Two basis states: $ |↑〉≡ |1/2, 1/2〉$, $ |↓〉≡ |1/2, -1/2〉$
+
+General state:
+$ |psi〉= alpha |↑〉+ beta |↓〉, quad |alpha|^2 + |beta|^2 = 1 $
+
+=== Pauli Matrices
+
+Spin operators for spin-1/2:
+$ hat(S)_i = (ℏ)/2 σ_i $
+
+Pauli matrices:
+$ σ_x = mat(0, 1; 1, 0), quad σ_y = mat(0, -i; i, 0), quad σ_z = mat(1, 0; 0, -1) $
+
+Properties:
+$ σ_i^2 &= I \
+{σ_i, σ_j} &= 2 delta_(i j) I \
+[σ_i, σ_j] &= 2i epsilon_(i j k) σ_k \
+σ_i σ_j &= delta_(i j) I + i epsilon_(i j k) σ_k $
+
+Eigenvectors of $σ_z$:
+$ |↑〉= vec(1, 0), quad |↓〉= vec(0, 1) $
+
+#example-box("5.1")[
+  Eigenvectors of $σ_x$:
+  
+  $σ_x |→〉= |→〉$ where $ |→〉= (1)/(sqrt(2))(|↑〉+ |↓〉) = (1)/(sqrt(2)) vec(1, 1)$
+  
+  $σ_x |←〉= -|←〉$ where $ |←〉= (1)/(sqrt(2))(|↑〉- |↓〉) = (1)/(sqrt(2)) vec(1, -1)$
+  
+  Similarly for $σ_y$:
+  
+  $σ_y |⊗〉= |⊗〉$ where $ |⊗〉= (1)/(sqrt(2))(|↑〉+ i |↓〉)$
+  
+  $σ_y |⊙〉= -|⊙〉$ where $ |⊙〉= (1)/(sqrt(2))(|↑〉- i |↓〉)$
+]
+
+=== Spin Precession
+
+In magnetic field $bold(B) = B_0 hat(z)$:
+$ hat(H) = -gamma hat(bold(S)) dot bold(B) = -gamma B_0 hat(S)_z = -(ℏ omega_L)/2 σ_z $
+
+where $omega_L = gamma B_0$ is the Larmor frequency.
+
+Time evolution:
+$ U(t) = e^(-i hat(H) t / ℏ) = e^(i omega_L t / 2 σ_z) = mat(e^(i omega_L t / 2), 0; 0, e^(-i omega_L t / 2)) $
+
+Initial state $ |→〉= (1)/(sqrt(2))(|↑〉+ |↓〉)$ evolves:
+
+$ |psi(t)〉&= U(t) |→〉= (1)/(sqrt(2))(e^(i omega_L t / 2) |↑〉+ e^(-i omega_L t / 2) |↓〉) \
+&= e^(i omega_L t / 2) ((|↑〉+ e^(-i omega_L t) |↓〉))/(sqrt(2)) $
+
+Expectation values:
+$ 〈hat(S)_x〉(t) = (ℏ)/2 cos(omega_L t) \
+〈hat(S)_y〉(t) = -(ℏ)/2 sin(omega_L t) \
+〈hat(S)_z〉(t) = 0 $
+
+The spin precesses around the magnetic field direction!
+
+=== Bloch Sphere
+
+Any spin-1/2 pure state can be written:
+$ |psi〉= cos(theta/2) |↑〉+ e^(i phi) sin(theta/2) |↓〉$
+
+where $0 <= theta <= pi$ and $0 <= phi < 2pi$.
+
+Expectation values:
+$ 〈σ_x〉= sin theta cos phi \
+〈σ_y〉= sin theta sin phi \
+〈σ_z〉= cos theta $
+
+These define a unit vector (Bloch vector) on a sphere (Bloch sphere).
+
+- North pole: $ |↑〉$ ($theta = 0$)
+- South pole: $ |↓〉$ ($theta = pi$)
+- Equator: Superpositions with equal amplitudes
+
+Orthogonal states are antipodal points.
+
+== Higher Spin
+
+=== Spin-1
+
+Three basis states: $ |1, 1〉, |1, 0〉, |1, -1〉$
+
+Spin matrices are $3 times 3$:
+$ S_z = ℏ mat(1, 0, 0; 0, 0, 0; 0, 0, -1) $
+
+$ S_x = (ℏ)/(sqrt(2)) mat(0, 1, 0; 1, 0, 1; 0, 1, 0) $
+
+Example: Photon polarization (covered in Chapter 11)
+
+=== General Spin-j
+
+Hilbert space dimension: $2j + 1$
+
+Matrices are $(2j+1) times (2j+1)$
+
+Clebsch-Gordan coefficients needed for addition of angular momenta.
+
+== Addition of Angular Momenta
+
+When combining two angular momenta $hat(bold(J))_1$ and $hat(bold(J))_2$:
+
+Total: $hat(bold(J)) = hat(bold(J))_1 + hat(bold(J))_2$
+
+Quantum numbers:
+$ j = |j_1 - j_2|, |j_1 - j_2| + 1, ..., j_1 + j_2 - 1, j_1 + j_2 $
+
+#example-box("5.2")[
+  Two spin-1/2 particles:
+  
+  Individual: $j_1 = 1/2$, $j_2 = 1/2$
+  
+  Combined: $j = 0$ (singlet) or $j = 1$ (triplet)
+  
+  *Singlet state* ($j=0, m=0$):
+  $ |0, 0〉= (1)/(sqrt(2))(|↑↓〉- |↓↑〉) $
+  
+  Antisymmetric, total spin zero, important for fermion pairing.
+  
+  *Triplet states* ($j=1$):
+  $ |1, 1〉&= |↑↑〉\
+  |1, 0〉&= (1)/(sqrt(2))(|↑↓〉+ |↓↑〉) \
+  |1, -1〉&= |↓↓〉$
+  
+  Symmetric, total spin one.
+]
+
+== Stern-Gerlach Experiment
+
+Sequential measurements demonstrate:
+1. Quantization of spin
+2. Non-commutativity of different spin components
+3. State collapse upon measurement
+
+Setup: Beam of silver atoms through inhomogeneous magnetic field.
+
+Force: $bold(F) = nabla(bold(mu) dot bold(B)) ≈ mu_z (d B_z)/(d z) hat(z)$
+
+Result: Beam splits into two (for spin-1/2), corresponding to $m = ±1/2$.
+
+#concept-box("Sequential Stern-Gerlach")[
+  1. First SG along $z$: Splits into $|↑_z〉$ and $|↓_z〉$
+  2. Block $|↓_z〉$, keep $|↑_z〉$
+  3. Second SG along $x$: Splits into $|↑_x〉$ and $|↓_x〉$ with equal probability
+  
+  This demonstrates:
+  - $ |↑_z〉$ is a superposition of $|↑_x〉$ and $|↓_x〉$
+  - Measuring $S_x$ destroys information about $S_z$
+  - $[S_x, S_z] ≠ 0$ leads to fundamental uncertainty
+]
+
+== Chapter Summary
+
+- Angular momentum satisfies $[hat(J)_i, hat(J)_j] = i ℏ epsilon_(i j k) hat(J)_k$, quantized as $ℏ^2 j(j+1)$
+- Spin is intrinsic angular momentum with no classical analog
+- Spin-1/2: Two states $ |↑〉, |↓〉$, described by Pauli matrices $σ_i$
+- Bloch sphere: All pure spin-1/2 states visualized as points on unit sphere
+- Spin precesses in magnetic field at Larmor frequency $omega_L = gamma B$
+- Ladder operators $hat(J)_±$ raise/lower $m$ by 1: $hat(J)_± |j, m〉∝ |j, m±1〉$
+- Addition: Two spin-1/2 → singlet (antisymmetric) + triplet (symmetric)
+- Stern-Gerlach experiment demonstrates quantization and measurement collapse
+
+== Exercises
+
+#exercise-box("5.1")[
+  Verify the Pauli matrix properties:
+  a) $σ_i^2 = I$ for $i = x, y, z$
+  b) ${σ_i, σ_j} = 2 delta_(i j) I$
+  c) $[σ_i, σ_j] = 2i epsilon_(i j k) σ_k$
+]
+
+#exercise-box("5.2")[
+  A spin-1/2 particle is in state $ |psi〉= (3)/(5) |↑〉+ (4)/(5) |↓〉$.
+  
+  a) Is this normalized?
+  b) Calculate $〈σ_x〉$, $〈σ_y〉$, $〈σ_z〉$
+  c) What are the probabilities of measuring $S_z = +ℏ/2$ and $S_z = -ℏ/2$?
+  d) After measuring $S_z = +ℏ/2$, what is the new state?
+]
+
+#exercise-box("5.3")[
+  Derive the time evolution of expectation values for spin in magnetic field:
+  $ (d)/(d t)〈bold(S)〉= gamma〈bold(S)〉× bold(B) $
+  
+  This is the classical torque equation!
+]
+
+#exercise-box("5.4")[
+  Find the eigenvectors and eigenvalues of $σ_n = bold(n) dot bold(σ)$ where $bold(n) = (sin theta cos phi, sin theta sin phi, cos theta)$ is a unit vector.
+]
+
+#exercise-box("5.5")[
+  For two spin-1/2 particles, write out the singlet and triplet states explicitly. Calculate:
+  
+  a) $〈hat(S)_(1z) hat(S)_(2z)〉$ for each state
+  b) $〈hat(bold(S))_1 dot hat(bold(S))_2〉$ for each state
+]
+
+#exercise-box("5.6")[
+  Verify that $hat(J)_± |j, m〉= ℏ sqrt(j(j+1) - m(m±1)) |j, m±1〉$ for spin-1/2 using the explicit Pauli matrices.
+]
+
+#exercise-box("5.7")[
+  *Challenge:* Derive the general formula for rotation of a spin-1/2 state by angle $theta$ around axis $hat(n)$:
+  $ U(theta, hat(n)) = e^(-i theta hat(n) dot bold(σ) / 2) = cos(theta/2) I - i sin(theta/2) hat(n) dot bold(σ) $
+]
+
+#exercise-box("5.8")[
+  *Challenge:* For spin-1, construct the matrices $S_x$, $S_y$, $S_z$ and verify the commutation relations.
+]
+
+#pagebreak()
+
