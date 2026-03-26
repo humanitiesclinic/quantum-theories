@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch02-schrodinger-equation" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Simplest Case: Non-Relativistic Spinless Schrödinger Equation</title>
+
+  <introduction>
+    <p>This chapter establishes the foundation by exploring the simplest corner of our 11-dimensional space: non-relativistic, spinless, single-particle quantum mechanics. This is the domain of the time-dependent Schrödinger equation, which governs the vast majority of practical quantum applications from chemistry to condensed matter physics.</p>
+    
+    <p>Our strategy is to start with the most basic cases (particle in a box, harmonic oscillator), where exact solutions exist, then move to the realistic three-dimensional hydrogen atom. By mastering these fundamental systems, you'll develop intuition for quantum mechanics that transfers to more complex problems.</p>
+  </introduction>
+
+  <section xml:id="sec-ch02-foundations">
+    <title>Establishing the Foundation</title>
+
+    <p>We consider a single spinless particle of mass <m>m</m> in a potential <m>V(\mathbf{r}, t)</m>. The time-dependent Schrödinger equation is:</p>
+
+    <me>
+      i\hbar \frac{\partial \psi(\mathbf{r}, t)}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi(\mathbf{r}, t) + V(\mathbf{r}, t) \psi(\mathbf{r}, t)
+    </me>
+
+    <p>In abstract operator form:</p>
+
+    <me>
+      i\hbar \frac{d \ket{\psi(t)}}{dt} = \HH \ket{\psi(t)}
+    </me>
+
+    <p>where <m>\HH = \frac{\pp^2}{2m} + V(\hat{\mathbf{r}}, t)</m> is the Hamiltonian.</p>
+
+    <subsection xml:id="subsec-hilbert-space">
+      <title>The Hilbert Space</title>
+
+      <p>Quantum states live in <m>L^2(\mathbb{R}^3)</m>, the space of square-integrable functions:</p>
+
+      <me>
+        \Hilbert = \{ \psi(\mathbf{r}) : \int_{\mathbb{R}^3} |\psi(\mathbf{r})|^2 d^3r &lt; \infty \}
+      </me>
+
+      <p>Key structures:</p>
+      <ul>
+        <li><em>Inner product:</em> <m>\braket{\phi}{\psi} = \int_{\mathbb{R}^3} \phi^*(\mathbf{r}) \psi(\mathbf{r}) d^3r</m></li>
+        <li><em>Norm:</em> <m>\|\psi\| = \sqrt{\braket{\psi}{\psi}}</m></li>
+        <li><em>Probability interpretation:</em> <m>|\psi(\mathbf{r}, t)|^2</m> is the probability density</li>
+        <li><em>Normalization:</em> <m>\braket{\psi}{\psi} = 1</m> ensures total probability equals one</li>
+      </ul>
+    </subsection>
+
+    <subsection xml:id="subsec-operators">
+      <title>Operators and Observables</title>
+
+      <p>Position operator (multiplication by <m>\mathbf{r}</m>):</p>
+      <me>
+        \hat{\mathbf{r}} \psi(\mathbf{r}) = \mathbf{r} \psi(\mathbf{r})
+      </me>
+
+      <p>Momentum operator (in position representation):</p>
+      <me>
+        \hat{\mathbf{p}} = -i\hbar \nabla
+      </me>
+
+      <p>These satisfy the canonical commutation relations:</p>
+      <me>
+        [\hat{r}_i, \hat{p}_j] = i\hbar \delta_{ij}
+      </me>
+
+      <p>This fundamental commutation relation is the essence of the Heisenberg uncertainty principle.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch02-time-independent">
+    <title>The Time-Independent Schrödinger Equation</title>
+
+    <p>When <m>V</m> is time-independent, we can separate variables:</p>
+
+    <me>
+      \psi(\mathbf{r}, t) = \phi(\mathbf{r}) e^{-iEt/\hbar}
+    </me>
+
+    <p>This yields the time-independent Schrödinger equation:</p>
+
+    <me>
+      \HH \phi(\mathbf{r}) = E \phi(\mathbf{r})
+    </me>
+
+    <p>This is an eigenvalue problem: find energy eigenvalues <m>E_n</m> and eigenstates <m>\phi_n(\mathbf{r})</m>.</p>
+
+    <assemblage xml:id="box-energy-eigenstate">
+      <title>Energy Eigenstate Expansion</title>
+      <p>The general solution is:</p>
+      <me>
+        \psi(\mathbf{r}, t) = \sum_n c_n \phi_n(\mathbf{r}) e^{-iE_n t/\hbar}
+      </me>
+      <p>where <m>c_n = \braket{\phi_n}{\psi(0)}</m> are determined by initial conditions. Energy eigenstates are stationary: their probability density is time-independent.</p>
+    </assemblage>
+  </section>
+
+  <section xml:id="sec-ch02-one-d-systems">
+    <title>Solved Examples: One-Dimensional Systems</title>
+
+    <subsection xml:id="subsec-particle-box">
+      <title>Particle in an Infinite Square Well</title>
+
+      <example xml:id="ex-ch02-particle-box">
+        <title>Infinite Square Well</title>
+        
+        <p>A particle confined to <m>0 &lt; x &lt; L</m> with infinite potential walls:</p>
+
+        <me>
+          V(x) = \begin{cases} 0 &amp; 0 &lt; x &lt; L \\ \infty &amp; \text{otherwise} \end{cases}
+        </me>
+
+        <p><em>Boundary conditions:</em> <m>\psi(0) = \psi(L) = 0</m></p>
+
+        <p><em>Inside the well:</em> <m>-\frac{\hbar^2}{2m} \frac{d^2\psi}{dx^2} = E\psi</m></p>
+
+        <p><em>General solution:</em> <m>\psi(x) = A\sin(kx) + B\cos(kx)</m></p>
+
+        <p>Applying <m>\psi(0) = 0</m> gives <m>B = 0</m>. Applying <m>\psi(L) = 0</m> gives:</p>
+
+        <me>
+          kL = n\pi, \quad n = 1, 2, 3, \ldots
+        </me>
+
+        <p><em>Energy eigenvalues:</em></p>
+        <me>
+          E_n = \frac{\hbar^2\pi^2 n^2}{2mL^2}
+        </me>
+
+        <p><em>Normalized eigenstates:</em></p>
+        <me>
+          \psi_n(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi x}{L}\right)
+        </me>
+
+        <p><em>Key features:</em></p>
+        <ul>
+          <li>Quantized energy levels (discrete spectrum)</li>
+          <li>Ground state energy <m>E_1 = \frac{\hbar^2\pi^2}{2mL^2} > 0</m> (zero-point energy)</li>
+          <li>Higher states have more oscillations (nodes)</li>
+        </ul>
+      </example>
+    </subsection>
+
+    <subsection xml:id="subsec-harmonic-osc">
+      <title>The Harmonic Oscillator</title>
+
+      <example xml:id="ex-ch02-harmonic">
+        <title>Quadratic Potential</title>
+        
+        <p>Potential: <m>V(x) = \frac{1}{2}m\omega^2 x^2</m></p>
+
+        <p><em>Energy eigenvalues:</em></p>
+        <me>
+          E_n = \hbar\omega\left(n + \frac{1}{2}\right), \quad n = 0, 1, 2, \ldots
+        </me>
+
+        <p><em>Eigenstates:</em> Involve Hermite polynomials <m>H_n</m></p>
+
+        <me>
+          \psi_n(x) = \left(\frac{m\omega}{\pi\hbar}\right)^{1/4} \frac{1}{\sqrt{2^n n!}} H_n\left(\sqrt{\frac{m\omega}{\hbar}}x\right) e^{-m\omega x^2/(2\hbar)}
+        </me>
+
+        <p><em>Key features:</em></p>
+        <ul>
+          <li>Equally spaced levels (spacing <m>\hbar\omega</m>)</li>
+          <li>Ground state is Gaussian: <m>\psi_0(x) \propto e^{-m\omega x^2/(2\hbar)}</m></li>
+          <li>Minimum uncertainty state: <m>\Delta x \Delta p = \hbar/2</m></li>
+          <li>Ubiquitous in physics: vibrations, QFT, quantum computing</li>
+        </ul>
+      </example>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch02-hydrogen">
+    <title>The Hydrogen Atom: Crown Jewel of Quantum Mechanics</title>
+
+    <p>The hydrogen atom—one electron bound to one proton by Coulomb attraction—was the first realistic system exactly solved by quantum mechanics. Its solution validated the entire theory and explained decades of spectroscopic data.</p>
+
+    <subsection xml:id="subsec-hydrogen-3d">
+      <title>The Three-Dimensional Problem</title>
+
+      <p>Hamiltonian (treating the proton as infinitely heavy):</p>
+
+      <me>
+        \HH = -\frac{\hbar^2}{2m_e}\nabla^2 - \frac{ke^2}{r}
+      </me>
+
+      <p>where <m>k = 1/(4\pi\epsilon_0)</m> and <m>r = |\mathbf{r}|</m>.</p>
+
+      <p>The potential <m>V(r) = -ke^2/r</m> has spherical symmetry, suggesting spherical coordinates <m>(r, \theta, \phi)</m>.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-separation">
+      <title>Separation in Spherical Coordinates</title>
+
+      <p>The wavefunction factors as:</p>
+
+      <me>
+        \psi_{n\ell m}(r, \theta, \phi) = R_{n\ell}(r) Y_\ell^m(\theta, \phi)
+      </me>
+
+      <p>where:</p>
+      <ul>
+        <li><m>R_{n\ell}(r)</m> is the radial wavefunction</li>
+        <li><m>Y_\ell^m(\theta, \phi)</m> are spherical harmonics (determine angular distribution)</li>
+      </ul>
+
+      <p><em>Three quantum numbers emerge:</em></p>
+      <ul>
+        <li><m>n = 1, 2, 3, \ldots</m> (principal quantum number, determines energy)</li>
+        <li><m>\ell = 0, 1, \ldots, n-1</m> (orbital angular momentum)</li>
+        <li><m>m = -\ell, -\ell+1, \ldots, \ell</m> (angular momentum z-component)</li>
+      </ul>
+
+      <p>Spectroscopic notation: <m>s(\ell=0)</m>, <m>p(\ell=1)</m>, <m>d(\ell=2)</m>, <m>f(\ell=3)</m>, etc.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-hydrogen-spectrum">
+      <title>Energy Spectrum</title>
+
+      <assemblage xml:id="box-hydrogen-energies">
+        <title>Hydrogen Atom Energy Levels</title>
+        
+        <me>
+          E_n = -\frac{m_e k^2 e^4}{2\hbar^2 n^2} = -\frac{13.6 \text{ eV}}{n^2}
+        </me>
+
+        <p>Energy depends only on <m>n</m>, not on <m>\ell</m> or <m>m</m> (accidental degeneracy in Coulomb potential).</p>
+
+        <p>Degeneracy of level <m>n</m>: <m>\sum_{\ell=0}^{n-1}(2\ell+1) = n^2</m> states</p>
+
+        <p>Ground state (<m>n=1</m>): <m>E_1 = -13.6 \text{ eV}</m> (Rydberg energy)</p>
+
+        <p>Ionization energy: <m>13.6 \text{ eV}</m></p>
+      </assemblage>
+
+      <p>This spectrum perfectly matches experimental observations! The success of quantum mechanics in predicting hydrogen's spectrum was a triumph that established the theory's validity.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-radial-wavefunctions">
+      <title>Radial Wavefunctions</title>
+
+      <p><em>Ground state (1s):</em></p>
+      <me>
+        R_{10}(r) = 2\left(\frac{1}{a_0}\right)^{3/2} e^{-r/a_0}
+      </me>
+
+      <p>where <m>a_0 = \hbar^2/(m_e ke^2) \approx 0.529 \text{ Å}</m> is the Bohr radius.</p>
+
+      <p><em>First excited state (2s and 2p):</em></p>
+
+      <me>
+        R_{20}(r) = \frac{1}{\sqrt{2}}\left(\frac{1}{a_0}\right)^{3/2}\left(1 - \frac{r}{2a_0}\right)e^{-r/(2a_0)}
+      </me>
+
+      <me>
+        R_{21}(r) = \frac{1}{2\sqrt{6}}\left(\frac{1}{a_0}\right)^{3/2}\frac{r}{a_0}e^{-r/(2a_0)}
+      </me>
+
+      <p>The radial probability density <m>P(r) = r^2|R_{n\ell}(r)|^2</m> gives the probability of finding the electron at distance <m>r</m>.</p>
+
+      <example xml:id="ex-ch02-hydrogen-ground">
+        <title>Hydrogen Ground State Radial Distribution</title>
+        
+        <p>For the 1s state:</p>
+
+        <me>
+          P_{10}(r) = r^2|R_{10}(r)|^2 = \frac{4r^2}{a_0^3}e^{-2r/a_0}
+        </me>
+
+        <p>Most probable radius: <m>\frac{dP}{dr} = 0</m> gives <m>r_{\text{max}} = a_0</m></p>
+
+        <p>Average radius: <m>\expect{r} = \int_0^\infty r P(r) dr = \frac{3}{2}a_0</m></p>
+
+        <p>The electron is most likely found at the Bohr radius!</p>
+      </example>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch02-expectation-values">
+    <title>Expectation Values and Measurements</title>
+
+    <p>For an observable <m>\AA</m> in state <m>\ket{\psi}</m>:</p>
+
+    <me>
+      \expect{\AA} = \expval{\psi}{\AA}{\psi} = \int \psi^*(\mathbf{r}) \AA \psi(\mathbf{r}) d^3r
+    </me>
+
+    <example xml:id="ex-ch02-expectations">
+      <title>Hydrogen Ground State Expectation Values</title>
+      
+      <p>The ground state wavefunction:</p>
+
+      <me>
+        \psi_{100}(\mathbf{r}) = \frac{1}{\sqrt{\pi a_0^3}} e^{-r/a_0}
+      </me>
+
+      <p>By spherical symmetry:</p>
+      <me>
+        \expect{x} = \expect{y} = \expect{z} = 0
+      </me>
+
+      <p>But:</p>
+      <me>
+        \expect{r^2} = 3a_0^2
+      </me>
+
+      <p>Kinetic energy:</p>
+      <me>
+        \expect{T} = \expect{\psi|-\frac{\hbar^2}{2m_e}\nabla^2|\psi} = \frac{\hbar^2}{2m_e a_0^2} = 13.6 \text{ eV}
+      </me>
+
+      <p>Potential energy:</p>
+      <me>
+        \expect{V} = \expect{\psi|-\frac{ke^2}{r}|\psi} = -\frac{ke^2}{a_0} = -27.2 \text{ eV}
+      </me>
+
+      <p>Total energy:</p>
+      <me>
+        E_1 = \expect{T} + \expect{V} = -13.6 \text{ eV} \checkmark
+      </me>
+
+      <p><strong>Virial theorem:</strong> <m>\expect{T} = -E_1</m> and <m>\expect{V} = 2E_1</m></p>
+    </example>
+  </section>
+
+  <section xml:id="sec-ch02-time-evolution">
+    <title>Time Evolution and Transitions</title>
+
+    <p>Superpositions of energy eigenstates oscillate at beat frequencies. For a superposition:</p>
+
+    <me>
+      \ket{\psi(t)} = c_1 e^{-iE_1 t/\hbar}\ket{1s} + c_2 e^{-iE_2 t/\hbar}\ket{2s}
+    </me>
+
+    <p>probability densities oscillate at frequency:</p>
+
+    <me>
+      \omega = \frac{E_2 - E_1}{\hbar}
+    </me>
+
+    <p>When an atom transitions from an excited state to a lower state, it emits a photon with frequency determined by the energy difference:</p>
+
+    <me>
+      \hbar\omega_{\text{photon}} = E_{\text{upper}} - E_{\text{lower}}
+    </me>
+
+    <p>For hydrogen transitions:</p>
+
+    <me>
+      \omega_{n \to n'} = \frac{13.6 \text{ eV}}{\hbar}\left(\frac{1}{n'^2} - \frac{1}{n^2}\right)
+    </me>
+
+    <p>This explains atomic spectral lines: the Lyman series (<m>n \to 1</m>), Balmer series (<m>n \to 2</m>), Paschen series (<m>n \to 3</m>), etc.</p>
+  </section>
+
+  <section xml:id="sec-ch02-summary">
+    <title>Chapter Summary</title>
+
+    <p>
+      <ul>
+        <li>Time-dependent Schrödinger equation: <m>i\hbar d\ket{\psi}/dt = \HH\ket{\psi}</m></li>
+        <li>For time-independent Hamiltonians, separate variables: <m>\psi(\mathbf{r}, t) = \phi(\mathbf{r})e^{-iEt/\hbar}</m></li>
+        <li>Time-independent equation <m>\HH\phi = E\phi</m> is an eigenvalue problem</li>
+        <li><em>Infinite square well:</em> quantized energies <m>E_n \propto n^2</m>, particle-in-a-box model</li>
+        <li><em>Harmonic oscillator:</em> equally spaced levels <m>E_n = \hbar\omega(n + 1/2)</m>, ubiquitous in physics</li>
+        <li><em>Hydrogen atom:</em> three quantum numbers <m>(n, \ell, m)</m>, energy <m>E_n = -13.6 \text{ eV}/n^2</m></li>
+        <li>Spherical harmonics determine angular distribution; radial functions describe distance from nucleus</li>
+        <li>Expectation values <m>\expect{\AA} = \expval{\psi}{\AA}{\psi}</m> predict measurement outcomes</li>
+        <li>Time evolution of superpositions leads to oscillating probabilities and photon emission</li>
+      </ul>
+    </p>
+  </section>
+
+  <exercises xml:id="exercises-ch02">
+    <title>Exercises</title>
+
+    <exercise xml:id="ex-ch02-1">
+      <statement>
+        <p>For a particle in an infinite square well (0 to L), calculate <m>\expect{x}</m>, <m>\expect{x^2}</m>, and <m>\Delta x</m> for the ground state.</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-2">
+      <statement>
+        <p>Verify that the harmonic oscillator ground state <m>\psi_0(x) = (m\omega/(\pi\hbar))^{1/4} e^{-m\omega x^2/(2\hbar)}</m> is normalized and calculate <m>\Delta x \Delta p</m>.</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-3">
+      <statement>
+        <p>Show that for the hydrogen atom ground state: <m>\expect{1/r} = 1/a_0</m>, <m>\expect{r} = (3/2)a_0</m>, <m>\expect{r^2} = 3a_0^2</m></p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-4">
+      <statement>
+        <p>Calculate the wavelength of light emitted when hydrogen transitions from n=3 to n=2. Compare with the experimental Balmer series line at 656.3 nm.</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-5">
+      <statement>
+        <p>For a two-level system, construct a time-dependent solution as a superposition of the two energy eigenstates and show that the probability oscillates with frequency <m>\omega = (E_2 - E_1)/\hbar</m>.</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-6">
+      <statement>
+        <p>The virial theorem states <m>2\expect{T} = -\expect{V}</m> for potential <m>V(r) \propto r^n</m>. Verify for: (a) harmonic oscillator (n=2), (b) hydrogen atom (n=-1).</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-7">
+      <statement>
+        <p>For the first excited state of hydrogen (n=2), write down the four degenerate wavefunctions corresponding to (2s, 2p₀, 2p₊₁, 2p₋₁) and calculate <m>\expect{r}</m> for each.</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-ch02-8">
+      <statement>
+        <p><strong>Challenge:</strong> Derive the selection rules for electric dipole transitions between hydrogen levels by calculating the matrix element <m>\expect{n'\ell' m'|z|n\ell m}</m> and determining when it vanishes.</p>
+      </statement>
+    </exercise>
+  </exercises>
+
+</chapter>
