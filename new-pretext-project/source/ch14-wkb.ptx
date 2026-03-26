@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch14-wkb" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>WKB and Semiclassical Methods</title>
+  <introduction>
+    <p>The WKB approximation connects quantum mechanics to classical mechanics. It is an expansion in powers of ℏ, valid when the action varies slowly on quantum scales. This chapter covers tunneling, barrier penetration, quantization conditions, and the classical limit.</p>
+  </introduction>
+  <section xml:id="sec-ch14-wkb-ansatz">
+    <title>The WKB Ansatz</title>
+    <p>Assume <m>\psi(x) \sim A(x) e^{iS(x)/\hbar}</m> with <m>S(x) = \int p(x) dx</m> the classical action. Plugging into the Schrödinger equation and expanding in ℏ gives the eikonal equation <m>p(x)^2 = 2m[E - V(x)]</m> to leading order.</p>
+  </section>
+  <section xml:id="sec-ch14-tunneling">
+    <title>Tunneling and Barrier Penetration</title>
+    <p>In the classically forbidden region, <m>p(x) = i\kappa(x)</m> is imaginary. The tunneling amplitude is</p>
+    <me>
+      T \sim e^{-2\gamma}, \quad \gamma = \frac{1}{\hbar}\int_{x_1}^{x_2} \kappa(x) dx,
+    </me>
+    <p>where <m>x_1, x_2</m> are classical turning points. This explains radioactive decay, field emission, and other exponentially suppressed processes.</p>
+  </section>
+  <section xml:id="sec-ch14-quantization">
+    <title>Bohr-Sommerfeld Quantization</title>
+    <p>For a bound orbit, quantization requires</p>
+    <me>
+      \oint p(x) dx = (n + 1/2)\pi\hbar,
+    </me>
+    <p>giving semiclassical energy levels. This reproduces the exact result for the harmonic oscillator and is excellent for heavy particles.</p>
+  </section>
+  <section xml:id="sec-ch14-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>WKB is an expansion in ℏ for slowly varying potentials.</li>
+      <li>Tunneling probability decays exponentially with the classically forbidden action.</li>
+      <li>Bohr-Sommerfeld quantization connects classical orbits to quantum levels.</li>
+      <li>WKB is accurate for high quantum numbers and heavy particles.</li>
+    </ul>
+  </section>
+</chapter>

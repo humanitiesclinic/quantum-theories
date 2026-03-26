@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch18-applications" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Applications Across Physics and Chemistry</title>
+  <introduction>
+    <p>Quantum mechanics is not abstract philosophy but the foundation of modern technology and science. This chapter surveys applications across domains: atomic physics, chemistry, condensed matter, particle physics, and quantum technologies.</p>
+  </introduction>
+  <section xml:id="sec-ch18-atomic">
+    <title>Atomic Physics and Spectroscopy</title>
+    <p>Energy levels, transition frequencies, fine structure, hyperfine structure, and isotope shifts all follow from quantum mechanics. Atomic spectroscopy—from absorption and emission lines to X-ray photoelectron spectroscopy—depends on precise quantum predictions.</p>
+  </section>
+  <section xml:id="sec-ch18-chemistry">
+    <title>Molecular Structure and Bonding</title>
+    <p>Chemical bonds emerge from quantum overlap of electron orbitals. Hybridization, bonding angles, bond strengths, and reaction pathways are all quantum mechanical in origin. Computational chemistry uses ab initio and density functional methods to predict molecular properties.</p>
+  </section>
+  <section xml:id="sec-ch18-condensed">
+    <title>Condensed Matter Physics</title>
+    <p>Quantum mechanics explains metals, semiconductors, insulators, superconductivity, superfluidity, and magnetism. Band structure, Fermi surfaces, and emergent quasiparticles are quantum phenomena essential for device physics and materials science.</p>
+  </section>
+  <section xml:id="sec-ch18-particle">
+    <title>Particle Physics and the Standard Model</title>
+    <p>Quantum field theory describes the interactions of quarks, leptons, and gauge bosons. Predictions of the Standard Model—from the electron's magnetic moment to Higgs mass—achieve extraordinary precision, confirming quantum mechanics at the highest energies accessible today.</p>
+  </section>
+  <section xml:id="sec-ch18-quantum-tech">
+    <title>Quantum Technologies</title>
+    <p>Quantum computing, quantum cryptography, quantum sensing, and quantum simulation are emerging technologies. They exploit quantum superposition, entanglement, and decoherence control to achieve capabilities impossible classically.</p>
+  </section>
+  <section xml:id="sec-ch18-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Quantum mechanics enables understanding and prediction of atomic structure.</li>
+      <li>Chemical bonding and molecular properties emerge from quantum mechanics.</li>
+      <li>Condensed matter phenomena require quantum mechanics and many-body physics.</li>
+      <li>Particle physics confirms quantum field theory to extraordinary precision.</li>
+      <li>Quantum technologies promise revolutionary capabilities in computation, communication, and sensing.</li>
+    </ul>
+  </section>
+</chapter>

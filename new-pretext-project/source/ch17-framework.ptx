@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch17-framework" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The Complete 11-Dimensional Framework: Synthesis</title>
+  <introduction>
+    <p>Having explored each dimension in detail, we now integrate them into a unified picture. Every quantum theory—from simple Schrödinger equations to quantum chromodynamics—is a point in the 11-dimensional space. Understanding the coordinates and connections reveals the deep unity underlying quantum mechanics.</p>
+  </introduction>
+  <section xml:id="sec-ch17-map">
+    <title>Mapping the Quantum Landscape</title>
+    <p>The 11 dimensions are:</p>
+    <ol>
+      <li>Formalism: operator vs. path integral</li>
+      <li>Relativity: non-relativistic, special, general</li>
+      <li>Particle number: single, fixed-N, Fock space</li>
+      <li>Picture: Schrödinger, Heisenberg, interaction</li>
+      <li>State purity: pure vs. mixed</li>
+      <li>System: closed vs. open</li>
+      <li>Spin: spinless, 1/2, arbitrary</li>
+      <li>Mass: massive vs. massless</li>
+      <li>Approximation: exact, perturbative, linearized</li>
+      <li>Classical limit: quantum, semiclassical, classical</li>
+      <li>Solutions: analytical, approximate, numerical</li>
+    </ol>
+    <p>Each dimension reveals degeneracies and connections between seemingly different theories.</p>
+  </section>
+  <section xml:id="sec-ch17-examples">
+    <title>Examples Across the Map</title>
+    <p><em>Hydrogen atom:</em> Operator formalism, non-relativistic, single electron, Schrödinger picture, pure states, closed system, spin-1/2 electron, massive, exact solution, quantum, analytical.</p>
+    <p><em>QED:</em> Path integral, special relativistic, Fock space, interaction picture, mixed states from environment, open system (coupling to radiation), spin-1/2 electrons and spin-1 photons, massless photons, perturbative, quantum, numerical.</p>
+  </section>
+  <section xml:id="sec-ch17-future">
+    <title>Frontiers and Open Questions</title>
+    <p>Quantum gravity requires general relativity (dimension 2). Quantum chromodynamics uses all dimensions with sophisticated understanding. Quantum computing (dimension 3 and 6) is a frontier. Quantum sensing uses dimension 5 (mixed states) and dimension 6 (open systems).</p>
+  </section>
+  <section xml:id="sec-ch17-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>The 11 dimensions organize all quantum theories into a unified landscape.</li>
+      <li>Transitions along dimensions reveal connections between different formalisms.</li>
+      <li>Most practical quantum systems occupy specific regions of the space; understanding your location is key to choosing the right tools.</li>
+      <li>The framework is not exhaustive but captures essential physical and mathematical distinctions.</li>
+    </ul>
+  </section>
+</chapter>

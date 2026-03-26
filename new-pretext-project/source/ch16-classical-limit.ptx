@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch16-classical-limit" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Classical Limit and Correspondence Principle</title>
+  <introduction>
+    <p>How does quantum mechanics reduce to classical mechanics? The correspondence principle—formulated by Bohr—states that the behavior of quantum systems must approach classical behavior in appropriate limits. This chapter explores the ℏ → 0 limit, decoherence, and the quantum-classical boundary.</p>
+  </introduction>
+  <section xml:id="sec-ch16-ehrenfest">
+    <title>Ehrenfest Theorem</title>
+    <p>Expectation values of observables obey classical equations:</p>
+    <me>
+      \frac{d}{dt}\langle \rr \rangle = \frac{\langle \pp \rangle}{m}, \quad \frac{d}{dt}\langle \pp \rangle = -\langle \nabla V \rangle.
+    </me>
+    <p>For sharply localized wavepackets, the center of the packet follows a classical trajectory. Quantum corrections come from spreading (dispersion) and tunneling.</p>
+  </section>
+  <section xml:id="sec-ch16-wkb-limit">
+    <title>WKB Limit and Stationary Phase</title>
+    <p>In the limit ℏ → 0, the path integral is dominated by stationary phase (saddle points where δS = 0), recovering classical equations of motion and the Euler-Lagrange equations.</p>
+  </section>
+  <section xml:id="sec-ch16-decoherence">
+    <title>Decoherence and the Emergence of Classicality</title>
+    <p>Environmental interactions destroy quantum coherence. Macroscopic systems decohere extremely rapidly, making superpositions of macroscopically distinct states impossible to maintain. This explains why we don't see cats in superposition.</p>
+  </section>
+  <section xml:id="sec-ch16-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Expectation values follow classical equations via Ehrenfest theorem.</li>
+      <li>Wavepackets spread; classical localization emerges only for sharply peaked densities.</li>
+      <li>Classical mechanics is the ℏ → 0 limit of quantum mechanics.</li>
+      <li>Decoherence suppresses quantum coherence at macroscopic scales naturally.</li>
+    </ul>
+  </section>
+</chapter>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch13-quantum-info" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Quantum Information and Computation</title>
+  <introduction>
+    <p>Quantum information theory is the science of using quantum systems to store, process, and transmit information. Qubits, entanglement, and quantum algorithms reveal that quantum mechanics offers exponential speedups for certain tasks. This chapter covers the foundations: qubits, quantum gates, measurement, entanglement, and simple algorithms.</p>
+  </introduction>
+  <section xml:id="sec-ch13-qubits">
+    <title>Qubits and Quantum Gates</title>
+    <p>A qubit is a two-level quantum system: <m>|\psi\rangle = \alpha |0\rangle + \beta |1\rangle</m> with <m>|\alpha|^2 + |\beta|^2 = 1</m>. Unlike classical bits (0 or 1), qubits can be superpositions. Quantum gates are unitary operations: Pauli gates <m>X, Y, Z</m>, Hadamard <m>H</m>, phase gates, and controlled-NOT (CNOT).</p>
+  </section>
+  <section xml:id="sec-ch13-entanglement">
+    <title>Entanglement and Bell States</title>
+    <p>Two qubits can be entangled: <m>\frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)</m>. Measuring one qubit instantaneously determines the other. Entanglement enables quantum advantage for computation and communication.</p>
+  </section>
+  <section xml:id="sec-ch13-measurement">
+    <title>Measurement and Decoherence</title>
+    <p>Measurement projects qubits onto basis states, destroying superposition. Environmental decoherence limits quantum coherence times—a major engineering challenge.</p>
+  </section>
+  <section xml:id="sec-ch13-algorithms">
+    <title>Quantum Algorithms</title>
+    <p>Deutsch-Jozsa, Grover, and Shor algorithms demonstrate exponential speedups on quantum computers for specific problems. Shor's algorithm factors large numbers efficiently, threatening RSA encryption.</p>
+  </section>
+  <section xml:id="sec-ch13-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Qubits are two-level quantum systems; <m>N</m> qubits span a <m>2^N</m>-dimensional Hilbert space.</li>
+      <li>Quantum gates are unitary operations; quantum circuits are their compositions.</li>
+      <li>Entanglement enables quantum correlations impossible classically.</li>
+      <li>Measurement collapses superpositions; decoherence destroys quantum advantage if unchecked.</li>
+      <li>Quantum algorithms offer exponential speedups for specific tasks.</li>
+    </ul>
+  </section>
+</chapter>

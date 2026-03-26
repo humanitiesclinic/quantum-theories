@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch15-numerical" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Numerical and Computational Methods</title>
+  <introduction>
+    <p>For realistic quantum systems, exact solutions are rare. Numerical methods—from finite-difference schemes to variational approaches—make quantum mechanics computable. This chapter surveys modern computational techniques essential for research and engineering.</p>
+  </introduction>
+  <section xml:id="sec-ch15-grid">
+    <title>Grid-Based Methods</title>
+    <p>Discretize space and solve the Schrödinger equation on a grid. Works well for one or few dimensions but scales poorly; useful for pedagogical and benchmark calculations.</p>
+  </section>
+  <section xml:id="sec-ch15-variational">
+    <title>Variational Methods</title>
+    <p>Upper bounds on ground state energy: <m>E_0 \le \langle \psi | H | \psi \rangle / \langle \psi | \psi \rangle</m>. Optimize over an ansatz wavefunctions (e.g., Gaussians, sums of exponentials) to approximate ground states.</p>
+  </section>
+  <section xml:id="sec-ch15-montecarlo">
+    <title>Quantum Monte Carlo</title>
+    <p>Sample the probability distribution <m>|\psi|^2</m> stochastically. Allows simulation of sign-problem-free systems with many particles. Diffusion Monte Carlo projects to ground states.</p>
+  </section>
+  <section xml:id="sec-ch15-tensor">
+    <title>Tensor Networks and DMRG</title>
+    <p>Represent many-body wavefunctions as networks of tensors. Density-matrix renormalization group (DMRG) is state-of-the-art for one-dimensional systems with strong correlations.</p>
+  </section>
+  <section xml:id="sec-ch15-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Grid methods scale poorly but are exact; useful for few-particle systems and small spaces.</li>
+      <li>Variational methods provide upper bounds and good approximations with modest computational cost.</li>
+      <li>Quantum Monte Carlo samples probability distributions to compute expectation values.</li>
+      <li>Tensor networks exploit entanglement structure; DMRG is the gold standard for 1D.</li>
+    </ul>
+  </section>
+</chapter>
