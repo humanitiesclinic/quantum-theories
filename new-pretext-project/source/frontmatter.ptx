@@ -21,6 +21,14 @@
     <attribution>Paul Dirac, 1929</attribution>
   </epigraph>
 
+  <!-- Foreword -->
+  <preface xml:id="foreword">
+    <title>Foreword</title>
+    <p>The landscape of quantum mechanics has expanded enormously since Dirac and von Neumann laid its foundations in the 1920s and 1930s. What began as a theory of atomic spectra now encompasses quantum field theory, quantum information, condensed matter physics, and quantum gravity. Students entering this field face an unprecedented challenge: how to see the forest for the trees.</p>
+    <p>This textbook addresses that challenge directly. By organizing the entire subject around the concept of time evolution—and by identifying eleven independent dimensions along which quantum theories vary—it provides a map of the quantum landscape that no single treatment has offered before. Whether you are a student encountering density matrices for the first time or a researcher seeking to connect quantum information to quantum field theory, the framework developed here will help you navigate with confidence.</p>
+    <p>The authors have succeeded in creating something rare: a textbook that is simultaneously rigorous and accessible, comprehensive and coherent. I commend it to all serious students of quantum mechanics.</p>
+  </preface>
+
   <!-- Preface -->
   <preface xml:id="preface">
     <title>Preface</title>

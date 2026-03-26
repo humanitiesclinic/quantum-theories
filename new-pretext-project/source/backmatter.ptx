@@ -3,105 +3,281 @@
 
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="backmatter">
 
-  <!-- Appendix A: Notation -->
+  <!-- ============================================================ -->
+  <!-- APPENDIX A: NOTATION AND CONVENTIONS -->
+  <!-- ============================================================ -->
   <appendix xml:id="appendix-notation">
     <title>Notation and Conventions</title>
-    <section>
-      <title>Quantum Notation</title>
+
+    <section xml:id="app-notation-dirac">
+      <title>Dirac Notation</title>
       <ul>
-        <li><m>\ket{\psi}</m>: state vector (ket)</li>
-        <li><m>\bra{\psi}</m>: dual vector (bra)</li>
-        <li><m>\braket{\phi}{\psi}</m>: inner product</li>
-        <li><m>\AA, \HH, \LL, \SS</m>: operators</li>
-        <li><m>\expect{\AA}</m>: expectation value</li>
-        <li><m>\comm{\AA}{\BB}</m>: commutator</li>
+        <li><m>\ket{\psi}</m> — state vector (ket) in Hilbert space</li>
+        <li><m>\bra{\psi}</m> — dual vector (bra), linear functional on kets</li>
+        <li><m>\braket{\phi}{\psi}</m> — inner product (complex number)</li>
+        <li><m>\ketbra{\psi}{\phi}</m> — outer product (operator)</li>
+        <li><m>\expect{\hat{A}}</m> — expectation value of operator <m>\hat{A}</m></li>
+        <li><m>\comm{\hat{A}}{\hat{B}} = \hat{A}\hat{B} - \hat{B}\hat{A}</m> — commutator</li>
+        <li><m>\anticomm{\hat{A}}{\hat{B}} = \hat{A}\hat{B} + \hat{B}\hat{A}</m> — anticommutator</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-notation-operators">
+      <title>Common Operators</title>
+      <ul>
+        <li><m>\HH</m> — Hamiltonian (total energy operator)</li>
+        <li><m>\hat{\mathbf{r}}, \hat{\mathbf{p}}</m> — position and momentum operators</li>
+        <li><m>\hat{\mathbf{L}} = \hat{\mathbf{r}} \times \hat{\mathbf{p}}</m> — orbital angular momentum</li>
+        <li><m>\hat{\mathbf{S}}</m> — spin angular momentum</li>
+        <li><m>\hat{\mathbf{J}} = \hat{\mathbf{L}} + \hat{\mathbf{S}}</m> — total angular momentum</li>
+        <li><m>U(t) = e^{-i\HH t/\hbar}</m> — time evolution operator</li>
+        <li><m>\hat{a}, \hat{a}^\dagger</m> — annihilation and creation operators</li>
+        <li><m>\hat{n} = \hat{a}^\dagger\hat{a}</m> — number operator</li>
+        <li><m>\rho</m> — density matrix (density operator)</li>
+        <li><m>\sigma_x, \sigma_y, \sigma_z</m> — Pauli matrices</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-notation-spaces">
+      <title>Spaces and Sets</title>
+      <ul>
+        <li><m>\Hilbert</m> — Hilbert space</li>
+        <li><m>\Fock</m> — Fock space</li>
+        <li><m>L^2(\R^3)</m> — square-integrable functions on <m>\R^3</m></li>
+        <li><m>\C^n</m> — <m>n</m>-dimensional complex vector space</li>
+        <li><m>\R, \C, \Z, \N</m> — real, complex, integer, natural numbers</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-notation-conventions">
+      <title>Conventions</title>
+      <ul>
+        <li>SI units throughout unless stated otherwise</li>
+        <li>Natural units (<m>\hbar = c = 1</m>) used in QFT chapters (11-12) where noted</li>
+        <li>Einstein summation convention for repeated indices in relativistic expressions</li>
+        <li>Metric signature <m>(+,-,-,-)</m> in special relativity</li>
+        <li>Operators distinguished from scalars by hats: <m>\hat{A}</m> vs. <m>A</m></li>
       </ul>
     </section>
   </appendix>
 
-  <!-- Appendix B: Mathematical Tools -->
+  <!-- ============================================================ -->
+  <!-- APPENDIX B: ESSENTIAL MATHEMATICAL TOOLS -->
+  <!-- ============================================================ -->
   <appendix xml:id="appendix-math">
     <title>Essential Mathematical Tools</title>
-    <section>
-      <title>Linear Algebra</title>
-      <p>Vector spaces, eigenvalues, matrix diagonalization, tensor products, functional analysis.</p>
-    </section>
-    <section>
-      <title>Special Functions</title>
-      <p>Hermite, Legendre, Bessel functions, and spherical harmonics used throughout.</p>
-    </section>
-  </appendix>
 
-  <!-- Appendix C: Constants -->
-  <appendix xml:id="appendix-constants">
-    <title>Physical Constants and Conversion Factors</title>
-    <section>
-      <title>Fundamental Constants</title>
+    <section xml:id="app-math-linalg">
+      <title>Linear Algebra Review</title>
+      <p>Quantum mechanics is built on linear algebra in complex vector spaces. Key concepts:</p>
       <ul>
-        <li><m>\hbar = 1.054 \times 10^{-34}</m> J·s</li>
-        <li><m>c = 3 \times 10^8</m> m/s</li>
-        <li><m>m_e = 9.109 \times 10^{-31}</m> kg</li>
-        <li><m>a_0 = 0.529 \text{ Å}</m> (Bohr radius)</li>
+        <li><em>Vector spaces:</em> closure under addition and scalar multiplication</li>
+        <li><em>Linear independence and bases:</em> a set <m>\{\ket{e_i}\}</m> spans <m>\Hilbert</m> if every state is a linear combination</li>
+        <li><em>Inner product:</em> <m>\braket{\phi}{\psi} \in \C</m>, conjugate-linear in first argument, linear in second</li>
+        <li><em>Orthonormal basis:</em> <m>\braket{e_i}{e_j} = \delta_{ij}</m></li>
+        <li><em>Completeness:</em> <m>\sum_i \ketbra{e_i}{e_i} = \hat{I}</m> (resolution of identity)</li>
+        <li><em>Eigenvalue decomposition:</em> Hermitian <m>\hat{A} = \sum_i a_i \ketbra{a_i}{a_i}</m></li>
+        <li><em>Tensor product:</em> <m>\Hilbert_A \otimes \Hilbert_B</m> for composite systems</li>
+        <li><em>Trace:</em> <m>\text{Tr}(\hat{A}) = \sum_i \bra{e_i}\hat{A}\ket{e_i}</m>, basis-independent</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-math-calculus">
+      <title>Calculus and Differential Equations</title>
+      <ul>
+        <li><em>Fourier transforms:</em> <m>\tilde{f}(k) = \int f(x) e^{-ikx} dx</m></li>
+        <li><em>Delta function:</em> <m>\delta(x-a) = \frac{1}{2\pi}\int e^{ik(x-a)} dk</m></li>
+        <li><em>Gaussian integrals:</em> <m>\int_{-\infty}^{\infty} e^{-ax^2} dx = \sqrt{\pi/a}</m></li>
+        <li><em>Ordinary differential equations:</em> separation of variables, power series, Frobenius method</li>
+        <li><em>Partial differential equations:</em> separation of variables in Cartesian, cylindrical, spherical coordinates</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-math-special">
+      <title>Special Functions</title>
+      <ul>
+        <li><em>Hermite polynomials</em> <m>H_n(x)</m>: harmonic oscillator wavefunctions</li>
+        <li><em>Legendre polynomials</em> <m>P_\ell(x)</m>: angular dependence in spherical symmetry</li>
+        <li><em>Spherical harmonics</em> <m>Y_\ell^m(\theta,\phi)</m>: angular momentum eigenfunctions</li>
+        <li><em>Associated Laguerre polynomials</em> <m>L_n^\ell(x)</m>: hydrogen radial wavefunctions</li>
+        <li><em>Bessel functions</em> <m>J_n(x)</m>: cylindrical symmetry problems</li>
+        <li><em>Airy functions</em> <m>\text{Ai}(x), \text{Bi}(x)</m>: WKB connection formulas</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-math-group">
+      <title>Group Theory Essentials</title>
+      <ul>
+        <li><em>Rotation group SO(3):</em> symmetry of 3D space, representations labeled by angular momentum <m>\ell</m></li>
+        <li><em>SU(2):</em> double cover of SO(3), spin representations</li>
+        <li><em>Lorentz group:</em> symmetry of special relativity</li>
+        <li><em>Poincaré group:</em> Lorentz transformations + spacetime translations</li>
+        <li><em>Permutation group</em> <m>S_N</m>: symmetry of identical particles</li>
       </ul>
     </section>
   </appendix>
 
-  <!-- Appendix D: Solutions -->
+  <!-- ============================================================ -->
+  <!-- APPENDIX C: PHYSICAL CONSTANTS -->
+  <!-- ============================================================ -->
+  <appendix xml:id="appendix-constants">
+    <title>Physical Constants and Conversion Factors</title>
+
+    <section xml:id="app-constants-fundamental">
+      <title>Fundamental Constants</title>
+      <ul>
+        <li><m>\hbar = 1.054571817 \times 10^{-34}</m> J·s (reduced Planck constant)</li>
+        <li><m>c = 2.99792458 \times 10^8</m> m/s (speed of light, exact)</li>
+        <li><m>e = 1.602176634 \times 10^{-19}</m> C (elementary charge, exact)</li>
+        <li><m>m_e = 9.1093837015 \times 10^{-31}</m> kg (electron mass)</li>
+        <li><m>m_p = 1.67262192369 \times 10^{-27}</m> kg (proton mass)</li>
+        <li><m>k_B = 1.380649 \times 10^{-23}</m> J/K (Boltzmann constant, exact)</li>
+        <li><m>\epsilon_0 = 8.8541878128 \times 10^{-12}</m> F/m (vacuum permittivity)</li>
+        <li><m>\mu_0 = 1.25663706212 \times 10^{-6}</m> H/m (vacuum permeability)</li>
+      </ul>
+    </section>
+
+    <section xml:id="app-constants-derived">
+      <title>Derived Quantum Constants</title>
+      <ul>
+        <li><m>a_0 = \hbar^2/(m_e k e^2) = 0.529177 \times 10^{-10}</m> m (Bohr radius)</li>
+        <li><m>E_h = m_e e^4/(16\pi^2\epsilon_0^2\hbar^2) = 4.35974 \times 10^{-18}</m> J = 27.2114 eV (Hartree energy)</li>
+        <li><m>\alpha = e^2/(4\pi\epsilon_0\hbar c) = 1/137.036</m> (fine-structure constant)</li>
+        <li><m>\mu_B = e\hbar/(2m_e) = 9.27401 \times 10^{-24}</m> J/T (Bohr magneton)</li>
+        <li><m>\lambda_C = h/(m_e c) = 2.42631 \times 10^{-12}</m> m (Compton wavelength)</li>
+        <li>1 eV = <m>1.602 \times 10^{-19}</m> J = <m>8065.5</m> cm<m>^{-1}</m> = <m>11604</m> K</li>
+      </ul>
+    </section>
+  </appendix>
+
+  <!-- ============================================================ -->
+  <!-- APPENDIX D: SOLUTIONS TO SELECTED EXERCISES -->
+  <!-- ============================================================ -->
   <appendix xml:id="appendix-solutions">
     <title>Solutions to Selected Exercises</title>
     <introduction>
-      <p>Detailed solutions to selected exercises marked with a star throughout the textbook.</p>
+      <p>This appendix provides detailed solutions to selected exercises from each chapter. Exercises chosen for solution are representative of key techniques and concepts. Students are encouraged to attempt all exercises before consulting these solutions.</p>
     </introduction>
-    <section>
-      <title>Part I Solutions</title>
-      <p>Solutions to foundational problems from Chapters 1-3.</p>
+
+    <section xml:id="app-sol-part1">
+      <title>Part I: Foundations (Chapters 1–3)</title>
+      <p><em>Exercise 1.1:</em> To show <m>U^\dagger U = I</m>, note <m>U^\dagger = (e^{-i\HH t/\hbar})^\dagger = e^{i\HH^\dagger t/\hbar} = e^{i\HH t/\hbar}</m> since <m>\HH</m> is Hermitian. Then <m>U^\dagger U = e^{i\HH t/\hbar}e^{-i\HH t/\hbar} = e^0 = I</m>.</p>
+      <p><em>Exercise 2.1:</em> For the ground state of the infinite well, <m>\psi_1(x) = \sqrt{2/L}\sin(\pi x/L)</m>: <m>\expect{x} = L/2</m> (by symmetry), <m>\expect{x^2} = L^2(1/3 - 1/(2\pi^2))</m>, <m>\Delta x = L\sqrt{1/12 - 1/(2\pi^2)} \approx 0.181L</m>.</p>
+      <p><em>Exercise 3.5:</em> Schwarz inequality: Define <m>\ket{w} = \ket{\psi} - \frac{\braket{\phi}{\psi}}{\braket{\phi}{\phi}}\ket{\phi}</m>. Then <m>0 \leq \braket{w}{w} = \braket{\psi}{\psi} - |\braket{\phi}{\psi}|^2/\braket{\phi}{\phi}</m>, which rearranges to <m>|\braket{\phi}{\psi}|^2 \leq \braket{\phi}{\phi}\braket{\psi}{\psi}</m>.</p>
     </section>
-    <section>
-      <title>Part II and Beyond</title>
-      <p>Solutions to advanced exercises.</p>
+
+    <section xml:id="app-sol-part2">
+      <title>Part II: Dimension Variations (Chapters 4–7)</title>
+      <p><em>Exercise 5.2:</em> Eigenstates of <m>S_x</m> for spin-1/2: Diagonalize <m>S_x = (\hbar/2)\sigma_x</m>. Eigenvalues <m>\pm\hbar/2</m> with eigenstates <m>\ket{\pm}_x = (\ket{\uparrow} \pm \ket{\downarrow})/\sqrt{2}</m>.</p>
+      <p><em>Exercise 6.5:</em> From <m>\{\hat{c}^\dagger, \hat{c}^\dagger\} = 2(\hat{c}^\dagger)^2 = 0</m>, we get <m>(\hat{c}^\dagger)^2 = 0</m>. Applying to vacuum: <m>(\hat{c}^\dagger)^2\ket{0} = 0</m>, so creating two fermions in the same state gives the zero vector—the state does not exist.</p>
+      <p><em>Exercise 7.6:</em> Variational estimate for particle in box: <m>\psi = A(L^2/4-x^2)</m>, normalize to get <m>A = \sqrt{15/(4L^5)}</m>. Then <m>\expect{T} = 5\hbar^2/(mL^2)</m>. Compared to exact <m>\pi^2\hbar^2/(2mL^2) \approx 4.93\hbar^2/(mL^2)</m>, the error is about 1.3%.</p>
+    </section>
+
+    <section xml:id="app-sol-part3">
+      <title>Parts III–VI: Selected Solutions</title>
+      <p><em>Exercise 8.2:</em> For Bloch representation <m>\rho = (I + \mathbf{r}\cdot\boldsymbol{\sigma})/2</m>: <m>\text{Tr}(\rho^2) = \text{Tr}((I + \mathbf{r}\cdot\boldsymbol{\sigma})^2)/4 = (2 + 2|\mathbf{r}|^2)/4 = (1+|\mathbf{r}|^2)/2</m>. This equals 1 iff <m>|\mathbf{r}| = 1</m>.</p>
+      <p><em>Exercise 13.4:</em> No-cloning proof: Assume <m>U\ket{\psi}\ket{0} = \ket{\psi}\ket{\psi}</m> and <m>U\ket{\phi}\ket{0} = \ket{\phi}\ket{\phi}</m>. Taking inner products: <m>\braket{\phi}{\psi} = (\braket{\phi}{\psi})^2</m>. Solutions: <m>\braket{\phi}{\psi} = 0</m> or <m>1</m>. So cloning works only for orthogonal or identical states, not arbitrary unknown states.</p>
     </section>
   </appendix>
 
-  <!-- Bibliography -->
+  <!-- ============================================================ -->
+  <!-- BIBLIOGRAPHY -->
+  <!-- ============================================================ -->
   <references xml:id="references">
     <title>Bibliography and Further Reading</title>
     <introduction>
-      <p>This bibliography provides classic references that established quantum mechanics and modern treatments offering additional perspectives.</p>
+      <p>This bibliography provides references organized by topic, from foundational works to modern treatments. Each entry is annotated with the chapters where it is most relevant.</p>
     </introduction>
-    <section>
-      <title>Classic References</title>
-      <p>Foundational texts: Dirac, von Neumann, Landau and Lifshitz, and others.</p>
+
+    <section xml:id="bib-foundational">
+      <title>Foundational Texts</title>
+      <ul>
+        <li>P. A. M. Dirac, <em>The Principles of Quantum Mechanics</em>, 4th ed. (Oxford, 1958). The classic axiomatic treatment. [Chapters 1–3]</li>
+        <li>J. von Neumann, <em>Mathematical Foundations of Quantum Mechanics</em> (Princeton, 1955). Rigorous mathematical framework. [Chapters 3, 8]</li>
+        <li>R. P. Feynman and A. R. Hibbs, <em>Quantum Mechanics and Path Integrals</em> (McGraw-Hill, 1965). The path integral formulation. [Chapter 10]</li>
+      </ul>
     </section>
-    <section>
-      <title>Modern Textbooks</title>
-      <p>Contemporary quantum mechanics texts at various levels.</p>
+
+    <section xml:id="bib-modern-qm">
+      <title>Modern Quantum Mechanics Textbooks</title>
+      <ul>
+        <li>J. J. Sakurai and J. Napolitano, <em>Modern Quantum Mechanics</em>, 3rd ed. (Cambridge, 2021). Standard graduate text. [Chapters 1–7]</li>
+        <li>D. J. Griffiths and D. F. Schroeter, <em>Introduction to Quantum Mechanics</em>, 3rd ed. (Cambridge, 2018). Excellent undergraduate introduction. [Chapters 1–5]</li>
+        <li>C. Cohen-Tannoudji, B. Diu, and F. Laloë, <em>Quantum Mechanics</em>, Vols. 1-3 (Wiley, 2020). Comprehensive treatment. [All chapters]</li>
+        <li>L. D. Landau and E. M. Lifshitz, <em>Quantum Mechanics</em>, 3rd ed. (Pergamon, 1977). Concise and elegant. [Chapters 1–7, 14]</li>
+        <li>R. Shankar, <em>Principles of Quantum Mechanics</em>, 2nd ed. (Springer, 1994). Path integral emphasis. [Chapters 1–3, 10]</li>
+      </ul>
     </section>
-    <section>
-      <title>Specialized Topics</title>
-      <p>References for: relativistic quantum mechanics, quantum field theory, quantum information, mathematical physics.</p>
+
+    <section xml:id="bib-advanced">
+      <title>Advanced and Specialized Topics</title>
+      <ul>
+        <li>M. E. Peskin and D. V. Schroeder, <em>An Introduction to Quantum Field Theory</em> (Westview, 1995). Standard QFT textbook. [Chapters 11–12]</li>
+        <li>S. Weinberg, <em>The Quantum Theory of Fields</em>, Vols. 1-3 (Cambridge, 1995-2000). Definitive treatment. [Chapters 11–12]</li>
+        <li>H.-P. Breuer and F. Petruccione, <em>The Theory of Open Quantum Systems</em> (Oxford, 2002). Comprehensive open systems treatment. [Chapters 8–9]</li>
+        <li>M. A. Nielsen and I. L. Chuang, <em>Quantum Computation and Quantum Information</em> (Cambridge, 2010). The standard reference. [Chapter 13]</li>
+        <li>W. H. Zurek, "Decoherence, einselection, and the quantum origins of the classical," <em>Rev. Mod. Phys.</em> 75, 715 (2003). Decoherence review. [Chapters 8, 16]</li>
+        <li>U. Schollwöck, "The density-matrix renormalization group in the age of matrix product states," <em>Ann. Phys.</em> 326, 96 (2011). Tensor network review. [Chapter 15]</li>
+      </ul>
     </section>
   </references>
 
-  <!-- Glossary -->
+  <!-- ============================================================ -->
+  <!-- GLOSSARY -->
+  <!-- ============================================================ -->
   <glossary xml:id="glossary">
     <title>Glossary of Terms</title>
+    <gi><title>Adiabatic Theorem</title><p>A quantum system remains in its instantaneous eigenstate if the Hamiltonian changes slowly enough.</p></gi>
     <gi><title>Angular Momentum</title><p>Intrinsic or orbital rotational property, quantized in units of <m>\hbar</m>.</p></gi>
-    <gi><title>Born Rule</title><p>Probability <m>P(a_n) = |\braket{a_n}{\psi}|^2</m> of measuring eigenvalue.</p></gi>
-    <gi><title>Boson</title><p>Integer spin particle with symmetric wavefunction.</p></gi>
-    <gi><title>Commutator</title><p><m>[\AA, \BB] = \AA\BB - \BB\AA</m>, measures non-commutativity.</p></gi>
-    <gi><title>Decoherence</title><p>Loss of quantum coherence to environment.</p></gi>
-    <gi><title>Eigenvalue</title><p>Possible measurement outcome for observable.</p></gi>
-    <gi><title>Entanglement</title><p>Correlation in composite systems beyond product states.</p></gi>
-    <gi><title>Fermion</title><p>Half-integer spin particle with antisymmetric wavefunction.</p></gi>
-    <gi><title>Fock Space</title><p>Hilbert space for variable particle number.</p></gi>
-    <gi><title>Hamiltonian</title><p>Total energy operator <m>\HH = \hat{T} + \hat{V}</m>.</p></gi>
-    <gi><title>Hilbert Space</title><p>Complete complex vector space for quantum states.</p></gi>
-    <gi><title>Pauli Exclusion</title><p>No two fermions in identical quantum state.</p></gi>
-    <gi><title>Perturbation Theory</title><p>Approximation in powers of small coupling.</p></gi>
+    <gi><title>Anticommutator</title><p><m>\{A,B\} = AB + BA</m>, fundamental for fermion algebra.</p></gi>
+    <gi><title>Berry Phase</title><p>Geometric phase acquired during adiabatic cyclic evolution, depending only on the path in parameter space.</p></gi>
+    <gi><title>Bloch Sphere</title><p>Geometric representation of a qubit state as a point on or inside a unit sphere.</p></gi>
+    <gi><title>Born Rule</title><p>Probability of measuring eigenvalue <m>a_n</m> is <m>P(a_n) = |\braket{a_n}{\psi}|^2</m>.</p></gi>
+    <gi><title>Boson</title><p>Integer spin particle with symmetric wavefunction under exchange.</p></gi>
+    <gi><title>Commutator</title><p><m>[\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}</m>, measures non-commutativity.</p></gi>
+    <gi><title>Coherent State</title><p>Minimum-uncertainty state of the harmonic oscillator; eigenstate of annihilation operator.</p></gi>
+    <gi><title>Decoherence</title><p>Loss of quantum coherence due to environmental interaction.</p></gi>
+    <gi><title>Density Matrix</title><p><m>\rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i}</m>, general description of quantum states (pure or mixed).</p></gi>
+    <gi><title>Dirac Equation</title><p>Relativistic wave equation for spin-1/2 particles: <m>(i\gamma^\mu\partial_\mu - m)\psi = 0</m>.</p></gi>
+    <gi><title>Eigenvalue</title><p>Possible measurement outcome for observable <m>\hat{A}</m>: <m>\hat{A}\ket{a} = a\ket{a}</m>.</p></gi>
+    <gi><title>Entanglement</title><p>Quantum correlations in composite systems that cannot exist in product states.</p></gi>
+    <gi><title>Fermi's Golden Rule</title><p>Transition rate: <m>\Gamma = (2\pi/\hbar)|V_{fi}|^2\rho(E_f)</m>.</p></gi>
+    <gi><title>Fermion</title><p>Half-integer spin particle with antisymmetric wavefunction under exchange.</p></gi>
+    <gi><title>Feynman Diagram</title><p>Pictorial representation of terms in perturbative QFT expansion.</p></gi>
+    <gi><title>Fock Space</title><p>Hilbert space for variable particle number: <m>\Fock = \bigoplus_{N=0}^\infty \Hilbert_N</m>.</p></gi>
+    <gi><title>Hamiltonian</title><p>Total energy operator <m>\HH</m>, generator of time evolution.</p></gi>
+    <gi><title>Heisenberg Picture</title><p>Representation where operators evolve and states are fixed.</p></gi>
+    <gi><title>Hermitian Operator</title><p>Self-adjoint operator <m>\hat{A}^\dagger = \hat{A}</m>; represents physical observables.</p></gi>
+    <gi><title>Hilbert Space</title><p>Complete complex inner product space, the mathematical home of quantum states.</p></gi>
+    <gi><title>Interaction Picture</title><p>Representation splitting evolution between free and interaction Hamiltonians.</p></gi>
+    <gi><title>Klein-Gordon Equation</title><p>Relativistic wave equation for spin-0 particles: <m>(\Box + m^2)\phi = 0</m>.</p></gi>
+    <gi><title>Lindblad Equation</title><p>Master equation for Markovian open quantum systems.</p></gi>
+    <gi><title>No-Cloning Theorem</title><p>Impossibility of copying an arbitrary unknown quantum state.</p></gi>
+    <gi><title>Pauli Exclusion Principle</title><p>No two identical fermions can occupy the same quantum state.</p></gi>
+    <gi><title>Pauli Matrices</title><p><m>\sigma_x, \sigma_y, \sigma_z</m>: <m>2\times 2</m> matrices representing spin-1/2 observables.</p></gi>
+    <gi><title>Path Integral</title><p>Sum over all histories: <m>K = \int \mathcal{D}[x] e^{iS[x]/\hbar}</m>.</p></gi>
+    <gi><title>Perturbation Theory</title><p>Systematic expansion of solutions in powers of a small coupling parameter.</p></gi>
+    <gi><title>Qubit</title><p>Two-level quantum system; fundamental unit of quantum information.</p></gi>
+    <gi><title>Renormalization</title><p>Procedure absorbing ultraviolet divergences into physical parameters in QFT.</p></gi>
     <gi><title>Schrödinger Equation</title><p>Master equation: <m>i\hbar d\ket{\psi}/dt = \HH\ket{\psi}</m>.</p></gi>
-    <gi><title>Spin</title><p>Intrinsic angular momentum, purely quantum.</p></gi>
-    <gi><title>Tunneling</title><p>Quantum particle penetration into classically forbidden region.</p></gi>
-    <gi><title>Uncertainty Principle</title><p><m>\Delta A \cdot \Delta B \geq \frac{\hbar}{2}|\expect{[\AA, \BB]}|</m>.</p></gi>
+    <gi><title>Schrödinger Picture</title><p>Representation where states evolve and operators are fixed.</p></gi>
+    <gi><title>Slater Determinant</title><p>Antisymmetrized product state for fermions.</p></gi>
+    <gi><title>Spin</title><p>Intrinsic angular momentum, purely quantum mechanical property.</p></gi>
+    <gi><title>Tunneling</title><p>Quantum penetration into classically forbidden region.</p></gi>
+    <gi><title>Uncertainty Principle</title><p><m>\Delta A \cdot \Delta B \geq \frac{1}{2}|\expect{[\hat{A}, \hat{B}]}|</m>.</p></gi>
+    <gi><title>Unitary Operator</title><p><m>\hat{U}^\dagger\hat{U} = \hat{I}</m>; preserves inner products and probabilities.</p></gi>
+    <gi><title>Variational Principle</title><p><m>E_0 \leq \expect{\HH}_{\text{trial}}</m> for any trial state.</p></gi>
+    <gi><title>Von Neumann Entropy</title><p><m>S = -\text{Tr}(\rho\ln\rho)</m>, quantum generalization of Shannon entropy.</p></gi>
+    <gi><title>WKB Approximation</title><p>Semiclassical expansion valid when potential varies slowly on the scale of the de Broglie wavelength.</p></gi>
+    <gi><title>Wigner Function</title><p>Phase-space quasi-probability distribution; can be negative for non-classical states.</p></gi>
   </glossary>
+
+  <!-- ============================================================ -->
+  <!-- INDEX -->
+  <!-- ============================================================ -->
+  <index>
+    <title>Index</title>
+    <index-list/>
+  </index>
 
 </backmatter>
