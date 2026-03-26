@@ -40,7 +40,7 @@
       
       <xi:include href="./ch04-pictures.ptx" />
       <xi:include href="./ch05-spin-and-angular-momentum-dimension-7-.ptx" />
-      <xi:include href="./ch06-identical-particles-and-many-body-systems-dimension-3-.ptx" />
+      <xi:include href="./ch06-identical-particles.ptx" />
       <xi:include href="./ch07-perturbation-theory.ptx" />
       
       <conclusion>

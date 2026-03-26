@@ -1,75 +1,292 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch07-perturbation-theory" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Perturbation Theory (Dimension 9)</title>
+  <title>Approximation Methods: Perturbation Theory (Dimension 9)</title>
   <objectives>
     <ul>
-      <li>Master time-independent perturbation theory for energy corrections.</li>
-      <li>Understand first and second-order corrections to eigenvalues and eigenstates.</li>
-      <li>Develop time-dependent perturbation theory for transitions.</li>
-      <li>Apply Fermi's Golden Rule to calculate transition rates.</li>
-      <li>Recognize when perturbation theory is valid and its limitations.</li>
+      <li>Master time-independent perturbation theory for non-degenerate and degenerate systems.</li>
+      <li>Develop time-dependent perturbation theory and transition rates.</li>
+      <li>Derive Fermi's golden rule for transition probabilities.</li>
+      <li>Apply the variational method to estimate ground-state energies.</li>
+      <li>Understand the sudden and adiabatic approximations and the Berry phase.</li>
+      <li>Recognize when each approximation method is appropriate within the 11-dimensional framework.</li>
     </ul>
   </objectives>
   <introduction>
-    <p>Dimension nine asks: how do we solve the equations? For most interesting quantum systems, exact solutions do not exist. Perturbation theory is the workhorse approximation: we split the Hamiltonian as <m>\HH = \HH_0 + V</m> where <m>\HH_0</m> is solvable and <m>V</m> is small, then expand solutions in powers of <m>V</m>. This systematic expansion underlies most practical quantum mechanics: calculating atomic spectra, molecular bonding, scattering processes, and quantum electrodynamics.</p>
+    <p>The ninth dimension of our framework concerns the level of approximation used to solve quantum problems. Exact analytical solutions exist only for a handful of systems—the harmonic oscillator, hydrogen atom, and a few others. For virtually every other system, we need approximation methods. This chapter develops the most powerful and widely used techniques: perturbation theory (both time-independent and time-dependent), the variational method, and the sudden and adiabatic approximations.</p>
+    <p>These methods are not mere computational tricks. They reveal physical structure. Perturbation theory shows how a system responds to small perturbations and predicts atomic spectra with extraordinary precision. The variational principle provides rigorous bounds on energies and underlies computational chemistry. The adiabatic theorem introduces the Berry phase, connecting quantum mechanics to topology. Together, these methods form the practical backbone of quantum mechanics.</p>
   </introduction>
-  <section xml:id="sec-ch07-time-independent">
-    <title>Time-Independent Perturbation Theory</title>
-    <p>Suppose <m>\HH_0</m> has known eigenvalues and eigenstates: <m>\HH_0 \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}}</m>. The full Hamiltonian is <m>\HH = \HH_0 + \lambda V</m>, where <m>\lambda \ll 1</m> is a small dimensionless coupling.</p>
-    <p>Expand the eigenstates and energies as power series in <m>\lambda</m>:</p>
+
+  <section xml:id="sec-ch07-ti-nondegenerate">
+    <title>Time-Independent Perturbation Theory: Non-Degenerate Case</title>
+    <p>Consider a Hamiltonian split into a solvable part and a small perturbation:</p>
+    <me>
+      \HH = \HH_0 + \lambda \hat{V},
+    </me>
+    <p>where <m>\lambda</m> is a small dimensionless parameter and the eigenstates and eigenvalues of <m>\HH_0</m> are known:</p>
+    <me>
+      \HH_0 \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}}.
+    </me>
+    <p>We expand the exact eigenstate and energy in powers of <m>\lambda</m>:</p>
     <me>
       \ket{n} = \ket{n^{(0)}} + \lambda \ket{n^{(1)}} + \lambda^2 \ket{n^{(2)}} + \cdots,
     </me>
     <me>
       E_n = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots.
     </me>
-    <p><em>First-order energy correction:</em></p>
-    <me>
-      E_n^{(1)} = \langle n^{(0)} | V | n^{(0)} \rangle.
-    </me>
-    <p><em>Second-order energy correction:</em></p>
-    <me>
-      E_n^{(2)} = \sum_{k \ne n} \frac{|\langle k^{(0)} | V | n^{(0)} \rangle|^2}{E_n^{(0)} - E_k^{(0)}}.
-    </me>
-    <p>Higher orders follow by iteration. The series converges when <m>\lambda |V| \ll |E_n^{(0)} - E_k^{(0)}|</m> for all <m>k \ne n</m>.</p>
+
+    <assemblage xml:id="box-pt-formulas">
+      <title>Perturbation Theory Formulas (Non-Degenerate)</title>
+      <p><em>First-order energy correction:</em></p>
+      <me>
+        E_n^{(1)} = \bra{n^{(0)}} \hat{V} \ket{n^{(0)}} = V_{nn}.
+      </me>
+      <p>The first-order energy shift is the expectation value of the perturbation in the unperturbed state.</p>
+      <p><em>First-order state correction:</em></p>
+      <me>
+        \ket{n^{(1)}} = \sum_{m \neq n} \frac{V_{mn}}{E_n^{(0)} - E_m^{(0)}} \ket{m^{(0)}},
+      </me>
+      <p>where <m>V_{mn} = \bra{m^{(0)}} \hat{V} \ket{n^{(0)}}</m>.</p>
+      <p><em>Second-order energy correction:</em></p>
+      <me>
+        E_n^{(2)} = \sum_{m \neq n} \frac{|V_{mn}|^2}{E_n^{(0)} - E_m^{(0)}}.
+      </me>
+      <p>The second-order correction always lowers the ground-state energy (all denominators are negative for <m>m \neq 0</m>).</p>
+    </assemblage>
+
+    <example xml:id="ex-ch07-anharmonic">
+      <title>Anharmonic Oscillator</title>
+      <p>Consider a harmonic oscillator with a quartic perturbation <m>V = \lambda x^4</m>. Using ladder operators, <m>x = \sqrt{\hbar/(2m\omega)}(\hat{a} + \hat{a}^\dagger)</m>, we compute the first-order correction:</p>
+      <me>
+        E_n^{(1)} = \lambda \bra{n} x^4 \ket{n} = \frac{3\lambda\hbar^2}{4m^2\omega^2}(2n^2 + 2n + 1).
+      </me>
+      <p>This gives energy levels that are no longer equally spaced—the hallmark of anharmonicity. The ground state shifts by <m>E_0^{(1)} = 3\lambda\hbar^2/(4m^2\omega^2)</m>.</p>
+    </example>
+
+    <remark>
+      <title>Validity of Perturbation Theory</title>
+      <p>Perturbation theory is valid when <m>|V_{mn}| \ll |E_n^{(0)} - E_m^{(0)}|</m> for all <m>m \neq n</m>. When nearby levels are close in energy, the denominators become small and the expansion breaks down. This signals the need for degenerate perturbation theory.</p>
+    </remark>
   </section>
-  <section xml:id="sec-ch07-applications">
-    <title>Applications to Atoms and Molecules</title>
-    <p><em>Fine structure:</em> Relativistic corrections split degenerate levels by order <m>\alpha^2</m> (where <m>\alpha \approx 1/137</m> is the fine-structure constant).</p>
-    <p><em>Stark effect:</em> An electric field <m>E</m> creates a perturbation <m>V = -e E z</m>, shifting atomic levels quadratically (second-order) for nondegenerate states.</p>
-    <p><em>Zeeman effect:</em> A magnetic field causes splitting proportional to <m>B</m> (first-order) due to <m>V = -\mu \cdot B</m>.</p>
-    <p><em>Molecular vibrations:</em> Perturbation theory explains how molecular bonds stiffen and vibrational frequencies shift when molecular geometry changes.</p>
+
+  <section xml:id="sec-ch07-ti-degenerate">
+    <title>Degenerate Perturbation Theory</title>
+    <p>When the unperturbed level <m>E_n^{(0)}</m> is degenerate—multiple states share the same energy—the standard formulas fail because denominators vanish. The resolution is to diagonalize the perturbation within the degenerate subspace.</p>
+    <p>Suppose states <m>\ket{n, \alpha}</m> for <m>\alpha = 1, 2, \ldots, g</m> are degenerate with energy <m>E_n^{(0)}</m>. Form the <m>g \times g</m> matrix:</p>
+    <me>
+      W_{\alpha\beta} = \bra{n, \alpha} \hat{V} \ket{n, \beta}.
+    </me>
+    <p>The first-order energy corrections are the eigenvalues of <m>W</m>. The correct zeroth-order states are the eigenvectors of <m>W</m>.</p>
+
+    <example xml:id="ex-ch07-stark">
+      <title>Linear Stark Effect in Hydrogen</title>
+      <p>An external electric field <m>\mathcal{E}</m> along the z-axis gives perturbation <m>\hat{V} = e\mathcal{E}z</m>. For the <m>n=2</m> level of hydrogen (four-fold degenerate: 2s, 2p<m>_0</m>, 2p<m>_{\pm 1}</m>):</p>
+      <p>The only non-zero matrix element within this subspace is between 2s and 2p<m>_0</m>:</p>
+      <me>
+        \bra{200} e\mathcal{E}z \ket{210} = -3e\mathcal{E}a_0.
+      </me>
+      <p>Diagonalizing the <m>2 \times 2</m> matrix in the 2s–2p<m>_0</m> subspace gives first-order corrections:</p>
+      <me>
+        E^{(1)} = \pm 3e\mathcal{E}a_0.
+      </me>
+      <p>The energy splitting is linear in <m>\mathcal{E}</m>—the linear Stark effect. States 2p<m>_{\pm 1}</m> are unaffected to first order.</p>
+    </example>
+
+    <example xml:id="ex-ch07-zeeman">
+      <title>Zeeman Effect</title>
+      <p>A magnetic field <m>\mathbf{B} = B\hat{z}</m> perturbs the hydrogen atom via:</p>
+      <me>
+        \hat{V} = -\hat{\mu} \cdot \mathbf{B} = \frac{eB}{2m_e c}(\hat{L}_z + 2\hat{S}_z).
+      </me>
+      <p>For the anomalous Zeeman effect (including spin), the first-order energy shift for state <m>\ket{n, \ell, j, m_j}</m> is:</p>
+      <me>
+        E^{(1)} = \mu_B B m_j g_j,
+      </me>
+      <p>where <m>\mu_B = e\hbar/(2m_e c)</m> is the Bohr magneton and <m>g_j</m> is the Landé g-factor:</p>
+      <me>
+        g_j = 1 + \frac{j(j+1) + s(s+1) - \ell(\ell+1)}{2j(j+1)}.
+      </me>
+    </example>
   </section>
-  <section xml:id="sec-ch07-time-dependent">
+
+  <section xml:id="sec-ch07-td-perturbation">
     <title>Time-Dependent Perturbation Theory</title>
-    <p>For time-dependent perturbations <m>V(t)</m>, we work in the interaction picture. The transition probability from state <m>n</m> to state <m>m</m> (with <m>m \ne n</m>) to first order is</p>
+    <p>When a perturbation is turned on at some time, we use time-dependent perturbation theory. The Hamiltonian is <m>\HH(t) = \HH_0 + V(t)</m> where <m>V(t) = 0</m> for <m>t \lt 0</m>.</p>
+    <p>Working in the interaction picture, the first-order transition amplitude from state <m>\ket{i}</m> to state <m>\ket{f}</m> is:</p>
     <me>
-      P_{n \to m}(t) = \left| \frac{1}{i\hbar} \int_0^t V_{mn}(t') e^{i\omega_{mn} t'} dt' \right|^2,
+      c_f^{(1)}(t) = -\frac{i}{\hbar} \int_0^t dt' \, V_{fi}(t') \, e^{i\omega_{fi}t'},
     </me>
-    <p>where <m>V_{mn}(t) = \langle m^{(0)} | V(t) | n^{(0)} \rangle</m> and <m>\omega_{mn} = (E_m^{(0)} - E_n^{(0)})/\hbar</m>.</p>
+    <p>where <m>\omega_{fi} = (E_f - E_i)/\hbar</m> and <m>V_{fi}(t) = \bra{f^{(0)}} V(t) \ket{i^{(0)}}</m>.</p>
+
+    <subsection xml:id="subsec-harmonic-pert">
+      <title>Harmonic Perturbation</title>
+      <p>For a sinusoidal perturbation <m>V(t) = V_0 \cos(\omega t)</m>, the transition probability is strongly peaked near resonance <m>\omega \approx \omega_{fi}</m>. Near resonance, only the co-rotating term matters:</p>
+      <me>
+        P_{i \to f}(t) \approx \frac{|V_{fi}|^2}{\hbar^2} \frac{\sin^2[(\omega_{fi} - \omega)t/2]}{[(\omega_{fi} - \omega)/2]^2}.
+      </me>
+      <p>This shows that transitions are most probable when the driving frequency matches the transition frequency—the resonance condition <m>\omega = \omega_{fi}</m>.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-fermis-golden">
+      <title>Fermi's Golden Rule</title>
+      <assemblage xml:id="box-fermi-golden">
+        <title>Fermi's Golden Rule</title>
+        <p>For transitions to a continuum of final states with density of states <m>\rho(E_f)</m>:</p>
+        <me>
+          \Gamma_{i \to f} = \frac{2\pi}{\hbar} |V_{fi}|^2 \rho(E_f).
+        </me>
+        <p>Applications include:</p>
+        <ul>
+          <li>Spontaneous and stimulated emission of photons</li>
+          <li>Radioactive decay rates</li>
+          <li>Scattering cross sections</li>
+          <li>Transition rates in semiconductors and lasers</li>
+        </ul>
+      </assemblage>
+      <p>The rate is proportional to the square of the matrix element (coupling strength) times the density of states (available final states). Both must be favorable for fast transitions.</p>
+    </subsection>
   </section>
-  <section xml:id="sec-ch07-fermi">
-    <title>Fermi's Golden Rule</title>
-    <p>For a constant perturbation turned on abruptly at <m>t=0</m>, the transition <em>rate</em> (probability per unit time) is</p>
-    <me>
-      \Gamma_{n \to m} = \frac{2\pi}{\hbar} |\langle m | V | n \rangle|^2 \rho(E_m),
-    </me>
-    <p>where <m>\rho(E_m)</m> is the density of final states. This formula is remarkably universal and applies to scattering, decay, and absorption processes.</p>
+
+  <section xml:id="sec-ch07-variational">
+    <title>The Variational Method</title>
+    <p>The variational method provides rigorous upper bounds on the ground-state energy without solving the Schrödinger equation exactly.</p>
+
+    <assemblage xml:id="box-variational">
+      <title>The Variational Principle</title>
+      <p>For any normalized trial state <m>\ket{\psi_{\text{trial}}}</m>:</p>
+      <me>
+        E_0 \leq \bra{\psi_{\text{trial}}} \HH \ket{\psi_{\text{trial}}}.
+      </me>
+      <p>The true ground-state energy <m>E_0</m> is always less than or equal to the energy expectation value in any trial state. Equality holds only when <m>\ket{\psi_{\text{trial}}}</m> is the exact ground state.</p>
+    </assemblage>
+
+    <p>The strategy: choose a trial wavefunction with adjustable parameters, compute the energy expectation value, and minimize with respect to all parameters.</p>
+
+    <example xml:id="ex-ch07-var-helium">
+      <title>Helium Ground State by the Variational Method</title>
+      <p>Using a hydrogen-like trial function with effective charge <m>Z_{\text{eff}}</m>:</p>
+      <me>
+        \psi(\mathbf{r}_1, \mathbf{r}_2) = \frac{Z_{\text{eff}}^3}{\pi a_0^3} e^{-Z_{\text{eff}}(r_1 + r_2)/a_0}.
+      </me>
+      <p>The energy as a function of <m>Z_{\text{eff}}</m> is:</p>
+      <me>
+        E(Z_{\text{eff}}) = \left(Z_{\text{eff}}^2 - \frac{27}{8}Z_{\text{eff}}\right) E_1,
+      </me>
+      <p>where <m>E_1 = -13.6</m> eV. Minimizing: <m>Z_{\text{eff}} = 27/16 \approx 1.69</m>, giving <m>E \approx -77.5</m> eV (experiment: <m>-79.0</m> eV, 2% error). The effective charge <m>Z_{\text{eff}} \lt 2</m> reflects electron screening.</p>
+    </example>
+
+    <p>The Ritz variational method extends this by expanding in a basis: <m>\ket{\psi_{\text{trial}}} = \sum_k c_k \ket{\phi_k}</m>. Minimizing energy with respect to the coefficients <m>c_k</m> leads to a generalized eigenvalue problem. This is the foundation of computational quantum chemistry (Hartree-Fock method, configuration interaction).</p>
   </section>
+
+  <section xml:id="sec-ch07-sudden-adiabatic">
+    <title>Sudden and Adiabatic Approximations</title>
+    <subsection xml:id="subsec-sudden">
+      <title>The Sudden Approximation</title>
+      <p>When a perturbation is applied very quickly (faster than any internal timescale), the state has no time to adjust. The system remains in its original state, but this state is no longer an eigenstate of the new Hamiltonian. The transition probability to new eigenstate <m>\ket{n'}</m> is:</p>
+      <me>
+        P_{n \to n'} = |\braket{n'}{n}|^2,
+      </me>
+      <p>simply the overlap between old and new eigenstates.</p>
+
+      <example xml:id="ex-ch07-sudden-box">
+        <title>Sudden Expansion of a Box</title>
+        <p>A particle in the ground state of a box of width <m>L</m>. The wall instantly moves to <m>2L</m>. The probability of remaining in the ground state of the expanded box is:</p>
+        <me>
+          P = \left|\int_0^L \sqrt{\frac{2}{2L}} \sin\left(\frac{\pi x}{2L}\right) \sqrt{\frac{2}{L}} \sin\left(\frac{\pi x}{L}\right) dx\right|^2 = \left(\frac{8}{3\pi}\right)^2 \approx 0.72.
+        </me>
+      </example>
+    </subsection>
+
+    <subsection xml:id="subsec-adiabatic">
+      <title>The Adiabatic Theorem and Berry Phase</title>
+      <p>When a perturbation changes very slowly compared to all internal timescales, the adiabatic theorem states: a system initially in the <m>n</m>-th eigenstate remains in the <m>n</m>-th eigenstate of the instantaneous Hamiltonian, up to a phase factor.</p>
+
+      <assemblage xml:id="box-adiabatic">
+        <title>The Adiabatic Theorem</title>
+        <p>If <m>\HH(t)</m> changes slowly and the system starts in eigenstate <m>\ket{n(0)}</m> of <m>\HH(0)</m>, then at time <m>t</m>:</p>
+        <me>
+          \ket{\Psi(t)} \approx e^{i\gamma_n(t)} e^{-i\theta_n(t)} \ket{n(t)},
+        </me>
+        <p>where <m>\theta_n = \frac{1}{\hbar}\int_0^t E_n(t') dt'</m> is the dynamical phase and <m>\gamma_n</m> is the geometric (Berry) phase.</p>
+      </assemblage>
+
+      <p>The Berry phase depends only on the path traced in parameter space, not on the speed:</p>
+      <me>
+        \gamma_n = i \oint \bra{n(\mathbf{R})} \nabla_\mathbf{R} \ket{n(\mathbf{R})} \cdot d\mathbf{R}.
+      </me>
+      <p>This geometric phase has profound consequences in molecular physics (Born-Oppenheimer approximation), condensed matter (topological insulators, quantum Hall effect), and quantum computing (holonomic gates).</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch07-framework">
+    <title>Approximation Methods in the 11-Dimensional Framework</title>
+    <p>The ninth dimension classifies the level of approximation:</p>
+    <ul>
+      <li><em>Exact:</em> harmonic oscillator, hydrogen atom, two-level systems—rare but foundational.</li>
+      <li><em>Perturbative:</em> fine structure, Stark/Zeeman effects, QED corrections—the workhorse method.</li>
+      <li><em>Variational:</em> helium, molecular bonding, many-body ground states—rigorous bounds.</li>
+      <li><em>Semiclassical:</em> WKB tunneling, coherent states—bridges quantum and classical (Chapter 14).</li>
+    </ul>
+    <p>The art of quantum mechanics is choosing the right approximation for the problem at hand. Perturbation theory requires a natural small parameter. The variational method works when you need ground-state properties. Semiclassical methods apply when <m>\hbar</m> is effectively small. Mastering approximation means knowing which tool to deploy and when.</p>
+  </section>
+
   <section xml:id="sec-ch07-summary">
     <title>Chapter Summary</title>
     <ul>
-      <li>Perturbation theory systematically expands solutions in powers of a small coupling <m>\lambda V</m>.</li>
-      <li>First-order energy correction is the expectation value of <m>V</m> in the unperturbed state.</li>
-      <li>Second-order correction involves virtual transitions to intermediate states.</li>
-      <li>Time-dependent perturbation theory describes transitions driven by time-varying forces.</li>
-      <li>Fermi's Golden Rule gives the transition rate in terms of matrix elements and density of states.</li>
+      <li>Time-independent perturbation theory expands energies and states in powers of the perturbation.</li>
+      <li>First-order energy: <m>E_n^{(1)} = \bra{n^{(0)}} \hat{V} \ket{n^{(0)}}</m>; second-order: <m>E_n^{(2)} = \sum_{m \neq n} |V_{mn}|^2/(E_n^{(0)} - E_m^{(0)})</m>.</li>
+      <li>Degenerate perturbation theory requires diagonalizing <m>\hat{V}</m> within the degenerate subspace.</li>
+      <li>Key applications: fine structure, Stark effect, Zeeman effect, anharmonic oscillators.</li>
+      <li>Time-dependent perturbation theory gives transition amplitudes driven by external fields.</li>
+      <li>Fermi's golden rule: <m>\Gamma = (2\pi/\hbar)|V_{fi}|^2 \rho(E_f)</m> for continuum transitions.</li>
+      <li>The variational principle: <m>E_0 \leq \expect{\HH}_{\text{trial}}</m> provides rigorous upper bounds.</li>
+      <li>The sudden approximation applies for fast changes; the adiabatic theorem for slow changes.</li>
+      <li>The Berry phase is a geometric phase acquired during adiabatic transport, with deep connections to topology.</li>
     </ul>
   </section>
-  <exercises>
+
+  <exercises xml:id="exercises-ch07">
     <title>Exercises</title>
-    <exercise><statement><p>Using first-order perturbation theory, calculate the energy shift of a hydrogen atom in a weak electric field (Stark effect).</p></statement></exercise>
-    <exercise><statement><p>Derive Fermi's Golden Rule starting from first-order time-dependent perturbation theory for a time-independent perturbation.</p></statement></exercise>
-    <exercise><statement><p>For a harmonic oscillator with an added linear perturbation <m>V = \lambda x</m>, calculate the first and second-order energy shifts to the ground state.</p></statement></exercise>
+    <exercise xml:id="exer-ch07-linear">
+      <statement>
+        <p>A particle in a one-dimensional box of length <m>L</m> is perturbed by <m>V(x) = V_0 x/L</m>. Calculate the first-order energy correction for the <m>n</m>-th level.</p>
+      </statement>
+      <hint><p>Use the position matrix elements in the box eigenstates.</p></hint>
+    </exercise>
+    <exercise xml:id="exer-ch07-quartic">
+      <statement>
+        <p>For a harmonic oscillator perturbed by <m>V = \lambda x^4</m>, calculate <m>E_n^{(1)}</m> using ladder operators. Express <m>x</m> in terms of <m>\hat{a}</m> and <m>\hat{a}^\dagger</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch07-stark">
+      <statement>
+        <p>Carry out the degenerate perturbation theory for the <m>n=2</m> level of hydrogen in an electric field. Find all four first-order energy corrections and the correct zeroth-order states.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch07-zeeman">
+      <statement>
+        <p>Calculate the Zeeman splitting of the hydrogen <m>2p</m> level in a magnetic field <m>B = 1</m> T. How many distinct energy levels result?</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch07-fermi">
+      <statement>
+        <p>Derive Fermi's golden rule starting from first-order time-dependent perturbation theory by considering a constant perturbation turned on at <m>t = 0</m> and taking the long-time limit.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch07-var-box">
+      <statement>
+        <p>Use the trial function <m>\psi(x) = A(L^2/4 - x^2)</m> for a particle in a box centered at the origin. Calculate the variational ground-state energy and compare with the exact result.</p>
+      </statement>
+      <answer><p>The variational estimate is <m>E \approx 5\hbar^2/(mL^2)</m>, compared to <m>E_1 = \pi^2\hbar^2/(2mL^2) \approx 4.93\hbar^2/(mL^2)</m>—about 1.3% above exact.</p></answer>
+    </exercise>
+    <exercise xml:id="exer-ch07-sudden">
+      <statement>
+        <p>A hydrogen atom in its ground state suddenly has its nuclear charge doubled (e.g., by beta decay). What is the probability the electron is in the ground state of the resulting He<m>^+</m> ion?</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch07-challenge">
+      <statement>
+        <p><em>Challenge.</em> Show that the Berry phase for a spin-1/2 particle in a slowly rotating magnetic field that traces a cone of half-angle <m>\theta</m> is <m>\gamma = -\pi(1 - \cos\theta)</m>. Interpret this as half the solid angle subtended by the path.</p>
+      </statement>
+    </exercise>
   </exercises>
 </chapter>
