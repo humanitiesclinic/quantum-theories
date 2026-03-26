@@ -1,0 +1,51 @@
+CRITICAL: EPUB ISBN Metadata Fix
+=================================
+
+PROBLEM:
+--------
+PreTeXt's EPUB generator uses a hardcoded mock ISBN (mock-123456789-0-987654321)
+in the package.opf metadata instead of reading the actual ISBN from docinfo.
+
+This causes Lulu and other publishing platforms to reject the EPUB with:
+"The ISBN detected within the ebook file does not match the ISBN you entered."
+
+SOLUTION:
+---------
+Modify /Users/user/.ptx/2.7.0/core/xsl/pretext-epub.xsl (PreTeXt cache)
+
+Lines 86-96 should be:
+
+    <!-- Use ISBN from docinfo if available, otherwise fall back to mock UUID -->
+    <xsl:variable name="mock-UUID">
+        <xsl:choose>
+            <xsl:when test="$docinfo/isbn">
+                <xsl:value-of select="$docinfo/isbn"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>mock-123456789-0-987654321</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+Replace the original hardcoded line:
+    <xsl:variable name="mock-UUID">mock-123456789-0-987654321</xsl:variable>
+
+WHEN TO APPLY:
+--------------
+- After installing/updating PreTeXt
+- After clearing ~/.ptx cache (pretext clean)
+- Before building EPUB for publishing
+
+VERIFICATION:
+-------------
+After building EPUB, extract and check package.opf:
+    unzip -q output/epub/main.epub -d check_epub
+    grep "dc:identifier" check_epub/EPUB/package.opf
+
+Should show your actual ISBN (e.g., 9781105471186), not the mock value.
+
+WHY NOT AUTOMATED:
+------------------
+PreTeXt v2 does not support custom XSL overrides at the project level.
+The fix must be applied to the PreTeXt cache manually.
+Hopefully PreTeXt v3+ will support this properly.
