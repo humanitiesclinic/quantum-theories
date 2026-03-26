@@ -3,86 +3,255 @@
   <title>Density Matrices and Mixed States (Dimension 5)</title>
   <objectives>
     <ul>
-      <li>Understand pure and mixed quantum states and their representations.</li>
-      <li>Master the density matrix formalism and its properties.</li>
-      <li>Learn how to construct density matrices from state preparations and environments.</li>
-      <li>Understand the meaning of purity and its physical interpretation.</li>
-      <li>Apply density matrices to thermal equilibrium and decoherence.</li>
+      <li>Understand the distinction between pure and mixed quantum states.</li>
+      <li>Master the density matrix formalism and its key properties.</li>
+      <li>Compute expectation values and time evolution using density matrices.</li>
+      <li>Understand reduced density matrices and their connection to entanglement.</li>
+      <li>Apply density matrices to thermal equilibrium and quantum statistical mechanics.</li>
+      <li>Grasp the role of decoherence in the quantum-to-classical transition.</li>
     </ul>
   </objectives>
   <introduction>
-    <p>Dimension five asks: is our knowledge of the quantum state complete? In a pure state described by $\ket{\psi}$, we have complete knowledge. But real systems are always entangled with environments, or prepared via statistical ensembles. The density matrix <m>\rho</m> is the natural generalization describing both pure and mixed states, incomplete and fluctuating information, thermal mixtures, and decoherence.</p>
+    <p>The fifth dimension of our framework asks: is our knowledge of the quantum state complete? In Chapters 1–7, we described systems by state vectors <m>\ket{\psi}</m>—pure states with complete quantum information. But real systems are rarely so pristine. An electron in a crystal at room temperature, a photon from a thermal source, or a qubit coupled to its environment cannot be described by a single state vector. We need the density matrix formalism.</p>
+    <p>The density matrix <m>\rho</m> is the most general description of a quantum state. It encompasses both pure states (complete knowledge) and mixed states (incomplete knowledge, arising from classical ignorance or entanglement with inaccessible degrees of freedom). This chapter develops the formalism, connects it to quantum statistical mechanics, and introduces the concept of decoherence—the mechanism by which quantum superpositions become effectively classical.</p>
   </introduction>
+
   <section xml:id="sec-ch08-pure-mixed">
-    <title>Pure and Mixed States</title>
-    <p>A <em>pure state</em> is described completely by a state vector $\ket{\psi}$ normalized so $\langle\psi|\psi\rangle = 1$. The density matrix is</p>
+    <title>Pure States vs. Mixed States</title>
+    <p>A <em>pure state</em> represents maximal quantum knowledge. It is described by a normalized state vector <m>\ket{\psi}</m> in the Hilbert space, or equivalently by the density matrix:</p>
     <me>
-      \rho = \ket{\psi}\bra{\psi}.
+      \rho_{\text{pure}} = \ket{\psi}\bra{\psi}.
     </me>
-    <p>A <em>mixed state</em> describes a statistical ensemble of pure states with probabilities $p_i$. The density matrix is the weighted average,</p>
+    <p>A <em>mixed state</em> arises when we have only statistical knowledge of which pure state the system is in. If the system is in state <m>\ket{\psi_i}</m> with probability <m>p_i</m>, the density matrix is:</p>
     <me>
-      \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i},
+      \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i}, \quad \sum_i p_i = 1, \quad p_i \geq 0.
     </me>
-    <p>where $\sum_i p_i = 1$ and $p_i \ge 0$. Unlike pure states, mixed states cannot be represented by a single state vector.</p>
-    <p>The key property distinguishing them: for a pure state, $\text{Tr}(\rho^2) = 1$; for a mixed state, $\text{Tr}(\rho^2) < 1$.</p>
+
+    <assemblage xml:id="box-density-properties">
+      <title>Properties of the Density Matrix</title>
+      <p>Every density matrix satisfies:</p>
+      <ol>
+        <li><em>Hermiticity:</em> <m>\rho^\dagger = \rho</m></li>
+        <li><em>Unit trace:</em> <m>\text{Tr}(\rho) = 1</m></li>
+        <li><em>Positive semidefiniteness:</em> <m>\bra{\phi}\rho\ket{\phi} \geq 0</m> for all <m>\ket{\phi}</m></li>
+      </ol>
+      <p>Conversely, any operator satisfying these three properties is a valid density matrix.</p>
+      <p><em>Purity test:</em> <m>\text{Tr}(\rho^2) = 1</m> for pure states; <m>\text{Tr}(\rho^2) \lt 1</m> for mixed states.</p>
+    </assemblage>
+
+    <example xml:id="ex-ch08-spin-half">
+      <title>Spin-1/2 Density Matrices</title>
+      <p>The most general density matrix for a spin-1/2 system can be written using the Bloch vector <m>\mathbf{r} = (r_x, r_y, r_z)</m>:</p>
+      <me>
+        \rho = \frac{1}{2}(\hat{I} + \mathbf{r} \cdot \hat{\boldsymbol{\sigma}}) = \frac{1}{2}\begin{pmatrix} 1 + r_z \amp r_x - ir_y \\ r_x + ir_y \amp 1 - r_z \end{pmatrix}.
+      </me>
+      <p>The state is pure when <m>|\mathbf{r}| = 1</m> (on the Bloch sphere surface) and mixed when <m>|\mathbf{r}| \lt 1</m> (inside the sphere). The maximally mixed state <m>\rho = \hat{I}/2</m> corresponds to <m>\mathbf{r} = 0</m> (center of the sphere).</p>
+    </example>
   </section>
-  <section xml:id="sec-ch08-properties">
-    <title>Properties of the Density Matrix</title>
-    <p>Any density matrix satisfies:</p>
+
+  <section xml:id="sec-ch08-expectation">
+    <title>Expectation Values and Measurements</title>
+    <p>The expectation value of observable <m>\hat{A}</m> in state <m>\rho</m> is:</p>
+    <me>
+      \expect{\hat{A}} = \text{Tr}(\rho \hat{A}).
+    </me>
+    <p>This formula works for both pure and mixed states. For a pure state <m>\rho = \ket{\psi}\bra{\psi}</m>, it reduces to the familiar <m>\expect{\hat{A}} = \bra{\psi}\hat{A}\ket{\psi}</m>.</p>
+
+    <p>The probability of measuring eigenvalue <m>a_n</m> of observable <m>\hat{A}</m> is:</p>
+    <me>
+      P(a_n) = \text{Tr}(\rho \ket{a_n}\bra{a_n}) = \bra{a_n}\rho\ket{a_n}.
+    </me>
+
+    <p>After measurement yielding <m>a_n</m>, the state updates to:</p>
+    <me>
+      \rho \to \rho' = \frac{\ket{a_n}\bra{a_n} \rho \ket{a_n}\bra{a_n}}{P(a_n)}.
+    </me>
+  </section>
+
+  <section xml:id="sec-ch08-time-evolution">
+    <title>Time Evolution: The von Neumann Equation</title>
+    <p>The time evolution of the density matrix for a closed system is governed by the von Neumann equation:</p>
+
+    <assemblage xml:id="box-von-neumann">
+      <title>The von Neumann Equation</title>
+      <me>
+        i\hbar \frac{d\rho}{dt} = [\HH, \rho].
+      </me>
+      <p>This is the density matrix analog of the Schrödinger equation. Its formal solution is:</p>
+      <me>
+        \rho(t) = U(t)\rho(0)U^\dagger(t), \quad U(t) = e^{-i\HH t/\hbar}.
+      </me>
+    </assemblage>
+
+    <p>Key properties of unitary evolution:</p>
     <ul>
-      <li><m>\text{Tr}(\rho) = 1</m> (trace = 1, probability normalization)</li>
-      <li><m>\rho^\dagger = \rho</m> (Hermitian)</li>
-      <li><m>\rho \ge 0</m> (positive semidefinite)</li>
-      <li>Eigenvalues $\lambda_i \in [0,1]$ with $\sum_i \lambda_i = 1$</li>
+      <li>Eigenvalues of <m>\rho</m> are preserved (purity is constant)</li>
+      <li>Pure states remain pure; mixed states remain equally mixed</li>
+      <li><m>\text{Tr}(\rho^2)</m> is constant in time</li>
     </ul>
-    <p>Expectation values are computed as</p>
-    <me>
-      \langle A \rangle = \text{Tr}(\rho A).
-    </me>
-    <p>Purity is defined as</p>
-    <me>
-      \mathcal{P} = \text{Tr}(\rho^2) \in [0,1],
-    </me>
-    <p>with $\mathcal{P} = 1$ for pure states and $\mathcal{P} < 1$ for mixed states.</p>
+    <p>This means a closed system cannot become more or less mixed through unitary evolution alone. Decoherence requires coupling to an environment (open system, Chapter 9).</p>
+
+    <example xml:id="ex-ch08-rabi">
+      <title>Two-Level System in a Magnetic Field</title>
+      <p>A spin-1/2 particle in a magnetic field <m>\mathbf{B} = B\hat{z}</m> with Hamiltonian <m>\HH = -(\hbar\omega_0/2)\sigma_z</m>. Starting in the density matrix <m>\rho(0) = \frac{1}{2}(\hat{I} + r_x\sigma_x)</m> (spin pointing along x):</p>
+      <me>
+        \rho(t) = \frac{1}{2}\begin{pmatrix} 1 \amp r_x e^{i\omega_0 t} \\ r_x e^{-i\omega_0 t} \amp 1 \end{pmatrix}.
+      </me>
+      <p>The off-diagonal elements (coherences) oscillate at the Larmor frequency <m>\omega_0</m>. The diagonal elements (populations) remain constant—this is precession, not decay.</p>
+    </example>
   </section>
-  <section xml:id="sec-ch08-thermal">
-    <title>Thermal Equilibrium and the Gibbs Ensemble</title>
-    <p>A system in thermal equilibrium at temperature <m>T</m> is described by the Gibbs ensemble,</p>
+
+  <section xml:id="sec-ch08-entropy">
+    <title>Von Neumann Entropy</title>
+    <p>The von Neumann entropy quantifies the information content (or lack thereof) of a quantum state:</p>
     <me>
-      \rho_{\text{Gibbs}} = \frac{e^{-\beta \HH}}{Z}, \quad Z = \text{Tr}(e^{-\beta \HH}),
+      S(\rho) = -\text{Tr}(\rho \ln \rho) = -\sum_i \lambda_i \ln \lambda_i,
     </me>
-    <p>where <m>\beta = 1/(k_B T)</m> and <m>Z</m> is the partition function. This is a mixed state representing classical thermal disorder.</p>
-    <p>In the energy eigenbasis,</p>
-    <me>
-      \rho_{\text{Gibbs}} = \sum_n \frac{e^{-\beta E_n}}{Z} \ket{n}\bra{n}.
-    </me>
-    <p>High temperature (small <m>\beta</m>) gives a nearly uniform mixture; low temperature (large <m>\beta</m>) gives nearly pure ground state.</p>
+    <p>where <m>\lambda_i</m> are the eigenvalues of <m>\rho</m>.</p>
+    <ul>
+      <li><m>S = 0</m> for a pure state (complete knowledge)</li>
+      <li><m>S = \ln d</m> for a maximally mixed state in a <m>d</m>-dimensional Hilbert space</li>
+      <li><m>S</m> is invariant under unitary evolution</li>
+    </ul>
+    <p>The von Neumann entropy is the quantum generalization of the classical Shannon entropy. It plays a central role in quantum information theory.</p>
   </section>
+
   <section xml:id="sec-ch08-reduced">
     <title>Reduced Density Matrices and Entanglement</title>
-    <p>For a composite system AB, the reduced density matrix for subsystem A is obtained by tracing over B,</p>
+    <p>For a bipartite system AB in state <m>\rho_{AB}</m>, the reduced density matrix for subsystem A is obtained by tracing over B:</p>
     <me>
       \rho_A = \text{Tr}_B(\rho_{AB}).
     </me>
-    <p>Even if the composite system is in a pure state <m>|\psi_{AB}\rangle</m>, the reduced density matrix is generally mixed. This indicates entanglement: information about subsystem A alone is incomplete without knowledge of subsystem B.</p>
-    <p>The purity of $\rho_A$ quantifies the degree of entanglement with the environment.</p>
+    <p>The partial trace sums over a complete basis of subsystem B:</p>
+    <me>
+      \rho_A = \sum_j \bra{b_j}\rho_{AB}\ket{b_j}.
+    </me>
+
+    <p>A crucial result: even if <m>\rho_{AB}</m> is pure, <m>\rho_A</m> can be mixed. This happens precisely when A and B are entangled.</p>
+
+    <example xml:id="ex-ch08-bell">
+      <title>Bell State Reduced Density Matrix</title>
+      <p>Consider the Bell state <m>\ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})</m>. The full density matrix is:</p>
+      <me>
+        \rho_{AB} = \frac{1}{2}(\ket{00}\bra{00} + \ket{00}\bra{11} + \ket{11}\bra{00} + \ket{11}\bra{11}).
+      </me>
+      <p>Tracing over B:</p>
+      <me>
+        \rho_A = \frac{1}{2}(\ket{0}\bra{0} + \ket{1}\bra{1}) = \frac{\hat{I}}{2}.
+      </me>
+      <p>The reduced state is maximally mixed! Subsystem A alone is completely random, even though the joint state is a pure entangled state. This is the essence of quantum entanglement: the whole has more information than the parts.</p>
+    </example>
+
+    <p>The entanglement entropy <m>S(\rho_A)</m> quantifies entanglement between A and B. For a product state, <m>S(\rho_A) = 0</m>. For a maximally entangled state of two qubits, <m>S(\rho_A) = \ln 2</m>.</p>
   </section>
+
+  <section xml:id="sec-ch08-thermal">
+    <title>Thermal Equilibrium and Quantum Statistical Mechanics</title>
+    <p>A quantum system in thermal equilibrium at temperature <m>T</m> is described by the canonical ensemble:</p>
+    <me>
+      \rho_{\text{th}} = \frac{e^{-\beta\HH}}{Z}, \quad Z = \text{Tr}(e^{-\beta\HH}), \quad \beta = \frac{1}{k_BT}.
+    </me>
+    <p>In the energy eigenbasis <m>\HH\ket{n} = E_n\ket{n}</m>:</p>
+    <me>
+      \rho_{\text{th}} = \sum_n \frac{e^{-\beta E_n}}{Z} \ket{n}\bra{n}.
+    </me>
+
+    <example xml:id="ex-ch08-thermal-oscillator">
+      <title>Thermal Harmonic Oscillator</title>
+      <p>For a harmonic oscillator with <m>E_n = \hbar\omega(n + 1/2)</m>:</p>
+      <me>
+        Z = \sum_{n=0}^\infty e^{-\beta\hbar\omega(n+1/2)} = \frac{e^{-\beta\hbar\omega/2}}{1 - e^{-\beta\hbar\omega}} = \frac{1}{2\sinh(\beta\hbar\omega/2)}.
+      </me>
+      <p>The average energy is:</p>
+      <me>
+        \expect{E} = \hbar\omega\left(\frac{1}{e^{\beta\hbar\omega} - 1} + \frac{1}{2}\right) = \hbar\omega\left(\bar{n} + \frac{1}{2}\right),
+      </me>
+      <p>where <m>\bar{n} = 1/(e^{\beta\hbar\omega} - 1)</m> is the Bose-Einstein distribution—the average number of quanta at temperature <m>T</m>.</p>
+    </example>
+
+    <p>The thermal density matrix maximizes the von Neumann entropy subject to the constraint <m>\expect{E} = \text{Tr}(\rho\HH)</m>. This connects quantum statistical mechanics to information theory: thermal equilibrium is the state of maximum ignorance consistent with known average energy.</p>
+  </section>
+
   <section xml:id="sec-ch08-decoherence">
-    <title>Decoherence: The Transition from Quantum to Classical</title>
-    <p>Decoherence describes how environmental interactions destroy quantum coherence. A superposition state like <m>\frac{1}{\sqrt{2}}(\ket{0} + \ket{1})</m> becomes a mixed state <m>\frac{1}{2}(\ket{0}\bra{0} + \ket{1}\bra{1})</m> when entangled with an environment.</p>
-    <p>The decoherence timescale depends on the coupling strength and the number of environmental degrees of freedom. This explains why we don't observe macroscopic superpositions: they decohere almost instantaneously.</p>
-    <p>Decoherence does not solve the measurement problem—it shows that certain bases become preferred (einselection), but interpretation of collapse remains subtle.</p>
+    <title>Decoherence</title>
+    <p>Decoherence is the process by which a quantum system loses its coherence (off-diagonal elements of <m>\rho</m>) through interaction with an environment. Consider a qubit initially in superposition <m>\ket{\psi} = \alpha\ket{0} + \beta\ket{1}</m>, with density matrix:</p>
+    <me>
+      \rho = \begin{pmatrix} |\alpha|^2 \amp \alpha\beta^* \\ \alpha^*\beta \amp |\beta|^2 \end{pmatrix}.
+    </me>
+
+    <p>After coupling to an environment, the off-diagonal elements decay:</p>
+    <me>
+      \rho(t) \approx \begin{pmatrix} |\alpha|^2 \amp \alpha\beta^* e^{-t/T_2} \\ \alpha^*\beta e^{-t/T_2} \amp |\beta|^2 \end{pmatrix},
+    </me>
+    <p>where <m>T_2</m> is the decoherence time. For <m>t \gg T_2</m>, the state becomes effectively classical:</p>
+    <me>
+      \rho \to \begin{pmatrix} |\alpha|^2 \amp 0 \\ 0 \amp |\beta|^2 \end{pmatrix}.
+    </me>
+
+    <p>This diagonal density matrix represents a classical probability distribution, not a quantum superposition. Decoherence explains why macroscopic objects do not exhibit quantum interference: the decoherence time for macroscopic objects is astronomically short (less than <m>10^{-30}</m> seconds for a dust grain).</p>
+
+    <remark>
+      <title>Decoherence Is Not Collapse</title>
+      <p>Decoherence explains why we do not observe macroscopic superpositions and why certain measurement bases are preferred (environment-induced superselection, or "einselection"). However, it does not fully resolve the measurement problem—the question of why individual measurement outcomes occur remains an interpretational issue.</p>
+    </remark>
   </section>
+
   <section xml:id="sec-ch08-summary">
     <title>Chapter Summary</title>
     <ul>
-      <li>Pure states are described by state vectors; mixed states require the density matrix formalism.</li>
-      <li>The density matrix <m>\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|</m> is Hermitian, positive, with trace 1.</li>
-      <li>Expectation values: <m>\langle A \rangle = \text{Tr}(\rho A)</m>.</li>
-      <li>Purity <m>\text{Tr}(\rho^2)</m> measures how mixed a state is.</li>
-      <li>Thermal states are Gibbs ensembles with all energy eigenstates populated.</li>
-      <li>Reduced density matrices describe subsystems of entangled composite systems.</li>
-      <li>Decoherence from environmental interactions transitions superposition states to effective mixtures.</li>
+      <li>Pure states are described by state vectors; mixed states require density matrices <m>\rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i}</m>.</li>
+      <li>Density matrices are Hermitian, positive semidefinite, with unit trace.</li>
+      <li>Expectation values: <m>\expect{\hat{A}} = \text{Tr}(\rho \hat{A})</m>.</li>
+      <li>Purity <m>\text{Tr}(\rho^2)</m> distinguishes pure (<m>=1</m>) from mixed (<m>\lt 1</m>) states.</li>
+      <li>The von Neumann equation <m>i\hbar\dot{\rho} = [\HH, \rho]</m> governs closed-system evolution.</li>
+      <li>Von Neumann entropy <m>S = -\text{Tr}(\rho\ln\rho)</m> quantifies quantum uncertainty.</li>
+      <li>Reduced density matrices describe subsystems; entanglement makes them mixed even if the total state is pure.</li>
+      <li>Thermal states <m>\rho_{\text{th}} = e^{-\beta\HH}/Z</m> maximize entropy at fixed average energy.</li>
+      <li>Decoherence destroys off-diagonal elements, driving quantum-to-classical transition.</li>
     </ul>
   </section>
+
+  <exercises xml:id="exercises-ch08">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch08-bloch">
+      <statement>
+        <p>Show that the Bloch vector representation <m>\rho = \frac{1}{2}(\hat{I} + \mathbf{r}\cdot\hat{\boldsymbol{\sigma}})</m> is positive semidefinite if and only if <m>|\mathbf{r}| \leq 1</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-purity">
+      <statement>
+        <p>Calculate <m>\text{Tr}(\rho^2)</m> for a spin-1/2 density matrix in terms of the Bloch vector. Verify that <m>\text{Tr}(\rho^2) = 1</m> iff <m>|\mathbf{r}| = 1</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-von-neumann">
+      <statement>
+        <p>Derive the von Neumann equation <m>i\hbar\dot{\rho} = [\HH, \rho]</m> from the Schrödinger equation for an ensemble of pure states.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-entropy">
+      <statement>
+        <p>Calculate the von Neumann entropy of a thermal state for a two-level system with energy gap <m>\Delta E</m> at temperature <m>T</m>. Plot <m>S</m> vs. <m>k_BT/\Delta E</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-reduced">
+      <statement>
+        <p>For the state <m>\ket{\psi} = \cos\theta\ket{00} + \sin\theta\ket{11}</m>, compute the reduced density matrix <m>\rho_A</m> and the entanglement entropy as a function of <m>\theta</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-thermal-spin">
+      <statement>
+        <p>A spin-1/2 particle is in a magnetic field <m>B</m> at temperature <m>T</m>. Calculate the thermal density matrix and the average magnetization <m>\expect{S_z}</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-deco-time">
+      <statement>
+        <p>Estimate the decoherence time for a dust grain (mass <m>10^{-15}</m> kg) in a superposition of two positions separated by <m>10^{-6}</m> m, interacting with room-temperature photons.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch08-challenge">
+      <statement>
+        <p><em>Challenge.</em> Prove that the von Neumann entropy is concave: <m>S(\lambda\rho_1 + (1-\lambda)\rho_2) \geq \lambda S(\rho_1) + (1-\lambda)S(\rho_2)</m> for <m>0 \leq \lambda \leq 1</m>.</p>
+      </statement>
+    </exercise>
+  </exercises>
 </chapter>
