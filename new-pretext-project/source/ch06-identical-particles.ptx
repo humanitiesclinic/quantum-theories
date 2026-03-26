@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch06-identical-particles" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Identical Particles and Many-Body Systems (Dimension 3)</title>
+  <objectives>
+    <ul>
+      <li>Understand the principle of indistinguishability of identical quantum particles.</li>
+      <li>Derive the symmetrization postulate for bosons and fermions.</li>
+      <li>Master the construction of Slater determinants for fermionic systems.</li>
+      <li>Apply the Pauli exclusion principle to atomic structure and the periodic table.</li>
+      <li>Develop second quantization as the natural language for many-body physics.</li>
+      <li>Understand Fock space and creation/annihilation operators.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>The third dimension of our framework concerns the number of particles in the system. Moving from single-particle quantum mechanics to many-body systems introduces one of the most profound features of quantum theory: identical particles are truly indistinguishable. Unlike classical physics, where we can always track individual particles by their trajectories, quantum mechanics forbids this. Two electrons are not merely similar—they are fundamentally the same object. This indistinguishability has far-reaching consequences: it gives rise to the Pauli exclusion principle, determines the structure of atoms and molecules, and ultimately requires the development of quantum field theory.</p>
+    <p>In this chapter we develop the formalism of identical particles step by step. We begin with the permutation symmetry of quantum states, derive the classification into bosons and fermions, construct properly symmetrized wavefunctions, and introduce second quantization—the algebraic framework that handles variable particle number naturally. This chapter bridges single-particle quantum mechanics and the full machinery of quantum field theory.</p>
+  </introduction>
+
+  <section xml:id="sec-ch06-indistinguishability">
+    <title>The Principle of Indistinguishability</title>
+    <p>Consider two particles described by quantum mechanics. In classical mechanics, we can label them as "particle 1" and "particle 2" and track their individual trajectories. In quantum mechanics, the situation is fundamentally different.</p>
+
+    <assemblage xml:id="box-indistinguishability">
+      <title>Indistinguishability Principle</title>
+      <p>Identical quantum particles are truly indistinguishable. No measurement can determine which particle is which. Any physical observable must be symmetric under exchange of identical particles.</p>
+    </assemblage>
+
+    <p>For a two-particle system, the state lives in the tensor product space <m>\Hilbert_1 \otimes \Hilbert_2</m>. The exchange operator <m>\hat{P}_{12}</m> swaps the two particles:</p>
+    <me>
+      \hat{P}_{12} \ket{\psi_a}_1 \ket{\psi_b}_2 = \ket{\psi_b}_1 \ket{\psi_a}_2.
+    </me>
+    <p>Since applying the exchange twice returns to the original state, <m>\hat{P}_{12}^2 = \hat{I}</m>, the eigenvalues of <m>\hat{P}_{12}</m> are <m>\pm 1</m>. This gives two classes of particles:</p>
+    <ul>
+      <li><em>Bosons</em> (<m>\hat{P}_{12}\ket{\Psi} = +\ket{\Psi}</m>): symmetric under exchange. Integer spin (0, 1, 2, ...).</li>
+      <li><em>Fermions</em> (<m>\hat{P}_{12}\ket{\Psi} = -\ket{\Psi}</m>): antisymmetric under exchange. Half-integer spin (1/2, 3/2, ...).</li>
+    </ul>
+    <p>The connection between spin and statistics—the spin-statistics theorem—is one of the deepest results in quantum theory, rigorously provable only in relativistic quantum field theory.</p>
+
+    <subsection xml:id="subsec-permutation-group">
+      <title>The Permutation Group</title>
+      <p>For <m>N</m> identical particles, the relevant symmetry group is the symmetric group <m>S_N</m>, consisting of all <m>N!</m> permutations. A general permutation <m>\hat{P}_\sigma</m> acts on an <m>N</m>-particle state as:</p>
+      <me>
+        \hat{P}_\sigma \ket{\psi_{a_1}} \ket{\psi_{a_2}} \cdots \ket{\psi_{a_N}} = \ket{\psi_{a_{\sigma(1)}}} \ket{\psi_{a_{\sigma(2)}}} \cdots \ket{\psi_{a_{\sigma(N)}}}.
+      </me>
+      <p>Physical states must transform according to specific representations of <m>S_N</m>:</p>
+      <ul>
+        <li>Bosons: the totally symmetric representation</li>
+        <li>Fermions: the totally antisymmetric representation</li>
+      </ul>
+      <p>In three spatial dimensions, these are the only possibilities for point particles. In two dimensions, more exotic possibilities (anyons) exist, relevant to the fractional quantum Hall effect.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch06-bosonic-states">
+    <title>Bosonic States: Symmetric Wavefunctions</title>
+    <p>For <m>N</m> bosons, the properly symmetrized state is constructed by summing over all permutations:</p>
+    <me>
+      \ket{\Psi_{\text{sym}}} = \frac{1}{\sqrt{N! \prod_k n_k!}} \sum_{\sigma \in S_N} \hat{P}_\sigma \ket{\psi_{a_1}} \ket{\psi_{a_2}} \cdots \ket{\psi_{a_N}},
+    </me>
+    <p>where <m>n_k</m> is the occupation number of the <m>k</m>-th single-particle state.</p>
+
+    <example xml:id="ex-ch06-two-bosons">
+      <title>Two Identical Bosons</title>
+      <p>Two bosons in states <m>\ket{a}</m> and <m>\ket{b}</m> with <m>a \neq b</m>:</p>
+      <me>
+        \ket{\Psi_{\text{sym}}} = \frac{1}{\sqrt{2}} \left( \ket{a}_1 \ket{b}_2 + \ket{b}_1 \ket{a}_2 \right).
+      </me>
+      <p>If both bosons are in the same state <m>\ket{a}</m>:</p>
+      <me>
+        \ket{\Psi_{\text{sym}}} = \ket{a}_1 \ket{a}_2.
+      </me>
+      <p>Bosons can occupy the same quantum state—this is the basis of Bose-Einstein condensation, lasers, and superfluidity.</p>
+    </example>
+
+    <p>The tendency of bosons to cluster in the same state is called <em>bosonic bunching</em>. It has no classical analog and is responsible for phenomena ranging from stimulated emission to the macroscopic quantum states of superfluid helium-4.</p>
+  </section>
+
+  <section xml:id="sec-ch06-fermionic-states">
+    <title>Fermionic States: Antisymmetric Wavefunctions and Slater Determinants</title>
+    <p>For <m>N</m> fermions, the properly antisymmetrized state is:</p>
+    <me>
+      \ket{\Psi_{\text{anti}}} = \frac{1}{\sqrt{N!}} \sum_{\sigma \in S_N} (-1)^{\sigma} \hat{P}_\sigma \ket{\psi_{a_1}} \ket{\psi_{a_2}} \cdots \ket{\psi_{a_N}},
+    </me>
+    <p>where <m>(-1)^\sigma</m> is the sign of the permutation (even permutations get <m>+1</m>, odd get <m>-1</m>).</p>
+
+    <p>This antisymmetrized product can be written as a determinant—the <em>Slater determinant</em>:</p>
+
+    <assemblage xml:id="box-slater">
+      <title>Slater Determinant</title>
+      <me>
+        \Psi(\mathbf{r}_1, \mathbf{r}_2, \ldots, \mathbf{r}_N) = \frac{1}{\sqrt{N!}}
+        \begin{vmatrix}
+          \psi_{a_1}(\mathbf{r}_1) \amp \psi_{a_1}(\mathbf{r}_2) \amp \cdots \amp \psi_{a_1}(\mathbf{r}_N) \\
+          \psi_{a_2}(\mathbf{r}_1) \amp \psi_{a_2}(\mathbf{r}_2) \amp \cdots \amp \psi_{a_2}(\mathbf{r}_N) \\
+          \vdots \amp \vdots \amp \ddots \amp \vdots \\
+          \psi_{a_N}(\mathbf{r}_1) \amp \psi_{a_N}(\mathbf{r}_2) \amp \cdots \amp \psi_{a_N}(\mathbf{r}_N)
+        \end{vmatrix}
+      </me>
+      <p>If any two rows are identical (same quantum state), the determinant vanishes. This is the <em>Pauli exclusion principle</em>: no two identical fermions can occupy the same quantum state.</p>
+    </assemblage>
+
+    <example xml:id="ex-ch06-two-fermions">
+      <title>Two Electrons in a Box</title>
+      <p>Consider two electrons (spin-1/2 fermions) in an infinite square well. The total wavefunction must be antisymmetric under exchange of both spatial and spin coordinates:</p>
+      <me>
+        \Psi(\mathbf{r}_1, s_1; \mathbf{r}_2, s_2) = -\Psi(\mathbf{r}_2, s_2; \mathbf{r}_1, s_1).
+      </me>
+      <p>This can be achieved in two ways:</p>
+      <ul>
+        <li><em>Symmetric spatial, antisymmetric spin (singlet):</em>
+        <me>
+          \Psi = \psi_{\text{sym}}(\mathbf{r}_1, \mathbf{r}_2) \cdot \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow})
+        </me></li>
+        <li><em>Antisymmetric spatial, symmetric spin (triplet):</em>
+        <me>
+          \Psi = \psi_{\text{anti}}(\mathbf{r}_1, \mathbf{r}_2) \cdot \chi_{\text{triplet}}
+        </me></li>
+      </ul>
+      <p>The spatial symmetry affects the energy through the exchange interaction, even though there is no explicit spin-dependent force in the Hamiltonian.</p>
+    </example>
+  </section>
+
+  <section xml:id="sec-ch06-exchange-interaction">
+    <title>The Exchange Interaction</title>
+    <p>For two electrons with Coulomb repulsion <m>V = e^2/|\mathbf{r}_1 - \mathbf{r}_2|</m>, the energy depends on whether the spatial wavefunction is symmetric or antisymmetric. Define the direct integral <m>J</m> and the exchange integral <m>K</m>:</p>
+    <me>
+      J = \int d^3r_1 \, d^3r_2 \, |\psi_a(\mathbf{r}_1)|^2 \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|} |\psi_b(\mathbf{r}_2)|^2,
+    </me>
+    <me>
+      K = \int d^3r_1 \, d^3r_2 \, \psi_a^*(\mathbf{r}_1) \psi_b^*(\mathbf{r}_2) \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|} \psi_b(\mathbf{r}_1) \psi_a(\mathbf{r}_2).
+    </me>
+    <p>The energies are:</p>
+    <ul>
+      <li>Singlet (symmetric spatial): <m>E_{\text{singlet}} = E_a + E_b + J + K</m></li>
+      <li>Triplet (antisymmetric spatial): <m>E_{\text{triplet}} = E_a + E_b + J - K</m></li>
+    </ul>
+    <p>The exchange integral <m>K</m> is typically positive, so the triplet state has lower energy. This is the origin of Hund's first rule in atomic physics: electrons in degenerate orbitals prefer parallel spins to maximize total spin.</p>
+
+    <remark>
+      <title>Exchange Is Not a Force</title>
+      <p>The exchange interaction is often described as a "force," but it is purely a consequence of the symmetrization requirement. There is no new force in the Hamiltonian—only the Coulomb repulsion. The energy splitting arises because symmetric and antisymmetric spatial wavefunctions sample the Coulomb potential differently.</p>
+    </remark>
+  </section>
+
+  <section xml:id="sec-ch06-atoms-periodic">
+    <title>Atomic Structure and the Periodic Table</title>
+    <p>The Pauli exclusion principle, combined with the shell structure of the hydrogen atom, explains the periodic table. Each electron in a multi-electron atom occupies a state labeled by quantum numbers <m>(n, \ell, m_\ell, m_s)</m>. No two electrons can share all four quantum numbers.</p>
+
+    <p>The filling order follows the aufbau principle (building-up principle):</p>
+    <ul>
+      <li>Shell <m>n=1</m>: 1s (2 electrons)</li>
+      <li>Shell <m>n=2</m>: 2s (2), 2p (6) — total 8 electrons</li>
+      <li>Shell <m>n=3</m>: 3s (2), 3p (6), 3d (10) — total 18 electrons</li>
+      <li>Shell <m>n=4</m>: 4s (2), 3d (10), 4p (6) — with energy-level crossings</li>
+    </ul>
+
+    <p>Each subshell <m>(n, \ell)</m> can hold <m>2(2\ell + 1)</m> electrons (the factor of 2 comes from spin). The periodic properties of the elements—chemical reactivity, ionization energies, atomic radii—all follow from this shell-filling pattern.</p>
+
+    <example xml:id="ex-ch06-helium">
+      <title>The Helium Atom</title>
+      <p>Helium has two electrons. The ground-state configuration is <m>1s^2</m> (both electrons in the 1s orbital with opposite spins). The spatial wavefunction is symmetric, and the spin state is the singlet:</p>
+      <me>
+        \Psi = \psi_{1s}(\mathbf{r}_1)\psi_{1s}(\mathbf{r}_2) \cdot \frac{1}{\sqrt{2}}(\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}).
+      </me>
+      <p>The ground-state energy cannot be found exactly due to the electron-electron repulsion term. Using the variational method with an effective nuclear charge <m>Z_{\text{eff}}</m> as variational parameter yields <m>Z_{\text{eff}} \approx 27/16</m>, giving an energy of <m>-77.5</m> eV compared to the experimental value of <m>-79.0</m> eV—already within 2%.</p>
+    </example>
+  </section>
+
+  <section xml:id="sec-ch06-second-quantization">
+    <title>Second Quantization</title>
+    <p>The Slater determinant formalism becomes unwieldy for large <m>N</m>. Second quantization provides an elegant algebraic framework that automatically handles symmetrization or antisymmetrization.</p>
+
+    <subsection xml:id="subsec-creation-annihilation">
+      <title>Creation and Annihilation Operators</title>
+      <p>Define operators <m>\hat{a}_k^\dagger</m> (creation) and <m>\hat{a}_k</m> (annihilation) for each single-particle state <m>\ket{k}</m>:</p>
+      <ul>
+        <li><m>\hat{a}_k^\dagger</m> adds a particle in state <m>\ket{k}</m></li>
+        <li><m>\hat{a}_k</m> removes a particle from state <m>\ket{k}</m></li>
+      </ul>
+
+      <p>For <em>bosons</em>, these satisfy commutation relations:</p>
+      <me>
+        [\hat{a}_j, \hat{a}_k^\dagger] = \delta_{jk}, \quad [\hat{a}_j, \hat{a}_k] = 0, \quad [\hat{a}_j^\dagger, \hat{a}_k^\dagger] = 0.
+      </me>
+
+      <p>For <em>fermions</em>, they satisfy anticommutation relations:</p>
+      <me>
+        \{\hat{c}_j, \hat{c}_k^\dagger\} = \delta_{jk}, \quad \{\hat{c}_j, \hat{c}_k\} = 0, \quad \{\hat{c}_j^\dagger, \hat{c}_k^\dagger\} = 0.
+      </me>
+      <p>The anticommutation relation <m>\{\hat{c}_k^\dagger, \hat{c}_k^\dagger\} = 0</m> means <m>(\hat{c}_k^\dagger)^2 = 0</m>: you cannot create two fermions in the same state. This is the Pauli exclusion principle in algebraic form.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-fock-space">
+      <title>Fock Space</title>
+      <p>The Fock space is the direct sum of all <m>N</m>-particle Hilbert spaces:</p>
+      <me>
+        \Fock = \Hilbert_0 \oplus \Hilbert_1 \oplus \Hilbert_2 \oplus \cdots
+      </me>
+      <p>where <m>\Hilbert_0 = \mathbb{C}</m> (the vacuum), <m>\Hilbert_1</m> is the single-particle space, <m>\Hilbert_2</m> is the (anti)symmetrized two-particle space, and so on.</p>
+
+      <p>The vacuum state <m>\ket{0}</m> satisfies <m>\hat{a}_k\ket{0} = 0</m> for all <m>k</m>. Multi-particle states are built by applying creation operators:</p>
+      <me>
+        \ket{n_1, n_2, \ldots} = \frac{(\hat{a}_1^\dagger)^{n_1}}{\sqrt{n_1!}} \frac{(\hat{a}_2^\dagger)^{n_2}}{\sqrt{n_2!}} \cdots \ket{0}.
+      </me>
+
+      <p>The number operator <m>\hat{n}_k = \hat{a}_k^\dagger \hat{a}_k</m> counts particles in state <m>\ket{k}</m>:</p>
+      <me>
+        \hat{n}_k \ket{\ldots, n_k, \ldots} = n_k \ket{\ldots, n_k, \ldots}.
+      </me>
+    </subsection>
+
+    <subsection xml:id="subsec-operators-second-quant">
+      <title>Operators in Second Quantization</title>
+      <p>Any one-body operator <m>\hat{O}_1 = \sum_{i=1}^N \hat{o}(i)</m> becomes:</p>
+      <me>
+        \hat{O}_1 = \sum_{jk} \langle j | \hat{o} | k \rangle \, \hat{a}_j^\dagger \hat{a}_k.
+      </me>
+      <p>Any two-body operator <m>\hat{O}_2 = \frac{1}{2}\sum_{i \neq j} \hat{v}(i,j)</m> becomes:</p>
+      <me>
+        \hat{O}_2 = \frac{1}{2} \sum_{jk\ell m} \langle jk | \hat{v} | \ell m \rangle \, \hat{a}_j^\dagger \hat{a}_k^\dagger \hat{a}_m \hat{a}_\ell.
+      </me>
+      <p>Note the reversed order of annihilation operators in the two-body term, which is essential for getting the correct signs for fermions.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch06-free-electron-gas">
+    <title>The Free Electron Gas</title>
+    <p>A simple but powerful application: <m>N</m> non-interacting electrons confined to a box of volume <m>V = L^3</m>. The single-particle states are plane waves with wavevector <m>\mathbf{k}</m> and spin <m>\sigma</m>.</p>
+
+    <p>At zero temperature, electrons fill states up to the Fermi wavevector <m>k_F</m>:</p>
+    <me>
+      k_F = \left(\frac{3\pi^2 N}{V}\right)^{1/3}.
+    </me>
+    <p>The corresponding Fermi energy is:</p>
+    <me>
+      E_F = \frac{\hbar^2 k_F^2}{2m_e}.
+    </me>
+
+    <p>The Fermi energy for typical metals is several electron volts—much larger than thermal energies at room temperature (<m>k_BT \approx 0.025</m> eV). This explains why metals are good conductors: the electrons near the Fermi surface can easily be excited into empty states above it.</p>
+
+    <p>The total ground-state energy of the electron gas is:</p>
+    <me>
+      E_{\text{total}} = \frac{3}{5} N E_F.
+    </me>
+    <p>The factor <m>3/5</m> reflects the average kinetic energy per electron in a filled Fermi sphere.</p>
+  </section>
+
+  <section xml:id="sec-ch06-11d-context">
+    <title>Dimension 3 in the 11-Dimensional Framework</title>
+    <p>Moving along dimension 3 of our framework—from single particle to fixed-<m>N</m> to Fock space—we encounter qualitatively new physics at each step:</p>
+    <ul>
+      <li><em>Single particle → Fixed N:</em> exchange symmetry, Pauli exclusion, shell structure</li>
+      <li><em>Fixed N → Fock space:</em> particle creation and annihilation, vacuum fluctuations, quantum field theory</li>
+    </ul>
+    <p>The key insight is that increasing particle number is not just a quantitative change—it introduces qualitatively new phenomena. The Pauli exclusion principle, which governs all of chemistry and condensed matter physics, simply does not exist in the single-particle sector. And the phenomena of particle creation and annihilation, central to high-energy physics, require the full Fock-space framework.</p>
+  </section>
+
+  <section xml:id="sec-ch06-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Identical quantum particles are truly indistinguishable; physical states must have definite symmetry under exchange.</li>
+      <li>Bosons (integer spin) have symmetric wavefunctions; fermions (half-integer spin) have antisymmetric wavefunctions.</li>
+      <li>The Slater determinant constructs antisymmetric fermionic states; it vanishes if two particles share a state (Pauli exclusion).</li>
+      <li>The exchange interaction splits singlet and triplet energies even without explicit spin-dependent forces.</li>
+      <li>The Pauli exclusion principle explains atomic shell structure and the periodic table.</li>
+      <li>Second quantization uses creation and annihilation operators to handle symmetrization automatically.</li>
+      <li>Fock space <m>\Fock = \bigoplus_{N=0}^\infty \Hilbert_N</m> accommodates variable particle number.</li>
+      <li>The number operator <m>\hat{n}_k = \hat{a}_k^\dagger \hat{a}_k</m> counts particles in each mode.</li>
+      <li>The free electron gas illustrates Fermi statistics: electrons fill states up to the Fermi energy.</li>
+    </ul>
+  </section>
+
+  <exercises xml:id="exercises-ch06">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch06-symmetrize">
+      <statement>
+        <p>Construct the properly symmetrized state for three identical bosons, two in state <m>\ket{a}</m> and one in state <m>\ket{b}</m>.</p>
+      </statement>
+      <hint><p>Sum over all distinct permutations and normalize. How many distinct permutations are there?</p></hint>
+    </exercise>
+    <exercise xml:id="exer-ch06-slater">
+      <statement>
+        <p>Write the Slater determinant for three electrons in states <m>\psi_1, \psi_2, \psi_3</m>. Verify that it changes sign under exchange of any two particles.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch06-helium-var">
+      <statement>
+        <p>For the helium atom, use a trial wavefunction <m>\psi(\mathbf{r}_1, \mathbf{r}_2) = \phi_{Z_{\text{eff}}}(\mathbf{r}_1)\phi_{Z_{\text{eff}}}(\mathbf{r}_2)</m> where <m>\phi_{Z_{\text{eff}}}(\mathbf{r}) = (Z_{\text{eff}}^3/(\pi a_0^3))^{1/2} e^{-Z_{\text{eff}} r/a_0}</m>. Find the optimal <m>Z_{\text{eff}}</m> by minimizing the total energy.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch06-commutation">
+      <statement>
+        <p>Verify that bosonic creation and annihilation operators satisfy <m>[\hat{a}, \hat{a}^\dagger] = 1</m> by computing their action on number states <m>\ket{n}</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch06-anticommutation">
+      <statement>
+        <p>Show that the fermionic anticommutation relation <m>\{\hat{c}_k^\dagger, \hat{c}_k^\dagger\} = 0</m> implies the Pauli exclusion principle: <m>(\hat{c}_k^\dagger)^2 = 0</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch06-number-op">
+      <statement>
+        <p>For a system of non-interacting fermions, show that the Hamiltonian can be written as <m>\hat{H} = \sum_k \varepsilon_k \hat{n}_k</m> where <m>\hat{n}_k = \hat{c}_k^\dagger \hat{c}_k</m>, and find the ground-state energy.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch06-fermi-energy">
+      <statement>
+        <p>Calculate the Fermi energy for copper, which has one conduction electron per atom and a density of <m>8.96 \times 10^3</m> kg/m<m>^3</m> with atomic mass 63.55 u.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch06-challenge">
+      <statement>
+        <p><em>Challenge.</em> Derive the second-quantized form of a two-body interaction <m>\hat{V} = \frac{1}{2}\sum_{i\neq j} v(\mathbf{r}_i - \mathbf{r}_j)</m> in terms of creation and annihilation operators. Explain the ordering of the annihilation operators.</p>
+      </statement>
+    </exercise>
+  </exercises>
+</chapter>
