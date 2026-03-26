@@ -43,8 +43,8 @@
     <subsection xml:id="subsec-examples">
       <title>Examples of Hilbert Spaces</title>
 
-      <p><em>Finite-dimensional:</em> <m>\mathbb{C}^n$ with standard inner product:
-      <m>\braket{\phi}{\psi} = \sum_{i=1}^n \phi_i^* \psi_i</m>
+      <p><em>Finite-dimensional:</em> <m>\mathbb{C}^n</m> with standard inner product:
+      <m>\braket{\phi}{\psi} = \sum_{i=1}^n \phi_i^* \psi_i</m>.
       Used for spin systems, qubits, finite-level atoms.</p>
 
       <p><em><m>L^2(\mathbb{R}^3)</m>:</em> Square-integrable functions
