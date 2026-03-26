@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch10-path-integrals" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Path Integral Formalism (Dimension 1: Alternative)</title>
+  <objectives>
+    <ul>
+      <li>Understand the conceptual foundations of path integrals.</li>
+      <li>Master the evaluation of path integrals for simple systems.</li>
+      <li>Recognize when path integrals are more powerful than operator methods.</li>
+      <li>Connect path integrals to classical mechanics and the correspondence principle.</li>
+      <li>Apply path integrals to quantum field theory and functional methods.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>The first dimension asks: how do we express time evolution? Feynman's path integral formulation offers an alternative to the operator approach. Instead of solving a differential equation, one sums over all possible histories weighted by <m>e^{iS/\hbar}</m>. This viewpoint is not merely mathematical convenience; it reveals deep connections to classical mechanics, symmetries, and quantum field theory.</p>
+  </introduction>
+  <section xml:id="sec-ch10-feynman">
+    <title>Feynman's Path Integral</title>
+    <p>The amplitude for a particle to go from <m>(x_i, t_i)</m> to <m>(x_f, t_f)</m> is</p>
+    <me>
+      K(x_f, t_f; x_i, t_i) = \int \mathcal{D}x(t) \, e^{iS[x]/\hbar},
+    </me>
+    <p>where the integral is over all paths <m>x(t)</m> connecting the initial and final points, and <m>S[x] = \int_{t_i}^{t_f} L(x, \dot{x}, t) dt</m> is the classical action.</p>
+    <p>Quantum mechanics is recovered: paths with phase near the classical action (where <m>\delta S = 0</m>) interfere constructively. Paths far from the classical trajectory destructively interfere.</p>
+  </section>
+  <section xml:id="sec-ch10-discretization">
+    <title>Discretization and the Free Particle</title>
+    <p>To evaluate path integrals, discretize time into <m>N</m> intervals. For a free particle with action <m>S = \int (m\dot{x}^2/2) dt</m>, the path integral evaluates to</p>
+    <me>
+      K_0(x_f, t_f; x_i, t_i) = \sqrt{\frac{m}{2\pi i \hbar (t_f - t_i)}} \exp\left\{ \frac{im(x_f - x_i)^2}{2\hbar(t_f - t_i)} \right\}.
+    </me>
+    <p>This matches the exact quantum mechanical propagator from the operator formalism.</p>
+  </section>
+  <section xml:id="sec-ch10-gaussian">
+    <title>Gaussian Path Integrals and Quadratic Actions</title>
+    <p>For quadratic actions (free particles, harmonic oscillators, quadratic potentials), path integrals evaluate to Gaussians. This is the foundation for perturbation theory in quantum field theory, where one expands around the Gaussian (free) part.</p>
+  </section>
+  <section xml:id="sec-ch10-classical-limit">
+    <title>The Classical Limit and the Principle of Least Action</title>
+    <p>In the limit <m>\hbar \to 0</m>, the path integral is dominated by the saddle point where <m>\delta S = 0</m>—the classical equation of motion. This makes the correspondence principle transparent: quantum mechanics reduces to classical mechanics when <m>\hbar</m> is negligible.</p>
+  </section>
+  <section xml:id="sec-ch10-field-theory">
+    <title>Path Integrals in Field Theory</title>
+    <p>In quantum field theory, fields <m>\phi(x)</m> replace particles. The path integral becomes</p>
+    <me>
+      Z = \int \mathcal{D}\phi \, e^{iS[\phi]/\hbar},
+    </me>
+    <p>where the action is <m>S[\phi] = \int d^4 x \, \mathcal{L}(\phi, \partial_\mu \phi)</m>. Functional derivatives and perturbation theory emerge naturally, generating Feynman diagrams.</p>
+  </section>
+  <section xml:id="sec-ch10-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Path integrals sum over all classical histories with weight <m>e^{iS/\hbar}</m>.</li>
+      <li>The propagator <m>K(x_f, t_f; x_i, t_i)</m> can be computed by evaluating the path integral.</li>
+      <li>Gaussian integrals (quadratic actions) are exactly evaluable.</li>
+      <li>Classical mechanics emerges as <m>\hbar \to 0</m> via the saddle-point approximation.</li>
+      <li>Path integrals naturally extend to field theory and generate Feynman diagrams.</li>
+      <li>Path integrals and operator methods are equivalent; each has advantages in different contexts.</li>
+    </ul>
+  </section>
+</chapter>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch09-open-systems" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Open Quantum Systems (Dimension 6)</title>
+  <objectives>
+    <ul>
+      <li>Understand the difference between closed and open systems.</li>
+      <li>Master the Lindblad master equation describing open system dynamics.</li>
+      <li>Learn about decay channels, dissipation, and dephasing.</li>
+      <li>Understand steady states and dynamical semigroups.</li>
+      <li>Apply open system theory to real physical systems.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>Dimension six asks: is the system isolated? Real quantum systems are never perfectly isolated. They exchange energy and information with their environment through dissipation, decay, and dephasing. Open quantum system theory provides the framework for analyzing non-unitary, irreversible evolution driven by environmental couplings.</p>
+  </introduction>
+  <section xml:id="sec-ch09-closed-open">
+    <title>Closed vs. Open Systems</title>
+    <p>A <em>closed system</em> evolves unitarily under its Hamiltonian: <m>\rho(t) = U(t)\rho(0)U^†(t)</m>. Purity is conserved; information is never lost.</p>
+    <p>An <em>open system</em> is coupled to an environment. The reduced density matrix (system only) evolves non-unitarily. Evolution is irreversible; entropy increases; purity decreases (unless the system is already maximally mixed).</p>
+  </section>
+  <section xml:id="sec-ch09-lindblad">
+    <title>The Lindblad Master Equation</title>
+    <p>For weak environmental coupling with many degrees of freedom, the evolution of the system density matrix is governed by the Lindblad equation,</p>
+    <me>
+      \frac{d\rho}{dt} = -\frac{i}{\hbar}[\HH, \rho] + \sum_k \left( L_k \rho L_k^† - \frac{1}{2}\{L_k^† L_k, \rho\} \right),
+    </me>
+    <p>where <m>L_k</m> are Lindblad jump operators representing different decay channels. The first term is unitary (Hamiltonian) evolution; the second term describes environmental dissipation.</p>
+    <p>The Lindblad form guarantees that <m>\rho(t)</m> remains a valid density matrix (positive, trace 1) for all times.</p>
+  </section>
+  <section xml:id="sec-ch09-decay">
+    <title>Decay and Damping</title>
+    <p>Spontaneous emission of a photon from an excited atom is described by a decay operator <m>L = \sqrt{\Gamma} \sigma_- </m>, where <m>\sigma_- = |0\rangle\langle 1|</m> lowers the quantum state and <m>\Gamma</m> is the decay rate.</p>
+    <p>The Lindblad term becomes</p>
+    <me>
+      \Gamma(\sigma_- \rho \sigma_+ - \frac{1}{2}\{\sigma_+ \sigma_-, \rho\}).
+    </me>
+    <p>This drives the excited state population toward zero exponentially: <m>P_1(t) = P_1(0) e^{-\Gamma t}</m>. The lifetime is <m>\tau = 1/\Gamma</m>.</p>
+  </section>
+  <section xml:id="sec-ch09-dephasing">
+    <title>Dephasing and Decoherence</title>
+    <p>Pure dephasing (loss of coherence without energy change) is described by <m>L = \sqrt{\gamma} \sigma_z</m>. This destroys off-diagonal elements of <m>\rho</m> without changing populations.</p>
+    <p>For a two-level system, dephasing converts a superposition <m>\frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)</m> into the mixed state <m>\frac{1}{2}(|0\rangle\langle 0| + |1\rangle\langle 1|)</m>. The decoherence time is <m>\tau_\phi = 1/(2\gamma)</m>.</p>
+  </section>
+  <section xml:id="sec-ch09-steady">
+    <title>Steady States and Fixed Points</title>
+    <p>An open system may reach a <em>steady state</em> <m>\rho_\infty</m> where <m>d\rho_\infty/dt = 0</m>:
+    </p>
+    <me>
+      -\frac{i}{\hbar}[\HH, \rho_\infty] + \sum_k (L_k \rho_\infty L_k^† - \frac{1}{2}\{L_k^† L_k, \rho_\infty\}) = 0.
+    </me>
+    <p>For dissipative systems, steady states are often unique and attracting. For example, a damped harmonic oscillator settles to the ground state; a system with decay and dephasing may thermalize toward a Gibbs state.</p>
+  </section>
+  <section xml:id="sec-ch09-examples">
+    <title>Physical Examples</title>
+    <ul>
+      <li><em>Radiative decay:</em> Excited atoms spontaneously emit photons.</li>
+      <li><em>Dephasing in NMR:</em> Magnetic moments lose coherence to spin-lattice interactions.</li>
+      <li><em>Decoherence of qubits:</em> Environmental noise limits quantum information storage and computation.</li>
+      <li><em>Quantum optics:</em> Photon loss and cavity decay limit laser and maser performance.</li>
+    </ul>
+  </section>
+  <section xml:id="sec-ch09-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Open systems couple to environments and evolve non-unitarily.</li>
+      <li>The Lindblad master equation describes open system dynamics with jump operators <m>L_k</m>.</li>
+      <li>Decay operators <m>L_k</m> encode different dissipation channels.</li>
+      <li>Spontaneous emission, dephasing, and dissipation reduce purity and drive entropy increase.</li>
+      <li>Steady states balance Hamiltonian and dissipative dynamics.</li>
+      <li>Open system theory is essential for realistic quantum mechanics, quantum information, and quantum computing.</li>
+    </ul>
+  </section>
+</chapter>

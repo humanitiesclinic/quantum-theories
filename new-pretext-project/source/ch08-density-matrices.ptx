@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch08-density-matrices" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Density Matrices and Mixed States (Dimension 5)</title>
+  <objectives>
+    <ul>
+      <li>Understand pure and mixed quantum states and their representations.</li>
+      <li>Master the density matrix formalism and its properties.</li>
+      <li>Learn how to construct density matrices from state preparations and environments.</li>
+      <li>Understand the meaning of purity and its physical interpretation.</li>
+      <li>Apply density matrices to thermal equilibrium and decoherence.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>Dimension five asks: is our knowledge of the quantum state complete? In a pure state described by $\ket{\psi}$, we have complete knowledge. But real systems are always entangled with environments, or prepared via statistical ensembles. The density matrix <m>\rho</m> is the natural generalization describing both pure and mixed states, incomplete and fluctuating information, thermal mixtures, and decoherence.</p>
+  </introduction>
+  <section xml:id="sec-ch08-pure-mixed">
+    <title>Pure and Mixed States</title>
+    <p>A <em>pure state</em> is described completely by a state vector $\ket{\psi}$ normalized so $\langle\psi|\psi\rangle = 1$. The density matrix is</p>
+    <me>
+      \rho = \ket{\psi}\bra{\psi}.
+    </me>
+    <p>A <em>mixed state</em> describes a statistical ensemble of pure states with probabilities $p_i$. The density matrix is the weighted average,</p>
+    <me>
+      \rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i},
+    </me>
+    <p>where $\sum_i p_i = 1$ and $p_i \ge 0$. Unlike pure states, mixed states cannot be represented by a single state vector.</p>
+    <p>The key property distinguishing them: for a pure state, $\text{Tr}(\rho^2) = 1$; for a mixed state, $\text{Tr}(\rho^2) < 1$.</p>
+  </section>
+  <section xml:id="sec-ch08-properties">
+    <title>Properties of the Density Matrix</title>
+    <p>Any density matrix satisfies:</p>
+    <ul>
+      <li><m>\text{Tr}(\rho) = 1</m> (trace = 1, probability normalization)</li>
+      <li><m>\rho^\dagger = \rho</m> (Hermitian)</li>
+      <li><m>\rho \ge 0</m> (positive semidefinite)</li>
+      <li>Eigenvalues $\lambda_i \in [0,1]$ with $\sum_i \lambda_i = 1$</li>
+    </ul>
+    <p>Expectation values are computed as</p>
+    <me>
+      \langle A \rangle = \text{Tr}(\rho A).
+    </me>
+    <p>Purity is defined as</p>
+    <me>
+      \mathcal{P} = \text{Tr}(\rho^2) \in [0,1],
+    </me>
+    <p>with $\mathcal{P} = 1$ for pure states and $\mathcal{P} < 1$ for mixed states.</p>
+  </section>
+  <section xml:id="sec-ch08-thermal">
+    <title>Thermal Equilibrium and the Gibbs Ensemble</title>
+    <p>A system in thermal equilibrium at temperature <m>T</m> is described by the Gibbs ensemble,</p>
+    <me>
+      \rho_{\text{Gibbs}} = \frac{e^{-\beta \HH}}{Z}, \quad Z = \text{Tr}(e^{-\beta \HH}),
+    </me>
+    <p>where <m>\beta = 1/(k_B T)</m> and <m>Z</m> is the partition function. This is a mixed state representing classical thermal disorder.</p>
+    <p>In the energy eigenbasis,</p>
+    <me>
+      \rho_{\text{Gibbs}} = \sum_n \frac{e^{-\beta E_n}}{Z} \ket{n}\bra{n}.
+    </me>
+    <p>High temperature (small <m>\beta</m>) gives a nearly uniform mixture; low temperature (large <m>\beta</m>) gives nearly pure ground state.</p>
+  </section>
+  <section xml:id="sec-ch08-reduced">
+    <title>Reduced Density Matrices and Entanglement</title>
+    <p>For a composite system AB, the reduced density matrix for subsystem A is obtained by tracing over B,</p>
+    <me>
+      \rho_A = \text{Tr}_B(\rho_{AB}).
+    </me>
+    <p>Even if the composite system is in a pure state <m>|\psi_{AB}\rangle</m>, the reduced density matrix is generally mixed. This indicates entanglement: information about subsystem A alone is incomplete without knowledge of subsystem B.</p>
+    <p>The purity of $\rho_A$ quantifies the degree of entanglement with the environment.</p>
+  </section>
+  <section xml:id="sec-ch08-decoherence">
+    <title>Decoherence: The Transition from Quantum to Classical</title>
+    <p>Decoherence describes how environmental interactions destroy quantum coherence. A superposition state like <m>\frac{1}{\sqrt{2}}(\ket{0} + \ket{1})</m> becomes a mixed state <m>\frac{1}{2}(\ket{0}\bra{0} + \ket{1}\bra{1})</m> when entangled with an environment.</p>
+    <p>The decoherence timescale depends on the coupling strength and the number of environmental degrees of freedom. This explains why we don't observe macroscopic superpositions: they decohere almost instantaneously.</p>
+    <p>Decoherence does not solve the measurement problem—it shows that certain bases become preferred (einselection), but interpretation of collapse remains subtle.</p>
+  </section>
+  <section xml:id="sec-ch08-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Pure states are described by state vectors; mixed states require the density matrix formalism.</li>
+      <li>The density matrix <m>\rho = \sum_i p_i |\psi_i\rangle\langle\psi_i|</m> is Hermitian, positive, with trace 1.</li>
+      <li>Expectation values: <m>\langle A \rangle = \text{Tr}(\rho A)</m>.</li>
+      <li>Purity <m>\text{Tr}(\rho^2)</m> measures how mixed a state is.</li>
+      <li>Thermal states are Gibbs ensembles with all energy eigenstates populated.</li>
+      <li>Reduced density matrices describe subsystems of entangled composite systems.</li>
+      <li>Decoherence from environmental interactions transitions superposition states to effective mixtures.</li>
+    </ul>
+  </section>
+</chapter>
