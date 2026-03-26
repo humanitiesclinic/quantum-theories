@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<chapter xml:id="ch03-mathematical-foundations" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Mathematical Foundations of Quantum Mechanics</title>
+
+  <introduction>
+    <p>Before exploring variations in our 11-dimensional framework, we must establish the mathematical machinery that underlies all quantum theory. This chapter develops essential tools: Hilbert spaces, operators, the five fundamental postulates, measurement theory, and uncertainty relations.</p>
+    
+    <p>Unlike classical mechanics, where states are points in phase space, quantum states are vectors in an infinite-dimensional complex vector space. This mathematical structure, combined with the probabilistic interpretation, gives quantum mechanics its distinctive character.</p>
+  </introduction>
+
+  <section xml:id="sec-ch03-hilbert">
+    <title>Hilbert Spaces</title>
+
+    <subsection xml:id="subsec-definition">
+      <title>Definition and Structure</title>
+
+      <p>A Hilbert space <m>\Hilbert</m> is a complete inner product space over the complex numbers. For quantum mechanics:</p>
+
+      <assemblage xml:id="box-hilbert-structure">
+        <title>Essential Properties of a Hilbert Space</title>
+        
+        <p><em>1. Vector space structure:</em> Linear combinations of states are states:</p>
+        <me>
+          \alpha \ket{\psi} + \beta \ket{\phi} \in \Hilbert \quad \text{for} \quad \alpha, \beta \in \mathbb{C}
+        </me>
+
+        <p><em>2. Inner product:</em> <m>\braket{\phi}{\psi} \in \mathbb{C}</m> satisfying:</p>
+        <ul>
+          <li>Conjugate symmetry: <m>\braket{\phi}{\psi} = \braket{\psi}{\phi}^*</m></li>
+          <li>Linearity: <m>\braket{\phi}{\alpha\psi_1 + \beta\psi_2} = \alpha\braket{\phi}{\psi_1} + \beta\braket{\phi}{\psi_2}</m></li>
+          <li>Positive definiteness: <m>\braket{\psi}{\psi} \geq 0</m> with equality iff <m>\ket{\psi} = 0</m></li>
+        </ul>
+
+        <p><em>3. Completeness:</em> Every Cauchy sequence converges</p>
+
+        <p><em>4. Separability:</em> Countable dense subset exists</p>
+      </assemblage>
+
+      <p>The norm induced by the inner product is <m>\|\psi\| = \sqrt{\braket{\psi}{\psi}}</m>.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-examples">
+      <title>Examples of Hilbert Spaces</title>
+
+      <p><em>Finite-dimensional:</em> <m>\mathbb{C}^n$ with standard inner product:
+      <m>\braket{\phi}{\psi} = \sum_{i=1}^n \phi_i^* \psi_i</m>
+      Used for spin systems, qubits, finite-level atoms.</p>
+
+      <p><em><m>L^2(\mathbb{R}^3)</m>:</em> Square-integrable functions
+      <me>
+        \Hilbert = \{\psi: \mathbb{R}^3 \to \mathbb{C} : \int_{\mathbb{R}^3} |\psi(\mathbf{r})|^2 d^3r &lt; \infty\}
+      </me>
+      Inner product: <m>\braket{\phi}{\psi} = \int_{\mathbb{R}^3} \phi^*(\mathbf{r}) \psi(\mathbf{r}) d^3r</m></p>
+
+      <p>Primary Hilbert space for single-particle quantum mechanics.</p>
+
+      <p><em>Fock space:</em> Direct sum for variable particle number
+      <me>
+        \Fock = \mathbb{C} \oplus \Hilbert_1 \oplus \Hilbert_2 \oplus \cdots
+      </me>
+      Essential for quantum field theory.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-dirac">
+      <title>Dirac Notation</title>
+
+      <p>Paul Dirac's bra-ket notation elegantly separates vectors from functionals:</p>
+
+      <ul>
+        <li><em>Ket:</em> <m>\ket{\psi} \in \Hilbert</m> is a state vector</li>
+        <li><em>Bra:</em> <m>\bra{\psi} \in \Hilbert^*</m> is the dual (a linear functional)</li>
+        <li><em>Inner product:</em> <m>\braket{\phi}{\psi} \in \mathbb{C}</m> is the action of <m>\bra{\phi}</m> on <m>\ket{\psi}</m></li>
+        <li><em>Outer product:</em> <m>\ketbra{\psi}{\phi}</m> is an operator on <m>\Hilbert</m></li>
+      </ul>
+
+      <p>The bra corresponding to <m>\ket{\psi}</m> is defined by the adjoint relationship:
+      <m>\braket{\phi}{\psi} = \braket{\psi}{\phi}^*</m></p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch03-operators">
+    <title>Operators on Hilbert Space</title>
+
+    <subsection xml:id="subsec-linear-ops">
+      <title>Linear Operators</title>
+
+      <p>An operator <m>\AA: \Hilbert \to \Hilbert</m> is linear if:
+      <me>
+        \AA(\alpha\ket{\psi} + \beta\ket{\phi}) = \alpha \AA\ket{\psi} + \beta \AA\ket{\phi}
+      </me></p>
+
+      <p>In Dirac notation, matrix elements are:
+      <me>
+        A_{ij} = \braket{\phi_i}{\AA}{\phi_j}
+      </me></p>
+
+      <p><em>Example:</em> Position operator <m>\hat{x}</m> in position representation:
+      <me>
+        \hat{x} \psi(x) = x \psi(x)
+      </me>
+      Acts by multiplication.</p>
+
+      <p><em>Example:</em> Momentum operator <m>\hat{p} = -i\hbar d/dx</m> in position representation.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-hermitian">
+      <title>Hermitian (Self-Adjoint) Operators</title>
+
+      <p>The adjoint <m>\AA^\dagger</m> of operator <m>\AA</m> satisfies:
+      <me>
+        \braket{\phi}{\AA}{\psi} = \braket{\AA^\dagger \phi}{\psi}
+      </me></p>
+
+      <p>An operator is <em>Hermitian</em> if <m>\AA^\dagger = \AA</m>.</p>
+
+      <assemblage xml:id="box-hermitian-theorem">
+        <title>Fundamental Theorem for Hermitian Operators</title>
+        
+        <p>Hermitian operators have:</p>
+        <ol>
+          <li><em>Real eigenvalues:</em> If <m>\AA\ket{a} = a\ket{a}</m>, then <m>a \in \mathbb{R}</m></li>
+          <li><em>Orthogonal eigenvectors:</em> Eigenvectors with different eigenvalues are orthogonal</li>
+          <li><em>Complete basis:</em> Eigenvectors span the Hilbert space</li>
+        </ol>
+
+        <p>These properties make Hermitian operators suitable for representing physical observables.</p>
+      </assemblage>
+    </subsection>
+
+    <subsection xml:id="subsec-unitary">
+      <title>Unitary Operators</title>
+
+      <p>An operator <m>\UU</m> is unitary if:
+      <me>
+        \UU^\dagger \UU = \UU \UU^\dagger = \II
+      </me></p>
+
+      <p>Unitary operators:</p>
+      <ul>
+        <li>Preserve inner products: <m>\braket{\UU\phi}{\UU\psi} = \braket{\phi}{\psi}</m></li>
+        <li>Preserve norms: <m>\|\UU\psi\| = \|\psi\|</m></li>
+        <li>Represent symmetry transformations and time evolution</li>
+      </ul>
+
+      <p>The time evolution operator <m>U(t) = e^{-i\HH t/\hbar}</m> is unitary because <m>\HH</m> is Hermitian.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch03-commutators">
+    <title>Commutators and Uncertainty Relations</title>
+
+    <subsection xml:id="subsec-commutator-algebra">
+      <title>The Commutator</title>
+
+      <p>The commutator of two operators:
+      <me>
+        [\AA, \BB] = \AA\BB - \BB\AA
+      </me></p>
+
+      <p>If <m>[\AA, \BB] = 0</m>, the operators commute and can be simultaneously diagonalized.</p>
+
+      <p><em>Key examples:</em></p>
+      <ul>
+        <li>Canonical: <m>[\hat{r}_i, \hat{p}_j] = i\hbar\delta_{ij}</m></li>
+        <li>Angular momentum: <m>[\hat{L}_i, \hat{L}_j] = i\hbar\epsilon_{ijk}\hat{L}_k</m></li>
+        <li>Harmonic oscillator: <m>[\hat{a}, \hat{a}^\dagger] = 1</m></li>
+      </ul>
+    </subsection>
+
+    <subsection xml:id="subsec-uncertainty">
+      <title>Heisenberg Uncertainty Principle</title>
+
+      <p>For any two observables <m>\AA</m> and <m>\BB</m>:</p>
+
+      <assemblage xml:id="box-uncertainty">
+        <title>Generalized Uncertainty Relation</title>
+        
+        <me>
+          \Delta A \cdot \Delta B \geq \frac{1}{2}|\expect{[\AA, \BB]}|
+        </me>
+
+        <p>where <m>\Delta A = \sqrt{\expect{\AA^2} - \expect{\AA}^2}</m> is the standard deviation.</p>
+      </assemblage>
+
+      <p>For position and momentum:
+      <me>
+        \Delta x \cdot \Delta p \geq \frac{\hbar}{2}
+      </me></p>
+
+      <p>This is not a statement about measurement disturbance, but a fundamental property of quantum states. The Gaussian wavepacket (harmonic oscillator ground state) achieves the minimum uncertainty.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch03-postulates">
+    <title>The Five Postulates of Quantum Mechanics</title>
+
+    <assemblage xml:id="box-five-postulates">
+      <title>Fundamental Axioms of Quantum Mechanics</title>
+
+      <p><em>Postulate 1 (States):</em> The state of a quantum system is represented by a unit vector <m>\ket{\psi}</m> in a Hilbert space <m>\Hilbert</m>. Physically equivalent states differ only by a global phase factor <m>e^{i\theta}</m>.</p>
+
+      <p><em>Postulate 2 (Observables):</em> Physical observables correspond to Hermitian operators on <m>\Hilbert</m>. The possible measurement outcomes are the eigenvalues of the operator.</p>
+
+      <p><em>Postulate 3 (Measurement):</em> When measuring observable <m>\AA</m> on state <m>\ket{\psi}</m>:
+      <ul>
+        <li>The probability of obtaining eigenvalue <m>a_n</m> is <m>|c_n|^2 = |\braket{a_n}{\psi}|^2</m></li>
+        <li>After measurement yielding <m>a_n</m>, the state collapses to <m>\ket{a_n}</m></li>
+      </ul></p>
+
+      <p><em>Postulate 4 (Time Evolution):</em> The time evolution of a closed system is governed by the Schrödinger equation:
+      <me>
+        i\hbar \frac{d\ket{\psi}}{dt} = \HH\ket{\psi}
+      </me>
+      where <m>\HH</m> is the Hamiltonian operator.</p>
+
+      <p><em>Postulate 5 (Composite Systems):</em> The Hilbert space of a composite system is the tensor product of the component Hilbert spaces:
+      <me>
+        \Hilbert_{\text{total}} = \Hilbert_A \otimes \Hilbert_B
+      </me></p>
+    </assemblage>
+
+    <p>These postulates, though concise, contain the entire structure of quantum mechanics. Everything else—interference, entanglement, uncertainty—follows from them.</p>
+  </section>
+
+  <section xml:id="sec-ch03-measurement">
+    <title>Measurement Theory</title>
+
+    <subsection xml:id="subsec-born-rule">
+      <title>The Born Rule</title>
+
+      <p>Given a normalized state <m>\ket{\psi} = \sum_n c_n \ket{\phi_n}</m> where <m>\ket{\phi_n}</m> are eigenstates of observable <m>\AA</m> with eigenvalues <m>a_n</m>:</p>
+
+      <p>Probability of measuring <m>a_n</m>:
+      <me>
+        P(a_n) = |c_n|^2 = |\braket{\phi_n}{\psi}|^2
+      </me></p>
+
+      <p>Expectation value:
+      <me>
+        \expect{\AA} = \sum_n a_n P(a_n) = \sum_n a_n |\braket{\phi_n}{\psi}|^2 = \braket{\psi}{\AA}{\psi}
+      </me></p>
+
+      <p>The Born rule is fundamental to quantum probability.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-collapse">
+      <title>Measurement and Collapse</title>
+
+      <p>The measurement process has two aspects:</p>
+
+      <ol>
+        <li><em>Probabilistic outcome:</em> Measurement yields eigenvalue <m>a_n</m> with probability <m>|\braket{a_n}{\psi}|^2</m></li>
+
+        <li><em>State reduction:</em> After measurement, the state becomes:
+        <me>
+          \ket{\psi} \to \ket{\psi'} = \frac{\ketbra{a_n}{a_n}}{\braket{a_n}{\psi}}\ket{\psi} = \ket{a_n}
+        </me>
+        This "collapse" is instantaneous and non-unitary, unlike Schrödinger evolution.</li>
+      </ol>
+
+      <p>This raises the measurement problem: how to interpret the collapse? Various interpretations exist (Copenhagen, many-worlds, pilot wave), but all give identical predictions for experimental outcomes.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-compatible">
+      <title>Compatible and Incompatible Observables</title>
+
+      <p>Two observables <m>\AA</m> and <m>\BB</m> are <em>compatible</em> if <m>[\AA, \BB] = 0</m>.</p>
+
+      <p><em>Compatible observables:</em></p>
+      <ul>
+        <li>Can be simultaneously measured</li>
+        <li>Share a common eigenbasis</li>
+        <li>No uncertainty limit: <m>\Delta A \cdot \Delta B = 0</m> is possible</li>
+      </ul>
+
+      <p><em>Incompatible observables</em> (<m>[\AA, \BB] \neq 0</m>):</p>
+      <ul>
+        <li>Cannot be simultaneously measured with arbitrary precision</li>
+        <li>No common eigenbasis</li>
+        <li>Fundamental uncertainty: <m>\Delta A \cdot \Delta B \geq \frac{\hbar}{2}|\expect{[\AA, \BB]}|</m></li>
+      </ul>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch03-basis">
+    <title>Basis Representations</title>
+
+    <subsection xml:id="subsec-position-basis">
+      <title>Position Representation</title>
+
+      <p>Eigenstates of position: <m>\hat{\mathbf{r}}\ket{\mathbf{r}} = \mathbf{r}\ket{\mathbf{r}}</m></p>
+
+      <p>Completeness: <m>\int d^3r \ketbra{\mathbf{r}}{\mathbf{r}} = \II</m></p>
+
+      <p>Any state expands as:
+      <me>
+        \ket{\psi} = \int d^3r \ket{\mathbf{r}}\braket{\mathbf{r}}{\psi} = \int d^3r \psi(\mathbf{r})\ket{\mathbf{r}}
+      </me>
+
+      where <m>\psi(\mathbf{r}) = \braket{\mathbf{r}}{\psi}</m> is the position-space wavefunction.</p>
+    </subsection>
+
+    <subsection xml:id="subsec-momentum-basis">
+      <title>Momentum Representation</title>
+
+      <p>Eigenstates of momentum: <m>\hat{\mathbf{p}}\ket{\mathbf{p}} = \mathbf{p}\ket{\mathbf{p}}</m></p>
+
+      <p>Completeness: <m>\int d^3p \ketbra{\mathbf{p}}{\mathbf{p}} = \II</m></p>
+
+      <p>Momentum-space wavefunction:
+      <me>
+        \tilde{\psi}(\mathbf{p}) = \braket{\mathbf{p}}{\psi}
+      </me></p>
+
+      <p>Connected to position space by Fourier transform.</p>
+    </subsection>
+  </section>
+
+  <section xml:id="sec-ch03-summary">
+    <title>Chapter Summary</title>
+
+    <p>
+      <ul>
+        <li>Quantum states are vectors in a complex Hilbert space with inner product structure</li>
+        <li>Key examples: <m>\mathbb{C}^n</m> (finite), <m>L^2(\mathbb{R}^3)</m> (single particle), Fock space (fields)</li>
+        <li>Dirac notation elegantly separates kets (vectors) from bras (dual functionals)</li>
+        <li>Physical observables are Hermitian operators with real eigenvalues</li>
+        <li>Unitary operators preserve inner products and represent symmetries/time evolution</li>
+        <li>Commutator <m>[\AA, \BB]</m> measures non-commutativity, leads to uncertainty relations</li>
+        <li>Five postulates encode complete structure of quantum mechanics</li>
+        <li>Born rule: Probability <m>P(a_n) = |\braket{a_n}{\psi}|^2</m>, expectation <m>\expect{\AA} = \braket{\psi}{\AA}{\psi}</m></li>
+        <li>Measurement causes state collapse (reduction) to eigenstate</li>
+        <li>Position and momentum representations connected by Fourier transform</li>
+      </ul>
+    </p>
+  </section>
+
+  <exercises xml:id="exercises-ch03">
+    <title>Exercises</title>
+
+    <exercise>
+      <statement>
+        <p>Prove that eigenvalues of Hermitian operators are real, and that eigenvectors with different eigenvalues are orthogonal.</p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Show that <m>U(t) = e^{-i\HH t/\hbar}</m> is unitary when <m>\HH</m> is Hermitian.</p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Calculate commutators: <m>[\hat{x}^2, \hat{p}]</m>, <m>[\hat{x}, \hat{p}^2]</m>, and <m>[\hat{x}^2, \hat{p}^2]</m></p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Show that <m>\expect{\AA} = \braket{\psi}{\AA}{\psi}</m> for any Hermitian operator and any normalized state.</p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Prove the Schwarz inequality: <m>|\braket{\phi}{\psi}|^2 \leq \braket{\phi}{\phi}\braket{\psi}{\psi}</m></p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>Demonstrate uncertainty relation <m>\Delta A \cdot \Delta B \geq \frac{1}{2}|\expect{[\AA, \BB]}|</m> using the Schwarz inequality.</p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>For a two-level system with basis <m>\{\ket{1}, \ket{2}\}</m>, show that any Hermitian operator can be written as <m>\AA = a_1 \ketbra{1}{1} + a_2 \ketbra{2}{2} + a_{12}\ketbra{1}{2} + a_{21}\ketbra{2}{1}</m> where <m>a_{21} = a_{12}^*</m>.</p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p><strong>Challenge:</strong> Prove that if <m>[\AA, \BB] = 0</m> and <m>[\AA, \CC] = 0</m>, then simultaneous eigenstates exist for all three operators.</p>
+      </statement>
+    </exercise>
+  </exercises>
+
+</chapter>
