@@ -1,36 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch14-wkb" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>WKB and Semiclassical Methods</title>
+  <title>WKB and Semiclassical Methods (Dimension 10)</title>
+  <objectives>
+    <ul>
+      <li>Derive the WKB approximation for the Schrödinger equation.</li>
+      <li>Apply connection formulas at classical turning points.</li>
+      <li>Calculate tunneling rates through potential barriers.</li>
+      <li>Understand the Bohr-Sommerfeld quantization condition.</li>
+      <li>Connect quantum mechanics to classical mechanics through the Ehrenfest theorem and coherent states.</li>
+    </ul>
+  </objectives>
   <introduction>
-    <p>The WKB approximation connects quantum mechanics to classical mechanics. It is an expansion in powers of ℏ, valid when the action varies slowly on quantum scales. This chapter covers tunneling, barrier penetration, quantization conditions, and the classical limit.</p>
+    <p>The tenth dimension of our framework concerns the classical limit: how does quantum mechanics reduce to classical mechanics? Semiclassical methods provide the bridge. The WKB (Wentzel-Kramers-Brillouin) approximation is a systematic expansion in powers of <m>\hbar</m> that captures the leading quantum corrections to classical motion. It is especially powerful for tunneling problems, where classically forbidden processes occur with exponentially small but finite probability.</p>
+    <p>Semiclassical methods also illuminate the conceptual relationship between quantum and classical mechanics. The Ehrenfest theorem shows that expectation values follow classical trajectories. Coherent states minimize uncertainty and evolve classically. These connections are not merely pedagogical—they are essential for understanding quantum optics, molecular dynamics, and the emergence of classicality.</p>
   </introduction>
-  <section xml:id="sec-ch14-wkb-ansatz">
-    <title>The WKB Ansatz</title>
-    <p>Assume <m>\psi(x) \sim A(x) e^{iS(x)/\hbar}</m> with <m>S(x) = \int p(x) dx</m> the classical action. Plugging into the Schrödinger equation and expanding in ℏ gives the eikonal equation <m>p(x)^2 = 2m[E - V(x)]</m> to leading order.</p>
+
+  <section xml:id="sec-ch14-wkb-derivation">
+    <title>The WKB Approximation</title>
+    <p>Write the wavefunction as <m>\psi(x) = A(x)e^{iS(x)/\hbar}</m> and substitute into the time-independent Schrödinger equation. Expanding in powers of <m>\hbar</m>:</p>
+
+    <assemblage xml:id="box-wkb">
+      <title>WKB Wavefunctions</title>
+      <p>In the classically allowed region (<m>E \gt V(x)</m>):</p>
+      <me>
+        \psi(x) \approx \frac{C}{\sqrt{p(x)}} \exp\left(\pm \frac{i}{\hbar}\int^x p(x')\,dx'\right),
+      </me>
+      <p>where <m>p(x) = \sqrt{2m(E-V(x))}</m> is the local classical momentum.</p>
+      <p>In the classically forbidden region (<m>E \lt V(x)</m>):</p>
+      <me>
+        \psi(x) \approx \frac{C}{\sqrt{\kappa(x)}} \exp\left(\pm \frac{1}{\hbar}\int^x \kappa(x')\,dx'\right),
+      </me>
+      <p>where <m>\kappa(x) = \sqrt{2m(V(x)-E)}</m>.</p>
+    </assemblage>
+
+    <p>The WKB approximation is valid when the potential varies slowly compared to the de Broglie wavelength: <m>|dp/dx| \ll p^2/\hbar</m>. It breaks down at classical turning points where <m>p(x) = 0</m>.</p>
   </section>
-  <section xml:id="sec-ch14-tunneling">
-    <title>Tunneling and Barrier Penetration</title>
-    <p>In the classically forbidden region, <m>p(x) = i\kappa(x)</m> is imaginary. The tunneling amplitude is</p>
+
+  <section xml:id="sec-ch14-connection">
+    <title>Connection Formulas at Turning Points</title>
+    <p>Near a turning point <m>x = a</m> where <m>V(a) = E</m>, the WKB solutions must be matched using Airy functions. The connection formulas relate the oscillatory solution on the allowed side to the exponential solution on the forbidden side:</p>
     <me>
-      T \sim e^{-2\gamma}, \quad \gamma = \frac{1}{\hbar}\int_{x_1}^{x_2} \kappa(x) dx,
+      \frac{1}{\sqrt{p}}\cos\left(\frac{1}{\hbar}\int_a^x p\,dx' - \frac{\pi}{4}\right) \leftrightarrow \frac{1}{2\sqrt{\kappa}}\exp\left(-\frac{1}{\hbar}\int_x^a \kappa\,dx'\right).
     </me>
-    <p>where <m>x_1, x_2</m> are classical turning points. This explains radioactive decay, field emission, and other exponentially suppressed processes.</p>
+    <p>These connection formulas are essential for correct quantization conditions and tunneling calculations.</p>
   </section>
+
   <section xml:id="sec-ch14-quantization">
     <title>Bohr-Sommerfeld Quantization</title>
-    <p>For a bound orbit, quantization requires</p>
-    <me>
-      \oint p(x) dx = (n + 1/2)\pi\hbar,
-    </me>
-    <p>giving semiclassical energy levels. This reproduces the exact result for the harmonic oscillator and is excellent for heavy particles.</p>
+    <p>For a particle bouncing between two turning points <m>a</m> and <m>b</m>, requiring the wavefunction to be single-valued gives:</p>
+    <assemblage xml:id="box-bohr-sommerfeld">
+      <title>Bohr-Sommerfeld Quantization Condition</title>
+      <me>
+        \oint p(x)\,dx = \int_a^b p(x)\,dx = \left(n + \frac{1}{2}\right)\pi\hbar, \quad n = 0, 1, 2, \ldots
+      </me>
+    </assemblage>
+    <p>This reproduces the exact energy levels for the harmonic oscillator and gives excellent approximations for other potentials when <m>n \gg 1</m> (highly excited states).</p>
+
+    <example xml:id="ex-ch14-ho-wkb">
+      <title>Harmonic Oscillator via WKB</title>
+      <p>For <m>V = m\omega^2x^2/2</m>, the turning points are <m>x = \pm\sqrt{2E/(m\omega^2)}</m>. The Bohr-Sommerfeld integral gives:</p>
+      <me>
+        \int_{-a}^{a} \sqrt{2m(E - m\omega^2x^2/2)}\,dx = \frac{\pi E}{\omega} = (n+1/2)\pi\hbar,
+      </me>
+      <p>yielding <m>E_n = \hbar\omega(n + 1/2)</m>—the exact result.</p>
+    </example>
   </section>
+
+  <section xml:id="sec-ch14-tunneling">
+    <title>Quantum Tunneling</title>
+    <p>A particle encountering a potential barrier <m>V(x) \gt E</m> in the region <m>a \lt x \lt b</m> has a transmission coefficient:</p>
+    <me>
+      T \approx \exp\left(-\frac{2}{\hbar}\int_a^b \sqrt{2m(V(x)-E)}\,dx\right).
+    </me>
+    <p>The exponential dependence on the barrier parameters makes tunneling extremely sensitive to barrier height and width.</p>
+
+    <example xml:id="ex-ch14-alpha-decay">
+      <title>Alpha Decay</title>
+      <p>An alpha particle (mass <m>m_\alpha</m>, energy <m>E</m>) tunnels through the Coulomb barrier of a nucleus (charge <m>Z</m>). The Gamow factor gives the tunneling probability:</p>
+      <me>
+        T \propto e^{-2\pi Z\alpha c/(v)},
+      </me>
+      <p>where <m>v</m> is the alpha particle velocity and <m>\alpha</m> is the fine-structure constant. This explains the enormous range of alpha-decay lifetimes (from microseconds to billions of years) through modest changes in nuclear parameters.</p>
+    </example>
+  </section>
+
+  <section xml:id="sec-ch14-ehrenfest">
+    <title>Ehrenfest's Theorem and Coherent States</title>
+    <p>Ehrenfest's theorem shows that quantum expectation values satisfy classical equations of motion:</p>
+    <me>
+      m\frac{d^2\expect{x}}{dt^2} = -\expect{\frac{dV}{dx}}.
+    </me>
+    <p>This equals Newton's second law when <m>\expect{dV/dx} \approx dV(\expect{x})/dx</m>, which holds for narrow wavepackets in smooth potentials.</p>
+
+    <p>Coherent states <m>\ket{\alpha}</m> of the harmonic oscillator are the quantum states that most closely mimic classical oscillatory motion:</p>
+    <me>
+      \ket{\alpha} = e^{-|\alpha|^2/2}\sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n!}}\ket{n}.
+    </me>
+    <p>They maintain minimum uncertainty <m>\Delta x\Delta p = \hbar/2</m> at all times and oscillate without spreading—the most "classical" quantum states.</p>
+  </section>
+
   <section xml:id="sec-ch14-summary">
     <title>Chapter Summary</title>
     <ul>
-      <li>WKB is an expansion in ℏ for slowly varying potentials.</li>
-      <li>Tunneling probability decays exponentially with the classically forbidden action.</li>
-      <li>Bohr-Sommerfeld quantization connects classical orbits to quantum levels.</li>
-      <li>WKB is accurate for high quantum numbers and heavy particles.</li>
+      <li>The WKB approximation is a semiclassical expansion valid when <m>\hbar</m> is effectively small.</li>
+      <li>WKB wavefunctions: <m>\psi \sim p^{-1/2} e^{\pm i\int p\,dx/\hbar}</m> in allowed regions, exponential in forbidden regions.</li>
+      <li>Connection formulas link solutions across classical turning points.</li>
+      <li>Bohr-Sommerfeld quantization: <m>\oint p\,dx = (n+1/2)\pi\hbar</m>.</li>
+      <li>Tunneling probability: <m>T \sim e^{-2\int \kappa\,dx/\hbar}</m>, exponentially sensitive to barrier parameters.</li>
+      <li>Ehrenfest's theorem connects quantum expectation values to classical equations of motion.</li>
+      <li>Coherent states are minimum-uncertainty states that evolve classically.</li>
     </ul>
   </section>
+
+  <exercises xml:id="exercises-ch14">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch14-wkb-well"><statement><p>Use WKB to find the approximate energy levels of a particle in a potential <m>V(x) = V_0|x/a|^\nu</m> for general <m>\nu</m>.</p></statement></exercise>
+    <exercise xml:id="exer-ch14-rectangular"><statement><p>Calculate the WKB tunneling probability through a rectangular barrier of height <m>V_0</m> and width <m>a</m>. Compare with the exact result.</p></statement></exercise>
+    <exercise xml:id="exer-ch14-alpha"><statement><p>Estimate the half-life of <m>^{238}</m>U alpha decay using the Gamow tunneling formula.</p></statement></exercise>
+    <exercise xml:id="exer-ch14-ehrenfest"><statement><p>Prove Ehrenfest's theorem: <m>d\expect{p}/dt = -\expect{dV/dx}</m> starting from the Schrödinger equation.</p></statement></exercise>
+    <exercise xml:id="exer-ch14-coherent"><statement><p>Show that coherent states are eigenstates of the annihilation operator: <m>\hat{a}\ket{\alpha} = \alpha\ket{\alpha}</m>.</p></statement></exercise>
+    <exercise xml:id="exer-ch14-spreading"><statement><p>Show that a Gaussian wavepacket for a free particle spreads in time: calculate <m>\Delta x(t)</m> and show it grows.</p></statement></exercise>
+    <exercise xml:id="exer-ch14-challenge"><statement><p><em>Challenge.</em> Derive the WKB connection formulas by solving the Schrödinger equation near a linear turning point using Airy functions.</p></statement></exercise>
+  </exercises>
 </chapter>

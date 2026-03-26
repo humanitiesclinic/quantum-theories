@@ -1,32 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch16-classical-limit" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Classical Limit and Correspondence Principle</title>
+  <title>Classical Limit and Correspondence (Dimension 10)</title>
+  <objectives>
+    <ul>
+      <li>Understand multiple routes from quantum to classical mechanics.</li>
+      <li>Master the Ehrenfest theorem and its limitations.</li>
+      <li>Develop the Wigner function as a phase-space quasi-probability distribution.</li>
+      <li>Connect commutators to Poisson brackets via deformation quantization.</li>
+      <li>Understand environment-induced classicality (decoherence and einselection).</li>
+    </ul>
+  </objectives>
   <introduction>
-    <p>How does quantum mechanics reduce to classical mechanics? The correspondence principle—formulated by Bohr—states that the behavior of quantum systems must approach classical behavior in appropriate limits. This chapter explores the ℏ → 0 limit, decoherence, and the quantum-classical boundary.</p>
+    <p>The tenth dimension of our framework asks: where does a theory sit on the spectrum from fully quantum to fully classical? Understanding this transition is crucial both conceptually (why does the world appear classical?) and practically (when can we use classical approximations?). This chapter explores multiple perspectives on the quantum-classical correspondence, from Ehrenfest's theorem to decoherence to the Wigner function formalism.</p>
   </introduction>
-  <section xml:id="sec-ch16-ehrenfest">
-    <title>Ehrenfest Theorem</title>
-    <p>Expectation values of observables obey classical equations:</p>
+
+  <section xml:id="sec-ch16-ehrenfest-revisited">
+    <title>Ehrenfest's Theorem Revisited</title>
+    <p>Ehrenfest's equations of motion for expectation values:</p>
     <me>
-      \frac{d}{dt}\langle \rr \rangle = \frac{\langle \pp \rangle}{m}, \quad \frac{d}{dt}\langle \pp \rangle = -\langle \nabla V \rangle.
+      \frac{d\expect{\hat{x}}}{dt} = \frac{\expect{\hat{p}}}{m}, \quad \frac{d\expect{\hat{p}}}{dt} = -\expect{\frac{\partial V}{\partial x}}.
     </me>
-    <p>For sharply localized wavepackets, the center of the packet follows a classical trajectory. Quantum corrections come from spreading (dispersion) and tunneling.</p>
+    <p>These look like Newton's equations, but there is a crucial difference: <m>\expect{dV/dx} \neq dV(\expect{x})/dx</m> in general. The two sides agree only when the wavefunction is narrow compared to the scale on which <m>V</m> varies. This is the regime of classical mechanics: macroscopic objects have extremely narrow (relative) wavepackets.</p>
+    <p>For potentials that are at most quadratic (free particle, harmonic oscillator, uniform field), Ehrenfest's equations are exact. For anharmonic potentials, quantum corrections arise from the spread of the wavepacket.</p>
   </section>
-  <section xml:id="sec-ch16-wkb-limit">
-    <title>WKB Limit and Stationary Phase</title>
-    <p>In the limit ℏ → 0, the path integral is dominated by stationary phase (saddle points where δS = 0), recovering classical equations of motion and the Euler-Lagrange equations.</p>
+
+  <section xml:id="sec-ch16-wigner">
+    <title>The Wigner Function</title>
+    <p>The Wigner function provides a phase-space representation of quantum states:</p>
+    <me>
+      W(x,p) = \frac{1}{\pi\hbar}\int_{-\infty}^{\infty} \psi^*(x+y)\psi(x-y) e^{2ipy/\hbar} dy.
+    </me>
+    <p>Key properties:</p>
+    <ul>
+      <li>Real-valued but can be negative (not a true probability distribution)</li>
+      <li>Marginals give correct probabilities: <m>\int W(x,p)\,dp = |\psi(x)|^2</m> and <m>\int W(x,p)\,dx = |\tilde\psi(p)|^2</m></li>
+      <li>Expectation values computed as phase-space averages: <m>\expect{A} = \int W(x,p) A_W(x,p)\,dx\,dp</m></li>
+    </ul>
+    <p>Negativity of the Wigner function is a signature of non-classicality. Classical states (coherent states, thermal states) have non-negative Wigner functions. Quantum states exhibiting interference (cat states, Fock states) have regions of negative <m>W</m>.</p>
+
+    <p>The Wigner function evolves according to the Moyal equation—a quantum analog of the Liouville equation that reduces to it as <m>\hbar \to 0</m>.</p>
   </section>
-  <section xml:id="sec-ch16-decoherence">
+
+  <section xml:id="sec-ch16-deformation">
+    <title>From Commutators to Poisson Brackets</title>
+    <p>The correspondence principle relates quantum commutators to classical Poisson brackets:</p>
+    <me>
+      \frac{1}{i\hbar}[\hat{A}, \hat{B}] \xrightarrow{\hbar \to 0} \{A, B\}_{\text{PB}},
+    </me>
+    <p>where <m>\{A, B\}_{\text{PB}} = \frac{\partial A}{\partial x}\frac{\partial B}{\partial p} - \frac{\partial A}{\partial p}\frac{\partial B}{\partial x}</m>.</p>
+    <p>This correspondence is made precise by deformation quantization (Moyal product), where the commutative algebra of classical observables is deformed to the non-commutative algebra of quantum operators. The deformation parameter is <m>\hbar</m>.</p>
+    <p>The Heisenberg equation <m>i\hbar d\hat{A}_H/dt = [\hat{A}_H, \hat{H}]</m> reduces to Hamilton's equation <m>dA/dt = \{A, H\}</m> in the classical limit—the most direct connection between the Heisenberg picture and classical mechanics.</p>
+  </section>
+
+  <section xml:id="sec-ch16-decoherence-classical">
     <title>Decoherence and the Emergence of Classicality</title>
-    <p>Environmental interactions destroy quantum coherence. Macroscopic systems decohere extremely rapidly, making superpositions of macroscopically distinct states impossible to maintain. This explains why we don't see cats in superposition.</p>
+    <p>Why does the world look classical? The modern answer involves decoherence (Chapter 8) combined with einselection. The environment continuously monitors quantum systems, selecting "pointer states" that are robust against environmental interaction. These pointer states are the classical states we observe.</p>
+    <p>For a macroscopic object, the decoherence timescale is:</p>
+    <me>
+      \tau_D \sim \frac{\hbar^2}{mk_BT(\Delta x)^2},
+    </me>
+    <p>where <m>\Delta x</m> is the separation of the superposition. For a dust grain at room temperature with <m>\Delta x = 10^{-6}</m> m, <m>\tau_D \sim 10^{-31}</m> s—effectively instantaneous.</p>
+    <p>Three routes to classicality work together:</p>
+    <ul>
+      <li><em>Large quantum numbers:</em> <m>n \gg 1</m> makes quantum corrections small</li>
+      <li><em>Decoherence:</em> environment-induced loss of interference</li>
+      <li><em>Coarse-graining:</em> limited measurement resolution averages out quantum fluctuations</li>
+    </ul>
   </section>
+
   <section xml:id="sec-ch16-summary">
     <title>Chapter Summary</title>
     <ul>
-      <li>Expectation values follow classical equations via Ehrenfest theorem.</li>
-      <li>Wavepackets spread; classical localization emerges only for sharply peaked densities.</li>
-      <li>Classical mechanics is the ℏ → 0 limit of quantum mechanics.</li>
-      <li>Decoherence suppresses quantum coherence at macroscopic scales naturally.</li>
+      <li>Ehrenfest's theorem: expectation values follow classical trajectories for narrow wavepackets.</li>
+      <li>The Wigner function provides phase-space representation; negativity signals non-classicality.</li>
+      <li>Commutators reduce to Poisson brackets as <m>\hbar \to 0</m> (deformation quantization).</li>
+      <li>Decoherence from environmental interaction selects robust "pointer states" (einselection).</li>
+      <li>Classicality emerges from large quantum numbers, decoherence, and coarse-graining acting together.</li>
+      <li>The classical limit is not simply <m>\hbar \to 0</m> but involves the interplay of system size, environment, and observation.</li>
     </ul>
   </section>
+
+  <exercises xml:id="exercises-ch16">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch16-ehrenfest"><statement><p>Show that Ehrenfest's theorem gives exact classical equations for a quadratic potential but not for a cubic potential. Estimate the leading quantum correction for <m>V(x) = x^2/2 + \lambda x^3</m>.</p></statement></exercise>
+    <exercise xml:id="exer-ch16-wigner-gauss"><statement><p>Compute the Wigner function for a Gaussian wavepacket and verify it is non-negative.</p></statement></exercise>
+    <exercise xml:id="exer-ch16-wigner-fock"><statement><p>Compute the Wigner function for the <m>n = 1</m> Fock state of a harmonic oscillator and show it takes negative values.</p></statement></exercise>
+    <exercise xml:id="exer-ch16-poisson"><statement><p>Verify the Dirac correspondence <m>(1/i\hbar)[\hat{x}, \hat{p}] = 1 \leftrightarrow \{x, p\} = 1</m> and extend it to <m>[\hat{x}^2, \hat{p}]</m>.</p></statement></exercise>
+    <exercise xml:id="exer-ch16-deco-estimate"><statement><p>Estimate the decoherence time for: (a) a fullerene molecule (C<m>_{60}</m>) in a double-slit experiment, (b) a cat in a superposition of alive and dead.</p></statement></exercise>
+    <exercise xml:id="exer-ch16-challenge"><statement><p><em>Challenge.</em> Derive the Moyal equation for the time evolution of the Wigner function and show it reduces to the classical Liouville equation as <m>\hbar \to 0</m>.</p></statement></exercise>
+  </exercises>
 </chapter>

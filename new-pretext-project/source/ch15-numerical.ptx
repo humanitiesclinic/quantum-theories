@@ -1,32 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch15-numerical" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Numerical and Computational Methods</title>
+  <title>Numerical and Computational Methods (Dimension 11)</title>
+  <objectives>
+    <ul>
+      <li>Understand matrix diagonalization as the foundation of numerical quantum mechanics.</li>
+      <li>Apply the variational method computationally using basis-set expansions.</li>
+      <li>Learn finite-difference methods for the Schrödinger equation.</li>
+      <li>Understand the basics of quantum Monte Carlo methods.</li>
+      <li>Appreciate density functional theory and tensor network methods.</li>
+    </ul>
+  </objectives>
   <introduction>
-    <p>For realistic quantum systems, exact solutions are rare. Numerical methods—from finite-difference schemes to variational approaches—make quantum mechanics computable. This chapter surveys modern computational techniques essential for research and engineering.</p>
+    <p>The eleventh dimension of our framework addresses how we implement calculations: analytically, approximately, or numerically. As systems grow in complexity, numerical methods become essential. A helium atom can be treated variationally; a protein requires density functional theory; a many-body quantum system may need tensor networks or quantum Monte Carlo. This chapter surveys the major computational approaches to quantum mechanics.</p>
+    <p>We focus on the ideas and applicability of each method rather than on algorithmic details. Understanding when to use which method—and what each method can and cannot capture—is as important as knowing the algorithms themselves.</p>
   </introduction>
-  <section xml:id="sec-ch15-grid">
-    <title>Grid-Based Methods</title>
-    <p>Discretize space and solve the Schrödinger equation on a grid. Works well for one or few dimensions but scales poorly; useful for pedagogical and benchmark calculations.</p>
+
+  <section xml:id="sec-ch15-exact-diag">
+    <title>Exact Diagonalization</title>
+    <p>The most straightforward numerical approach: represent the Hamiltonian as a matrix in some basis and diagonalize it. For a system with Hilbert space dimension <m>d</m>, this requires:</p>
+    <ul>
+      <li>Storing a <m>d \times d</m> matrix: <m>O(d^2)</m> memory</li>
+      <li>Diagonalization: <m>O(d^3)</m> operations</li>
+    </ul>
+    <p>For many-body systems, <m>d</m> grows exponentially with particle number (e.g., <m>d = 2^N</m> for <m>N</m> spin-1/2 particles). Exact diagonalization is limited to about <m>N \sim 40</m> spins with modern computers.</p>
+
+    <p>Sparse matrix methods (Lanczos algorithm) can find the lowest eigenvalues without full diagonalization, extending the reach to larger systems when only ground-state properties are needed.</p>
   </section>
-  <section xml:id="sec-ch15-variational">
-    <title>Variational Methods</title>
-    <p>Upper bounds on ground state energy: <m>E_0 \le \langle \psi | H | \psi \rangle / \langle \psi | \psi \rangle</m>. Optimize over an ansatz wavefunctions (e.g., Gaussians, sums of exponentials) to approximate ground states.</p>
+
+  <section xml:id="sec-ch15-variational-comp">
+    <title>Computational Variational Methods</title>
+    <p>Expand the trial wavefunction in a finite basis <m>\{\ket{\phi_k}\}_{k=1}^M</m>:</p>
+    <me>
+      \ket{\psi_{\text{trial}}} = \sum_{k=1}^M c_k \ket{\phi_k}.
+    </me>
+    <p>Minimizing the energy expectation value leads to the generalized eigenvalue problem:</p>
+    <me>
+      \mathbf{H}\mathbf{c} = E\mathbf{S}\mathbf{c},
+    </me>
+    <p>where <m>H_{jk} = \bra{\phi_j}\HH\ket{\phi_k}</m> and <m>S_{jk} = \braket{\phi_j}{\phi_k}</m>.</p>
+
+    <p>The Hartree-Fock method is the most important variational approach for many-electron systems. It approximates the many-body wavefunction as a single Slater determinant and optimizes the single-particle orbitals self-consistently. Hartree-Fock captures about 99% of the total energy for atoms but misses electron correlation effects.</p>
+
+    <p>Post-Hartree-Fock methods (configuration interaction, coupled cluster, Møller-Plesset perturbation theory) systematically include correlation. Coupled cluster with singles and doubles (CCSD) is considered the "gold standard" of quantum chemistry for medium-sized molecules.</p>
   </section>
-  <section xml:id="sec-ch15-montecarlo">
+
+  <section xml:id="sec-ch15-finite-diff">
+    <title>Finite-Difference Methods</title>
+    <p>Discretize space on a grid with spacing <m>\Delta x</m>. The second derivative becomes:</p>
+    <me>
+      \frac{d^2\psi}{dx^2} \approx \frac{\psi(x+\Delta x) - 2\psi(x) + \psi(x-\Delta x)}{(\Delta x)^2}.
+    </me>
+    <p>The time-independent Schrödinger equation becomes a matrix eigenvalue problem. For time evolution, the Crank-Nicolson scheme provides unconditionally stable, unitary propagation:</p>
+    <me>
+      \left(1 + \frac{i\Delta t}{2\hbar}\HH\right)\psi^{n+1} = \left(1 - \frac{i\Delta t}{2\hbar}\HH\right)\psi^n.
+    </me>
+    <p>Split-operator methods use the decomposition <m>e^{-i\HH\Delta t/\hbar} \approx e^{-iV\Delta t/(2\hbar)} e^{-iT\Delta t/\hbar} e^{-iV\Delta t/(2\hbar)}</m>, applying kinetic and potential operators alternately in their natural representations (momentum and position space).</p>
+  </section>
+
+  <section xml:id="sec-ch15-monte-carlo">
     <title>Quantum Monte Carlo</title>
-    <p>Sample the probability distribution <m>|\psi|^2</m> stochastically. Allows simulation of sign-problem-free systems with many particles. Diffusion Monte Carlo projects to ground states.</p>
+    <p>Monte Carlo methods use random sampling to evaluate high-dimensional integrals. In quantum mechanics:</p>
+    <ul>
+      <li><em>Variational Monte Carlo (VMC):</em> evaluates <m>\expect{\HH} = \int |\psi_T|^2 (H\psi_T/\psi_T) d\mathbf{R} / \int |\psi_T|^2 d\mathbf{R}</m> by sampling <m>|\psi_T|^2</m> as a probability distribution.</li>
+      <li><em>Diffusion Monte Carlo (DMC):</em> projects out the ground state by evolving in imaginary time. Gives essentially exact ground-state energies for bosonic systems.</li>
+      <li><em>Path Integral Monte Carlo (PIMC):</em> samples the Feynman path integral at finite temperature. Used for superfluid helium, warm dense matter, and quantum liquids.</li>
+    </ul>
+    <p>The fermion sign problem—negative weights from antisymmetrization—limits Monte Carlo for fermionic systems. Various approximate methods (fixed-node, constrained-path) partially address this.</p>
   </section>
+
+  <section xml:id="sec-ch15-dft">
+    <title>Density Functional Theory</title>
+    <p>DFT replaces the <m>N</m>-electron wavefunction with the electron density <m>n(\mathbf{r})</m> as the fundamental variable. The Hohenberg-Kohn theorems guarantee that the ground-state energy is a functional of the density alone.</p>
+    <p>The Kohn-Sham equations map the interacting problem to a system of non-interacting electrons in an effective potential:</p>
+    <me>
+      \left(-\frac{\hbar^2}{2m}\nabla^2 + V_{\text{eff}}[n](\mathbf{r})\right)\phi_i(\mathbf{r}) = \varepsilon_i \phi_i(\mathbf{r}),
+    </me>
+    <p>where <m>V_{\text{eff}}</m> includes the external potential, Hartree (mean-field Coulomb) potential, and exchange-correlation potential. The unknown exchange-correlation functional must be approximated (LDA, GGA, hybrid functionals).</p>
+    <p>DFT is the workhorse of materials science and much of chemistry, handling systems of hundreds to thousands of atoms.</p>
+  </section>
+
   <section xml:id="sec-ch15-tensor">
-    <title>Tensor Networks and DMRG</title>
-    <p>Represent many-body wavefunctions as networks of tensors. Density-matrix renormalization group (DMRG) is state-of-the-art for one-dimensional systems with strong correlations.</p>
+    <title>Tensor Network Methods</title>
+    <p>For one-dimensional quantum systems, the density matrix renormalization group (DMRG) and its generalization to matrix product states (MPS) provide powerful variational approaches. An MPS represents a quantum state as:</p>
+    <me>
+      \ket{\Psi} = \sum_{s_1,\ldots,s_N} A^{s_1} A^{s_2} \cdots A^{s_N} \ket{s_1 s_2 \cdots s_N},
+    </me>
+    <p>where each <m>A^{s_i}</m> is a matrix of bond dimension <m>\chi</m>. The computational cost scales as <m>O(N\chi^3)</m> instead of exponentially. DMRG gives essentially exact ground states for 1D systems with hundreds of sites.</p>
+    <p>Generalizations to 2D (PEPS—projected entangled pair states) and to time evolution (TEBD, tDMRG) extend the reach of tensor network methods to dynamical and higher-dimensional problems.</p>
   </section>
+
   <section xml:id="sec-ch15-summary">
     <title>Chapter Summary</title>
     <ul>
-      <li>Grid methods scale poorly but are exact; useful for few-particle systems and small spaces.</li>
-      <li>Variational methods provide upper bounds and good approximations with modest computational cost.</li>
-      <li>Quantum Monte Carlo samples probability distributions to compute expectation values.</li>
-      <li>Tensor networks exploit entanglement structure; DMRG is the gold standard for 1D.</li>
+      <li>Exact diagonalization works for small Hilbert spaces; exponential scaling limits it to <m>\sim 40</m> spins.</li>
+      <li>Variational methods (Hartree-Fock, post-HF) are the backbone of quantum chemistry.</li>
+      <li>Finite-difference and split-operator methods solve the Schrödinger equation on grids.</li>
+      <li>Quantum Monte Carlo methods sample high-dimensional integrals stochastically.</li>
+      <li>Density functional theory maps many-electron problems to effective single-particle equations.</li>
+      <li>Tensor networks (DMRG/MPS) provide efficient representations for low-entanglement states.</li>
+      <li>The choice of method depends on the system: size, dimensionality, entanglement structure, and desired accuracy.</li>
     </ul>
   </section>
+
+  <exercises xml:id="exercises-ch15">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch15-diag"><statement><p>Set up the Hamiltonian matrix for a particle in a box on a grid of <m>N</m> points. Diagonalize it numerically and compare the eigenvalues with the exact result.</p></statement></exercise>
+    <exercise xml:id="exer-ch15-variational"><statement><p>Implement the Rayleigh-Ritz variational method for the anharmonic oscillator <m>V = x^2/2 + \lambda x^4</m> using harmonic oscillator basis functions.</p></statement></exercise>
+    <exercise xml:id="exer-ch15-cn"><statement><p>Implement the Crank-Nicolson method for time evolution of a Gaussian wavepacket in a harmonic potential. Verify energy conservation.</p></statement></exercise>
+    <exercise xml:id="exer-ch15-vmc"><statement><p>Describe how to implement variational Monte Carlo for the hydrogen atom using a trial wavefunction <m>\psi(r) = e^{-\alpha r}</m>.</p></statement></exercise>
+    <exercise xml:id="exer-ch15-scaling"><statement><p>Discuss the computational scaling (memory and time) of exact diagonalization, DFT, and DMRG as a function of system size. When does each method become impractical?</p></statement></exercise>
+    <exercise xml:id="exer-ch15-challenge"><statement><p><em>Challenge.</em> Explain the fermion sign problem in diffusion Monte Carlo and why it makes exact treatment of fermionic systems computationally hard.</p></statement></exercise>
+  </exercises>
 </chapter>

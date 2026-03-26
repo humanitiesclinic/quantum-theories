@@ -1,33 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch13-quantum-info" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Quantum Information and Computation</title>
+  <objectives>
+    <ul>
+      <li>Understand qubits as the fundamental unit of quantum information.</li>
+      <li>Master quantum gates and circuit representations.</li>
+      <li>Grasp quantum entanglement as a resource for information processing.</li>
+      <li>Understand quantum teleportation and superdense coding protocols.</li>
+      <li>Appreciate the basics of quantum algorithms (Deutsch, Grover, Shor).</li>
+      <li>Understand quantum error correction and the threshold theorem.</li>
+    </ul>
+  </objectives>
   <introduction>
-    <p>Quantum information theory is the science of using quantum systems to store, process, and transmit information. Qubits, entanglement, and quantum algorithms reveal that quantum mechanics offers exponential speedups for certain tasks. This chapter covers the foundations: qubits, quantum gates, measurement, entanglement, and simple algorithms.</p>
+    <p>Quantum information theory recasts quantum mechanics as a theory of information processing. This perspective, developed since the 1980s, reveals that quantum mechanics enables computational and communication capabilities that are impossible classically. Entanglement becomes a resource, superposition enables parallelism, and the no-cloning theorem constrains what can be done with quantum data.</p>
+    <p>This chapter sits at the intersection of several dimensions of our framework: qubits are spin-1/2 systems (dimension 7), quantum gates are unitary operators (dimension 4 for pictures), decoherence is the primary obstacle (dimensions 5 and 6), and error correction provides the tools to fight it.</p>
   </introduction>
+
   <section xml:id="sec-ch13-qubits">
-    <title>Qubits and Quantum Gates</title>
-    <p>A qubit is a two-level quantum system: <m>|\psi\rangle = \alpha |0\rangle + \beta |1\rangle</m> with <m>|\alpha|^2 + |\beta|^2 = 1</m>. Unlike classical bits (0 or 1), qubits can be superpositions. Quantum gates are unitary operations: Pauli gates <m>X, Y, Z</m>, Hadamard <m>H</m>, phase gates, and controlled-NOT (CNOT).</p>
+    <title>Qubits and Quantum States</title>
+    <p>A qubit is a two-level quantum system—the quantum analog of a classical bit. While a classical bit is either 0 or 1, a qubit can exist in superposition:</p>
+    <me>
+      \ket{\psi} = \alpha\ket{0} + \beta\ket{1}, \quad |\alpha|^2 + |\beta|^2 = 1.
+    </me>
+    <p>On the Bloch sphere, this is parameterized as <m>\ket{\psi} = \cos(\theta/2)\ket{0} + e^{i\phi}\sin(\theta/2)\ket{1}</m>.</p>
+    <p>For <m>n</m> qubits, the state space has dimension <m>2^n</m>. A general state is:</p>
+    <me>
+      \ket{\Psi} = \sum_{x \in \{0,1\}^n} \alpha_x \ket{x},
+    </me>
+    <p>with <m>2^n</m> complex amplitudes. This exponential scaling is the source of quantum computational power—and the reason classical simulation of quantum systems is intractable.</p>
+
+    <assemblage xml:id="box-no-cloning">
+      <title>The No-Cloning Theorem</title>
+      <p>There is no quantum operation that can copy an arbitrary unknown quantum state: <m>\ket{\psi}\ket{0} \not\to \ket{\psi}\ket{\psi}</m> in general. This follows from the linearity of quantum mechanics. The no-cloning theorem is the foundation of quantum cryptography and constrains quantum error correction.</p>
+    </assemblage>
   </section>
+
+  <section xml:id="sec-ch13-gates">
+    <title>Quantum Gates and Circuits</title>
+    <p>Quantum gates are unitary operations on qubits. Important single-qubit gates:</p>
+    <ul>
+      <li><em>Pauli gates:</em> <m>X = \sigma_x</m> (bit flip), <m>Z = \sigma_z</m> (phase flip), <m>Y = \sigma_y</m></li>
+      <li><em>Hadamard gate:</em> <m>H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \amp 1 \\ 1 \amp -1 \end{pmatrix}</m>, creates superposition: <m>H\ket{0} = \frac{\ket{0}+\ket{1}}{\sqrt{2}}</m></li>
+      <li><em>Phase gate:</em> <m>S = \begin{pmatrix} 1 \amp 0 \\ 0 \amp i \end{pmatrix}</m></li>
+      <li><em>T gate:</em> <m>T = \begin{pmatrix} 1 \amp 0 \\ 0 \amp e^{i\pi/4} \end{pmatrix}</m></li>
+    </ul>
+    <p>The key two-qubit gate is the CNOT (controlled-NOT):</p>
+    <me>
+      \text{CNOT}\ket{a,b} = \ket{a, a \oplus b},
+    </me>
+    <p>where <m>\oplus</m> is addition mod 2. The set <m>\{H, T, \text{CNOT}\}</m> is universal: any unitary transformation on <m>n</m> qubits can be approximated to arbitrary precision using these gates.</p>
+  </section>
+
   <section xml:id="sec-ch13-entanglement">
-    <title>Entanglement and Bell States</title>
-    <p>Two qubits can be entangled: <m>\frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)</m>. Measuring one qubit instantaneously determines the other. Entanglement enables quantum advantage for computation and communication.</p>
+    <title>Entanglement as a Resource</title>
+    <p>Entangled states like the Bell states cannot be written as product states:</p>
+    <me>
+      \ket{\Phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}), \quad \ket{\Phi^-} = \frac{1}{\sqrt{2}}(\ket{00} - \ket{11}),
+    </me>
+    <me>
+      \ket{\Psi^+} = \frac{1}{\sqrt{2}}(\ket{01} + \ket{10}), \quad \ket{\Psi^-} = \frac{1}{\sqrt{2}}(\ket{01} - \ket{10}).
+    </me>
+    <p>These form a complete orthonormal basis for two qubits. Entanglement enables:</p>
+    <ul>
+      <li><em>Quantum teleportation:</em> transmitting a qubit state using entanglement and two classical bits</li>
+      <li><em>Superdense coding:</em> transmitting two classical bits using one entangled qubit</li>
+      <li><em>Quantum key distribution (BB84, E91):</em> provably secure communication</li>
+    </ul>
   </section>
-  <section xml:id="sec-ch13-measurement">
-    <title>Measurement and Decoherence</title>
-    <p>Measurement projects qubits onto basis states, destroying superposition. Environmental decoherence limits quantum coherence times—a major engineering challenge.</p>
-  </section>
+
   <section xml:id="sec-ch13-algorithms">
     <title>Quantum Algorithms</title>
-    <p>Deutsch-Jozsa, Grover, and Shor algorithms demonstrate exponential speedups on quantum computers for specific problems. Shor's algorithm factors large numbers efficiently, threatening RSA encryption.</p>
+    <subsection xml:id="subsec-deutsch">
+      <title>Deutsch-Jozsa Algorithm</title>
+      <p>Determines whether a function <m>f:\{0,1\}^n \to \{0,1\}</m> is constant or balanced using a single query, compared to <m>2^{n-1}+1</m> classical queries in the worst case. This provides an exponential speedup for this specific oracle problem.</p>
+    </subsection>
+    <subsection xml:id="subsec-grover">
+      <title>Grover's Search Algorithm</title>
+      <p>Searches an unstructured database of <m>N</m> items in <m>O(\sqrt{N})</m> queries, compared to <m>O(N)</m> classically. The algorithm uses amplitude amplification: repeatedly rotating the state vector toward the target.</p>
+    </subsection>
+    <subsection xml:id="subsec-shor">
+      <title>Shor's Factoring Algorithm</title>
+      <p>Factors an integer <m>N</m> in polynomial time <m>O((\log N)^3)</m>, compared to the best known classical algorithm (general number field sieve) which is sub-exponential. The core idea: use the quantum Fourier transform to find the period of a function, then use classical number theory to extract factors. This threatens RSA cryptography and is a primary motivation for quantum computing research.</p>
+    </subsection>
   </section>
+
+  <section xml:id="sec-ch13-error-correction">
+    <title>Quantum Error Correction</title>
+    <p>Decoherence and gate errors destroy quantum information. Quantum error correction (QEC) protects against these errors by encoding logical qubits into multiple physical qubits.</p>
+    <p>The key challenge: the no-cloning theorem prevents simple redundancy. The solution: encode information in entangled states. The Shor code uses 9 physical qubits per logical qubit; the Steane code uses 7; the surface code uses <m>O(d^2)</m> qubits for distance-<m>d</m> protection.</p>
+
+    <assemblage xml:id="box-threshold">
+      <title>The Threshold Theorem</title>
+      <p>If the physical error rate per gate is below a threshold value <m>p_{\text{th}}</m> (typically <m>\sim 10^{-2}</m> for surface codes), then arbitrarily long quantum computations can be performed reliably using fault-tolerant protocols. This theorem is the theoretical foundation for practical quantum computing.</p>
+    </assemblage>
+  </section>
+
   <section xml:id="sec-ch13-summary">
     <title>Chapter Summary</title>
     <ul>
-      <li>Qubits are two-level quantum systems; <m>N</m> qubits span a <m>2^N</m>-dimensional Hilbert space.</li>
-      <li>Quantum gates are unitary operations; quantum circuits are their compositions.</li>
-      <li>Entanglement enables quantum correlations impossible classically.</li>
-      <li>Measurement collapses superpositions; decoherence destroys quantum advantage if unchecked.</li>
-      <li>Quantum algorithms offer exponential speedups for specific tasks.</li>
+      <li>Qubits are two-level quantum systems that can exist in superpositions of <m>\ket{0}</m> and <m>\ket{1}</m>.</li>
+      <li>The no-cloning theorem forbids copying unknown quantum states.</li>
+      <li>Universal quantum computation requires only <m>\{H, T, \text{CNOT}\}</m> gates.</li>
+      <li>Entanglement enables teleportation, superdense coding, and quantum cryptography.</li>
+      <li>Grover's algorithm provides quadratic speedup for search; Shor's provides exponential speedup for factoring.</li>
+      <li>Quantum error correction encodes logical qubits in entangled states of physical qubits.</li>
+      <li>The threshold theorem guarantees fault-tolerant quantum computing is possible in principle.</li>
     </ul>
   </section>
+
+  <exercises xml:id="exercises-ch13">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch13-bloch"><statement><p>Show that any single-qubit unitary can be written as <m>U = e^{i\alpha}R_{\hat{n}}(\theta)</m> where <m>R_{\hat{n}}(\theta) = e^{-i\theta\hat{n}\cdot\boldsymbol{\sigma}/2}</m> is a rotation on the Bloch sphere.</p></statement></exercise>
+    <exercise xml:id="exer-ch13-bell"><statement><p>Starting from <m>\ket{00}</m>, construct all four Bell states using only Hadamard and CNOT gates.</p></statement></exercise>
+    <exercise xml:id="exer-ch13-teleportation"><statement><p>Work through the quantum teleportation protocol step by step. Show that Alice's measurement result determines which correction Bob must apply.</p></statement></exercise>
+    <exercise xml:id="exer-ch13-no-clone"><statement><p>Prove the no-cloning theorem: show that no unitary <m>U</m> satisfies <m>U\ket{\psi}\ket{0} = \ket{\psi}\ket{\psi}</m> for all <m>\ket{\psi}</m>.</p></statement></exercise>
+    <exercise xml:id="exer-ch13-grover"><statement><p>For Grover's algorithm with <m>N = 4</m>, carry out the algorithm explicitly and show that one iteration finds the marked item with certainty.</p></statement></exercise>
+    <exercise xml:id="exer-ch13-qft"><statement><p>Construct the quantum circuit for the 3-qubit quantum Fourier transform.</p></statement></exercise>
+    <exercise xml:id="exer-ch13-challenge"><statement><p><em>Challenge.</em> Show that the 3-qubit bit-flip code can correct any single bit-flip error. Write the encoding circuit and the error-detection measurements.</p></statement></exercise>
+  </exercises>
 </chapter>
