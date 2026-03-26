@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch11-relativistic-quantum" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Special Relativistic Quantum Mechanics (Dimension 2)</title>
+  <objectives>
+    <ul>
+      <li>Understand why non-relativistic quantum mechanics is incompatible with special relativity.</li>
+      <li>Derive and solve the Klein-Gordon equation for spinless particles.</li>
+      <li>Derive the Dirac equation and understand Dirac spinors.</li>
+      <li>Explain the prediction of antiparticles and the Dirac sea interpretation.</li>
+      <li>Calculate fine structure corrections to hydrogen from the Dirac equation.</li>
+      <li>Recognize why relativistic quantum mechanics leads inevitably to quantum field theory.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>The second dimension of our framework concerns the spacetime symmetry group: Galilean (non-relativistic) vs. Poincaré (special relativistic) vs. diffeomorphism (general relativistic). This chapter takes the first step beyond non-relativistic quantum mechanics by requiring consistency with special relativity. The consequences are profound: the existence of antiparticles, the spin-statistics connection, and ultimately the necessity of quantum field theory.</p>
+    <p>We develop two relativistic wave equations. The Klein-Gordon equation describes spin-0 particles but has interpretational problems (negative probability densities). The Dirac equation, designed specifically for spin-1/2 particles, resolves these problems and predicts the positron—confirmed experimentally by Anderson in 1932, one of the great triumphs of theoretical physics.</p>
+  </introduction>
+
+  <section xml:id="sec-ch11-need-relativity">
+    <title>Why Relativity Matters</title>
+    <p>The non-relativistic Schrödinger equation uses the Galilean energy-momentum relation <m>E = p^2/(2m)</m>. Special relativity replaces this with:</p>
+    <me>
+      E^2 = (pc)^2 + (mc^2)^2.
+    </me>
+    <p>This has several consequences that break the non-relativistic framework:</p>
+    <ul>
+      <li>Energy is no longer bounded below (negative energy solutions exist)</li>
+      <li>Particles can be created and destroyed (pair production when <m>E \geq 2mc^2</m>)</li>
+      <li>The position operator becomes problematic (localization within a Compton wavelength creates particles)</li>
+      <li>Causality requires that the theory be formulated in terms of fields, not particles</li>
+    </ul>
+    <p>These difficulties are not technical—they reflect deep physics. Relativistic quantum mechanics is inherently a many-body, field-theoretic subject.</p>
+  </section>
+
+  <section xml:id="sec-ch11-klein-gordon">
+    <title>The Klein-Gordon Equation</title>
+    <p>Substituting the quantum operators <m>E \to i\hbar\partial_t</m> and <m>\mathbf{p} \to -i\hbar\nabla</m> into the relativistic energy-momentum relation gives:</p>
+
+    <assemblage xml:id="box-klein-gordon">
+      <title>The Klein-Gordon Equation</title>
+      <me>
+        \left(\frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2 + \frac{m^2c^2}{\hbar^2}\right)\phi = 0,
+      </me>
+      <p>or in covariant notation: <m>(\partial_\mu\partial^\mu + m^2c^2/\hbar^2)\phi = 0</m>.</p>
+    </assemblage>
+
+    <p>Plane wave solutions: <m>\phi = Ae^{i(\mathbf{k}\cdot\mathbf{r} - \omega t)}</m> with <m>\hbar^2\omega^2 = \hbar^2c^2k^2 + m^2c^4</m>, yielding <m>E = \pm\sqrt{(pc)^2 + (mc^2)^2}</m>.</p>
+
+    <p>The negative-energy solutions are problematic: <m>\rho = (i\hbar/2mc^2)(\phi^*\partial_t\phi - \phi\partial_t\phi^*)</m> is not positive definite and cannot serve as a probability density. The resolution: <m>\phi</m> is not a probability amplitude but a quantum field, and the negative-energy solutions describe antiparticles.</p>
+  </section>
+
+  <section xml:id="sec-ch11-dirac">
+    <title>The Dirac Equation</title>
+    <p>Dirac sought a relativistic equation that is first-order in both time and space derivatives, ensuring a positive-definite probability density. He required:</p>
+    <me>
+      i\hbar\frac{\partial\psi}{\partial t} = \left(c\boldsymbol{\alpha}\cdot\hat{\mathbf{p}} + \beta mc^2\right)\psi,
+    </me>
+    <p>where <m>\boldsymbol{\alpha} = (\alpha_1, \alpha_2, \alpha_3)</m> and <m>\beta</m> are matrices satisfying:</p>
+    <me>
+      \{\alpha_i, \alpha_j\} = 2\delta_{ij}, \quad \{\alpha_i, \beta\} = 0, \quad \beta^2 = I.
+    </me>
+
+    <p>These anticommutation relations require at least <m>4 \times 4</m> matrices. In the Dirac (standard) representation:</p>
+    <me>
+      \alpha_i = \begin{pmatrix} 0 \amp \sigma_i \\ \sigma_i \amp 0 \end{pmatrix}, \quad \beta = \begin{pmatrix} I \amp 0 \\ 0 \amp -I \end{pmatrix}.
+    </me>
+
+    <assemblage xml:id="box-dirac-eq">
+      <title>The Dirac Equation (Covariant Form)</title>
+      <me>
+        (i\hbar\gamma^\mu\partial_\mu - mc)\psi = 0,
+      </me>
+      <p>where <m>\gamma^0 = \beta</m>, <m>\gamma^i = \beta\alpha_i</m> are the Dirac gamma matrices satisfying <m>\{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}</m>.</p>
+    </assemblage>
+
+    <p>The Dirac wavefunction <m>\psi</m> is a four-component <em>spinor</em>. The four components correspond to: spin up/down × particle/antiparticle.</p>
+  </section>
+
+  <section xml:id="sec-ch11-solutions">
+    <title>Solutions and Physical Interpretation</title>
+    <p>For a free particle with momentum <m>\mathbf{p}</m>, the Dirac equation has four solutions:</p>
+    <ul>
+      <li>Two positive-energy solutions (<m>E = +\sqrt{p^2c^2 + m^2c^4}</m>) with spin up and down: particles</li>
+      <li>Two negative-energy solutions (<m>E = -\sqrt{p^2c^2 + m^2c^4}</m>) with spin up and down: antiparticles</li>
+    </ul>
+
+    <p>The conserved probability current is <m>j^\mu = c\bar{\psi}\gamma^\mu\psi</m>, where <m>\bar{\psi} = \psi^\dagger\gamma^0</m>. Unlike the Klein-Gordon case, the probability density <m>j^0 = c\psi^\dagger\psi</m> is positive definite.</p>
+
+    <example xml:id="ex-ch11-positron">
+      <title>Prediction of the Positron</title>
+      <p>The negative-energy solutions initially seemed problematic. Dirac proposed the "Dirac sea": all negative-energy states are filled (Pauli exclusion prevents decay). A "hole" in the sea—a missing negative-energy electron—behaves as a positive-energy particle with opposite charge: the positron.</p>
+      <p>Anderson discovered the positron in cosmic ray tracks in 1932, confirming Dirac's prediction. The modern interpretation uses quantum field theory: negative-energy solutions are reinterpreted as positive-energy antiparticle states propagating forward in time.</p>
+    </example>
+  </section>
+
+  <section xml:id="sec-ch11-hydrogen">
+    <title>The Dirac Hydrogen Atom</title>
+    <p>The Dirac equation for hydrogen (Coulomb potential <m>V = -e^2/r</m>) can be solved exactly. The energy levels are:</p>
+    <me>
+      E_{nj} = mc^2\left[1 + \left(\frac{\alpha}{n - j - 1/2 + \sqrt{(j+1/2)^2 - \alpha^2}}\right)^2\right]^{-1/2},
+    </me>
+    <p>where <m>\alpha = e^2/(4\pi\epsilon_0\hbar c) \approx 1/137</m> is the fine-structure constant.</p>
+
+    <p>Expanding to order <m>\alpha^4</m>:</p>
+    <me>
+      E_{nj} \approx mc^2 - \frac{mc^2\alpha^2}{2n^2} - \frac{mc^2\alpha^4}{2n^4}\left(\frac{n}{j+1/2} - \frac{3}{4}\right).
+    </me>
+    <p>The first correction is the non-relativistic Bohr energy. The second correction is the fine structure, which splits levels with the same <m>n</m> but different <m>j</m>. This naturally accounts for three effects: relativistic kinetic energy correction, spin-orbit coupling, and the Darwin term.</p>
+  </section>
+
+  <section xml:id="sec-ch11-limitations">
+    <title>Limitations and the Need for QFT</title>
+    <p>Single-particle relativistic quantum mechanics is fundamentally incomplete:</p>
+    <ul>
+      <li>Pair creation cannot be described (requires variable particle number)</li>
+      <li>The Lamb shift (QED radiative correction) is absent in the Dirac equation</li>
+      <li>Massless particles (photons) have no consistent single-particle wavefunction</li>
+      <li>Causality requires anticommutation of fields at spacelike separations</li>
+    </ul>
+    <p>These limitations point inexorably toward quantum field theory—the subject of the next chapter.</p>
+  </section>
+
+  <section xml:id="sec-ch11-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Special relativity requires energy-momentum relation <m>E^2 = p^2c^2 + m^2c^4</m>, leading to negative-energy solutions.</li>
+      <li>The Klein-Gordon equation describes spin-0 particles but lacks positive-definite probability density.</li>
+      <li>The Dirac equation is a first-order equation for spin-1/2 particles using 4-component spinors.</li>
+      <li>Dirac gamma matrices satisfy <m>\{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}</m>.</li>
+      <li>The Dirac equation predicts antiparticles (positron confirmed 1932).</li>
+      <li>The Dirac hydrogen atom gives exact fine-structure corrections.</li>
+      <li>Single-particle relativistic QM is incomplete; quantum field theory is required for consistency.</li>
+    </ul>
+  </section>
+
+  <exercises xml:id="exercises-ch11">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch11-kg-solutions">
+      <statement><p>Find the plane-wave solutions of the Klein-Gordon equation and show that the conserved current <m>j^\mu</m> has a time-component that can be negative.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch11-dirac-anticomm">
+      <statement><p>Verify that the Dirac representation of <m>\alpha_i</m> and <m>\beta</m> satisfies the required anticommutation relations.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch11-helicity">
+      <statement><p>Show that the helicity operator <m>\hat{h} = \hat{\boldsymbol{\sigma}}\cdot\hat{\mathbf{p}}/|\mathbf{p}|</m> commutes with the free-particle Dirac Hamiltonian.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch11-nonrel-limit">
+      <statement><p>Take the non-relativistic limit of the Dirac equation and show it reduces to the Pauli equation (Schrödinger equation with spin).</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch11-fine-structure">
+      <statement><p>Calculate the fine-structure splitting of the hydrogen <m>n = 2</m> level. What is the energy difference between the <m>2P_{3/2}</m> and <m>2P_{1/2}</m> states?</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch11-g-factor">
+      <statement><p>Show that the Dirac equation predicts an electron g-factor of exactly 2. Explain why the experimental value <m>g \approx 2.002</m> requires QED corrections.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch11-challenge">
+      <statement><p><em>Challenge.</em> Derive the Gordon decomposition of the Dirac current <m>j^\mu = \bar{\psi}\gamma^\mu\psi</m> into convection and magnetization parts.</p></statement>
+    </exercise>
+  </exercises>
+</chapter>

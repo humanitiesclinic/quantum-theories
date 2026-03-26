@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch12-qft" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Quantum Field Theory Basics (Dimensions 2, 3 Extended)</title>
+  <objectives>
+    <ul>
+      <li>Understand canonical quantization of the scalar field.</li>
+      <li>Master creation and annihilation operators for quantum fields.</li>
+      <li>Calculate simple scattering amplitudes using Feynman diagrams.</li>
+      <li>Understand the basic structure of quantum electrodynamics (QED).</li>
+      <li>Appreciate renormalization as a physical necessity, not a mathematical trick.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>Quantum field theory (QFT) is the marriage of quantum mechanics, special relativity, and the concept of fields. It emerges inevitably when we combine dimensions 2 (special relativity) and 3 (Fock space) of our framework. In QFT, particles are excitations of underlying quantum fields that pervade all of spacetime. Particle creation and annihilation—impossible in single-particle quantum mechanics—become natural processes.</p>
+    <p>This chapter introduces the basic machinery of QFT: canonical quantization of fields, Fock-space structure, Feynman diagrams, and the beginnings of quantum electrodynamics. We focus on building intuition and connecting QFT to the earlier chapters rather than on technical rigor.</p>
+  </introduction>
+
+  <section xml:id="sec-ch12-classical-fields">
+    <title>From Particles to Fields</title>
+    <p>A classical field <m>\phi(x,t)</m> assigns a value to every point in spacetime. The dynamics follow from a Lagrangian density <m>\mathcal{L}(\phi, \partial_\mu\phi)</m>. For a real scalar field:</p>
+    <me>
+      \mathcal{L} = \frac{1}{2}(\partial_\mu\phi)(\partial^\mu\phi) - \frac{1}{2}m^2\phi^2,
+    </me>
+    <p>where we use natural units <m>\hbar = c = 1</m>. The Euler-Lagrange equation gives the Klein-Gordon equation <m>(\Box + m^2)\phi = 0</m>.</p>
+    <p>The general solution is a superposition of plane waves:</p>
+    <me>
+      \phi(x,t) = \int \frac{d^3k}{(2\pi)^3 2\omega_k}\left(a_{\mathbf{k}} e^{-ik\cdot x} + a_{\mathbf{k}}^* e^{ik\cdot x}\right),
+    </me>
+    <p>where <m>\omega_k = \sqrt{|\mathbf{k}|^2 + m^2}</m>. Each mode is a harmonic oscillator.</p>
+  </section>
+
+  <section xml:id="sec-ch12-canonical">
+    <title>Canonical Quantization</title>
+    <p>Quantize by promoting the amplitudes to operators:</p>
+    <me>
+      a_{\mathbf{k}} \to \hat{a}_{\mathbf{k}}, \quad a_{\mathbf{k}}^* \to \hat{a}_{\mathbf{k}}^\dagger,
+    </me>
+    <p>with commutation relations (for bosons):</p>
+    <me>
+      [\hat{a}_{\mathbf{k}}, \hat{a}_{\mathbf{k}'}^\dagger] = (2\pi)^3 2\omega_k \delta^3(\mathbf{k} - \mathbf{k}').
+    </me>
+
+    <assemblage xml:id="box-qft-field">
+      <title>The Quantum Scalar Field</title>
+      <me>
+        \hat{\phi}(x) = \int \frac{d^3k}{(2\pi)^3 2\omega_k}\left(\hat{a}_{\mathbf{k}} e^{-ik\cdot x} + \hat{a}_{\mathbf{k}}^\dagger e^{ik\cdot x}\right).
+      </me>
+      <p>The vacuum state <m>\ket{0}</m> satisfies <m>\hat{a}_{\mathbf{k}}\ket{0} = 0</m> for all <m>\mathbf{k}</m>. A single-particle state is <m>\hat{a}_{\mathbf{k}}^\dagger\ket{0}</m>. Multi-particle states are built by repeated application of creation operators.</p>
+    </assemblage>
+
+    <p>The Hamiltonian becomes (after normal ordering):</p>
+    <me>
+      \hat{H} = \int \frac{d^3k}{(2\pi)^3 2\omega_k} \omega_k \hat{a}_{\mathbf{k}}^\dagger \hat{a}_{\mathbf{k}}.
+    </me>
+    <p>This is an infinite collection of harmonic oscillators, one for each momentum mode.</p>
+  </section>
+
+  <section xml:id="sec-ch12-feynman">
+    <title>Interactions and Feynman Diagrams</title>
+    <p>Interactions are described by adding terms to the Lagrangian. For <m>\phi^4</m> theory:</p>
+    <me>
+      \mathcal{L}_{\text{int}} = -\frac{\lambda}{4!}\phi^4.
+    </me>
+    <p>The S-matrix connects initial and final states: <m>\hat{S} = T\exp\left(-i\int d^4x\, \mathcal{L}_{\text{int}}\right)</m>.</p>
+
+    <p>Feynman diagrams are a pictorial representation of terms in the perturbative expansion of the S-matrix. Each diagram encodes:</p>
+    <ul>
+      <li><em>External lines:</em> incoming and outgoing particles</li>
+      <li><em>Internal lines (propagators):</em> virtual particles carrying momentum</li>
+      <li><em>Vertices:</em> interaction points, each contributing a factor of <m>-i\lambda</m></li>
+    </ul>
+
+    <p>The Feynman rules translate diagrams into mathematical expressions for scattering amplitudes. The cross section—the experimentally measurable quantity—is computed from <m>|\mathcal{M}|^2</m> where <m>\mathcal{M}</m> is the invariant amplitude.</p>
+  </section>
+
+  <section xml:id="sec-ch12-qed">
+    <title>Quantum Electrodynamics</title>
+    <p>QED describes the interaction of charged fermions (electrons) with the electromagnetic field (photons). The Lagrangian density is:</p>
+    <me>
+      \mathcal{L}_{\text{QED}} = \bar{\psi}(i\gamma^\mu\partial_\mu - m)\psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} - e\bar{\psi}\gamma^\mu\psi A_\mu,
+    </me>
+    <p>where <m>F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu</m> is the electromagnetic field strength tensor.</p>
+
+    <p>The QED vertex couples two fermion lines to one photon line with coupling <m>-ie\gamma^\mu</m>. Key processes calculated in QED include:</p>
+    <ul>
+      <li><em>Electron scattering (Møller scattering):</em> <m>e^-e^- \to e^-e^-</m></li>
+      <li><em>Electron-positron annihilation:</em> <m>e^+e^- \to \gamma\gamma</m></li>
+      <li><em>Compton scattering:</em> <m>e^-\gamma \to e^-\gamma</m></li>
+      <li><em>Anomalous magnetic moment:</em> <m>g - 2</m> of the electron</li>
+    </ul>
+    <p>QED predictions agree with experiment to better than one part in <m>10^{10}</m>, making it the most precisely tested theory in all of physics.</p>
+  </section>
+
+  <section xml:id="sec-ch12-renormalization">
+    <title>Renormalization: A Brief Introduction</title>
+    <p>Loop diagrams in QFT produce divergent integrals. Renormalization systematically absorbs these infinities into redefinitions of physical parameters (mass, charge, coupling constants). The key insight: the "bare" parameters in the Lagrangian are not physical observables. What we measure are the "renormalized" parameters, which are finite.</p>
+    <p>The running of coupling constants—how effective couplings change with energy scale—is a physical prediction of renormalization. In QED, the fine-structure constant <m>\alpha</m> increases at higher energies (from 1/137 at low energy to about 1/128 at the Z boson mass).</p>
+  </section>
+
+  <section xml:id="sec-ch12-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Quantum fields are operator-valued functions of spacetime; particles are their excitations.</li>
+      <li>Canonical quantization promotes field amplitudes to creation/annihilation operators.</li>
+      <li>The Fock space naturally accommodates variable particle number.</li>
+      <li>Feynman diagrams encode perturbative scattering amplitudes.</li>
+      <li>QED describes electron-photon interactions with extraordinary precision.</li>
+      <li>Renormalization absorbs ultraviolet divergences into physical parameters.</li>
+      <li>QFT unifies dimensions 1 (path integrals), 2 (relativity), and 3 (Fock space) of the framework.</li>
+    </ul>
+  </section>
+
+  <exercises xml:id="exercises-ch12">
+    <title>Exercises</title>
+    <exercise xml:id="exer-ch12-commutation">
+      <statement><p>Verify the equal-time commutation relations <m>[\hat{\phi}(x,t), \hat{\pi}(y,t)] = i\delta^3(\mathbf{x}-\mathbf{y})</m> from the mode expansion.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch12-energy">
+      <statement><p>Show that the vacuum energy <m>\bra{0}\hat{H}\ket{0} = \frac{1}{2}\sum_k \omega_k</m> diverges, and explain why normal ordering resolves this.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch12-propagator">
+      <statement><p>Derive the Feynman propagator <m>\Delta_F(x-y) = \bra{0}T\{\hat{\phi}(x)\hat{\phi}(y)\}\ket{0}</m> and show it satisfies <m>(\Box + m^2)\Delta_F = -\delta^4(x-y)</m>.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch12-phi4">
+      <statement><p>Draw all tree-level Feynman diagrams for <m>2 \to 2</m> scattering in <m>\phi^4</m> theory and write the corresponding amplitude.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch12-compton">
+      <statement><p>Draw the lowest-order Feynman diagrams for Compton scattering <m>e^-\gamma \to e^-\gamma</m> in QED.</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch12-coupling">
+      <statement><p>Explain qualitatively why the QED coupling constant <m>\alpha</m> increases with energy, while the QCD coupling <m>\alpha_s</m> decreases (asymptotic freedom).</p></statement>
+    </exercise>
+    <exercise xml:id="exer-ch12-challenge">
+      <statement><p><em>Challenge.</em> Calculate the lowest-order QED correction to the electron magnetic moment and show <m>g = 2 + \alpha/\pi + \cdots</m>.</p></statement>
+    </exercise>
+  </exercises>
+</chapter>
