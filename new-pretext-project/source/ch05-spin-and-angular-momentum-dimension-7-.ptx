@@ -1,25 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter xml:id="ch05-spin-and-angular-momentum-dimension-7-" xmlns:xi="http://www.w3.org/2001/XInclude">
+<chapter xml:id="ch05-spin-and-angular-momentum" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Spin and Angular Momentum (Dimension 7)</title>
-  <introduction>
-    <p>This chapter explores a crucial dimension of the quantum framework. Discusses intrinsic angular momentum (spin), angular momentum algebra, spin-1/2 systems, Pauli matrices, and the Stern-Gerlach experiment.</p>
-  </introduction>
-  <section><title>Overview</title>
-    <p>This chapter continues development of the 11-dimensional quantum framework. Key concepts and applications are developed systematically.</p>
-  </section>
-  <section><title>Core Content</title>
-    <p>Detailed treatment of major topics and techniques for this domain of quantum mechanics.</p>
-  </section>
-  <section><title>Chapter Summary</title>
+  <objectives>
     <ul>
-      <li>Key insight 1</li>
-      <li>Key insight 2</li>
-      <li>Key insight 3</li>
+      <li>Understand orbital angular momentum as the quantum generalization of classical angular momentum.</li>
+      <li>Master the algebra of angular momentum operators and their commutation relations.</li>
+      <li>Grasp the concept of spin as an intrinsic angular momentum with no classical analog.</li>
+      <li>Work with the Pauli matrices and represent spin-1/2 systems.</li>
+      <li>Understand the Stern-Gerlach experiment and sequential measurements of spin.</li>
+      <li>Extend concepts to higher spin particles and composite angular momenta.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>The seventh dimension of our framework concerns the intrinsic angular momentum properties of particles. This is crucial not only for quantum mechanics itself but for understanding identical particles, statistics, and the structure of atoms and nuclei. Angular momentum appears in two forms: orbital angular momentum <m>\LL = \rr \times \pp</m>, which arises from spatial motion, and spin <m>\SS</m>, which is an intrinsic quantum property with no classical analog. Mastering the algebra of angular momentum—the commutation relations, eigenvalues, and matrix representations—is essential for all advanced quantum theory.</p>
+  </introduction>
+  <section xml:id="sec-ch05-orbital">
+    <title>Orbital Angular Momentum</title>
+    <p>In classical mechanics, angular momentum is <m>\LL = \rr \times \pp</m>. In quantum mechanics we make this an operator:</p>
+    <me>
+      \LL = \rr \times \pp,
+    </me>
+    <p>where <m>\rr</m> and <m>\pp</m> are the quantum position and momentum operators. In Cartesian coordinates,</p>
+    <me>
+      L_x = y p_z - z p_y, \quad L_y = z p_x - x p_z, \quad L_z = x p_y - y p_x.
+    </me>
+    <p>These satisfy the fundamental commutation relations,</p>
+    <me>
+      [L_i, L_j] = i\hbar \epsilon_{ijk} L_k.
+    </me>
+    <p>Define the total angular momentum squared,</p>
+    <me>
+      \LL^2 = L_x^2 + L_y^2 + L_z^2.
+    </me>
+    <p>A crucial property: <m>[\LL^2, L_i] = 0</m> for all <m>i</m>. This means <m>\LL^2</m> and any component of <m>\LL</m> (by convention <m>L_z</m>) can be simultaneously diagonalized.</p>
+    <example xml:id="ex-ch05-commutation">
+      <title>Deriving the Angular Momentum Commutation Relations</title>
+      <statement>
+        <p>Verify <m>[L_x, L_y] = i\hbar L_z</m>. We have</p>
+        <me>
+          L_x = y p_z - z p_y, \quad L_y = z p_x - x p_z.
+        </me>
+        <p>Computing the commutator:</p>
+        <me>
+          [L_x, L_y] = [y p_z - z p_y, z p_x - x p_z].
+        </me>
+        <p>Expanding and using <m>[p_i, x_j] = -i\hbar \delta_{ij}</m>, the dominant terms are</p>
+        <me>
+          [y p_z, z p_x] = y[p_z, z]p_x = y(-i\hbar)p_x = -i\hbar yp_x,
+        </me>
+        <me>
+          [-z p_y, x p_z] = -z[p_y, x]p_z = -z(-i\hbar)p_z = i\hbar z p_z.
+        </me>
+        <p>After careful bookkeeping of all terms, the result is <m>[L_x, L_y] = i\hbar L_z</m>.</p>
+      </statement>
+    </example>
+  </section>
+  <section xml:id="sec-ch05-eigenvalues">
+    <title>Eigenvalues and Eigenstates</title>
+    <p>Because <m>[\LL^2, L_z] = 0</m>, we can find simultaneous eigenstates <m>\ket{\ell, m}</m> where</p>
+    <me>
+      \LL^2 \ket{\ell, m} = \hbar^2 \ell(\ell+1) \ket{\ell, m},
+    </me>
+    <me>
+      L_z \ket{\ell, m} = \hbar m \ket{\ell, m}.
+    </me>
+    <p>The quantum numbers satisfy:</p>
+    <ul>
+      <li><m>\ell = 0, 1, 2, 3, \ldots</m> (orbital angular momentum quantum number)</li>
+      <li><m>m = -\ell, -\ell+1, \ldots, \ell-1, \ell</m> (magnetic quantum number)</li>
+    </ul>
+    <p>For each <m>\ell</m> there are <m>2\ell + 1</m> degenerate states differing in <m>m</m>. In spectroscopy, <m>\ell</m> values are labeled <m>s, p, d, f, g, \ldots</m> for <m>\ell = 0, 1, 2, 3, 4, \ldots</m>.</p>
+    <subsection xml:id="sec-ch05-ladder">
+      <title>Ladder Operators</title>
+      <p>The raising and lowering operators</p>
+      <me>
+        L_{\pm} = L_x \pm i L_y
+      </me>
+      <p>satisfy</p>
+      <me>
+        L_+ \ket{\ell, m} = \hbar\sqrt{\ell(\ell+1) - m(m+1)} \, \ket{\ell, m+1},
+      </me>
+      <me>
+        L_- \ket{\ell, m} = \hbar\sqrt{\ell(\ell+1) - m(m-1)} \, \ket{\ell, m-1}.
+      </me>
+      <p>These ladder operators are powerful for constructing eigenstates and computing expectation values without needing explicit wavefunctions.</p>
+    </subsection>
+  </section>
+  <section xml:id="sec-ch05-spherical-harmonics">
+    <title>Spherical Harmonics as Eigenstates</title>
+    <p>In position representation, the eigenstates of <m>\LL^2</m> and <m>L_z</m> are the spherical harmonics <m>Y_\ell^m(\theta, \phi)</m>:</p>
+    <me>
+      \LL^2 Y_\ell^m(\theta, \phi) = \hbar^2 \ell(\ell+1) Y_\ell^m(\theta, \phi),
+    </me>
+    <me>
+      L_z Y_\ell^m(\theta, \phi) = \hbar m Y_\ell^m(\theta, \phi).
+    </me>
+    <p>The spherical harmonics are the angular part of atomic wavefunctions. The first few are:</p>
+    <me>
+      Y_0^0 = \frac{1}{\sqrt{4\pi}}, \quad Y_1^0 = \sqrt{\frac{3}{4\pi}} \cos\theta, \quad Y_1^{\pm 1} = \mp\sqrt{\frac{3}{8\pi}} \sin\theta e^{\pm i\phi}.
+    </me>
+    <p>They are complete orthonormal basis functions on the sphere, crucial for solving many quantum problems.</p>
+  </section>
+  <section xml:id="sec-ch05-spin">
+    <title>Spin: Intrinsic Angular Momentum</title>
+    <p>Spin is a quantum mechanical property with no classical analog. It is intrinsic angular momentum: it arises not from orbital motion but from the internal structure of the particle. Like orbital angular momentum, spin satisfies the same commutation relations,</p>
+    <me>
+      [S_i, S_j] = i\hbar \epsilon_{ijk} S_k.
+    </me>
+    <p>The eigenvalue spectrum is more general than orbital angular momentum. The spin quantum number <m>s</m> can be any non-negative integer or half-integer: <m>s = 0, 1/2, 1, 3/2, 2, \ldots</m>. For a given <m>s</m>, the magnetic quantum number is <m>m_s = -s, -s+1, \ldots, s</m>.</p>
+    <p>The key point: electrons have <m>s = 1/2</m>, photons have <m>s = 1</m>, Higgs bosons have <m>s = 0</m>. The spin of a particle is a fixed intrinsic property determining its statistics and interactions.</p>
+    <example xml:id="ex-ch05-spin-half">
+      <title>Spin-1/2 Systems: The Pauli Matrices</title>
+      <statement>
+        <p>For <m>s = 1/2</m>, the spin operators are</p>
+        <me>
+          S_x = \frac{\hbar}{2}\sigma_x, \quad S_y = \frac{\hbar}{2}\sigma_y, \quad S_z = \frac{\hbar}{2}\sigma_z,
+        </me>
+        <p>where <m>\sigma_i</m> are the Pauli matrices,</p>
+        <me>
+          \sigma_x = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \quad \sigma_y = \begin{pmatrix} 0 &amp; -i \\ i &amp; 0 \end{pmatrix}, \quad \sigma_z = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}.
+        </me>
+        <p>Eigenstates of <m>S_z</m> are</p>
+        <me>
+          \ket{\uparrow} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \text{ with eigenvalue } +\frac{\hbar}{2},
+          \quad
+          \ket{\downarrow} = \begin{pmatrix} 0 \\ 1 \end{pmatrix} \text{ with eigenvalue } -\frac{\hbar}{2}.
+        </me>
+        <p>These are the "spin-up" and "spin-down" states.</p>
+      </statement>
+    </example>
+  </section>
+  <section xml:id="sec-ch05-stern-gerlach">
+    <title>The Stern-Gerlach Experiment</title>
+    <p>The Stern-Gerlach experiment is a sequence of measurements revealing the discrete nature of spin. A beam of particles passes through an inhomogeneous magnetic field oriented along the z-direction. The field exerts a force proportional to <m>S_z</m>, splitting the beam into two: one with <m>S_z = +\hbar/2</m> (spin-up) and one with <m>S_z = -\hbar/2</m> (spin-down). This demonstrates quantization of angular momentum.</p>
+    <p>Measuring <m>S_z</m> is not the end of the story. If the spin-up beam is passed through a Stern-Gerlach apparatus oriented along the x-direction, it again splits into two equal components. This shows that <m>[S_x, S_z] \ne 0</m>: measuring <m>S_z</m> destroys knowledge of <m>S_x</m>. This is the essence of quantum uncertainty in the language of angular momentum.</p>
+    <assemblage xml:id="assembly-stern-gerlach">
+      <title>Key Lesson from Stern-Gerlach</title>
+      <p>Sequential spin measurements with different orientations reveal quantum uncertainty. The outcome of the second measurement depends on the orientation chosen, and the original knowledge of the first measurement is lost. This demonstrates noncommutativity and the irreducible randomness of quantum mechanics.</p>
+    </assemblage>
+  </section>
+  <section xml:id="sec-ch05-composite">
+    <title>Composite Angular Momentum: Addition of Angular Momenta</title>
+    <p>When two angular momenta combine—for instance, orbital and spin angular momentum in an atom, or the spins of two electrons—the resultant obeys the rules of angular momentum addition. If <m>\LL_1</m> and <m>\LL_2</m> are two angular momenta (or <m>\LL</m> and <m>\SS</m>, etc.), their sum <m>\JJ = \LL_1 + \LL_2</m> also satisfies angular momentum commutation relations.</p>
+    <p>The eigenvalues of <m>\JJ^2</m> are <m>\hbar^2 j(j+1)</m> where</p>
+    <me>
+      j = |j_1 - j_2|, |j_1 - j_2| + 1, \ldots, j_1 + j_2 - 1, j_1 + j_2.
+    </me>
+    <p>For the third component, <m>m_j = -j, -j+1, \ldots, j-1, j</m>. This is the foundation of term symbols in atomic spectroscopy and the classification of hadrons in particle physics.</p>
+    <example xml:id="ex-ch05-ls-coupling">
+      <title>Spin-Orbit Coupling: L-S Coupling</title>
+      <statement>
+        <p>In a single-electron atom, the electron has orbital angular momentum <m>\LL</m> and spin <m>\SS</m>. Without coupling, the Hamiltonian is diagonal in eigenstates of <m>\LL^2, L_z, S^2, S_z</m>. When spin-orbit coupling is included,</p>
+        <me>
+          H_{\text{so}} = \frac{\lambda}{2}[\LL \cdot \SS] = \frac{\lambda}{2}[L_+ S_- + L_- S_+ + 2L_z S_z],
+        </me>
+        <p>the good quantum numbers become <m>\LL^2, S^2, \JJ^2, J_z</m> instead, where <m>\JJ = \LL + \SS</m>. The energy splittings separate the degenerate levels into fine structure: the <m>^2P</m> level of hydrogen, for example, splits into <m>^2P_{1/2}</m> and <m>^2P_{3/2}</m>.</p>
+      </statement>
+    </example>
+  </section>
+  <section xml:id="sec-ch05-statistics">
+    <title>Spin and Statistics: Connection to Many-Body Physics</title>
+    <p>There is a deep connection between spin and the behavior of identical particles, formalized by the spin-statistics theorem. Particles with integer spin (photons, <m>\pi</m> mesons) are bosons and obey Bose-Einstein statistics. Particles with half-integer spin (electrons, quarks) are fermions and obey Fermi-Dirac statistics.</p>
+    <p>This connection is crucial for understanding:</p>
+    <ul>
+      <li>The Pauli exclusion principle for electrons</li>
+      <li>Superconductivity and Bose-Einstein condensation</li>
+      <li>The behavior of nuclear matter</li>
+      <li>Quantum field theory itself</li>
+    </ul>
+    <p>The spin-statistics theorem is one of the most profound results connecting relativity, quantum mechanics, and many-body physics.</p>
+  </section>
+  <section xml:id="sec-ch05-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Orbital angular momentum <m>\LL = \rr \times \pp</m> satisfies the commutation relation <m>[L_i, L_j] = i\hbar\epsilon_{ijk}L_k</m>.</li>
+      <li>Eigenvalues of <m>\LL^2</m> are <m>\hbar^2\ell(\ell+1)</m> and of <m>L_z</m> are <m>\hbar m</m> with <m>\ell \in \{0,1,2,\ldots\}</m> and <m>m \in \{-\ell, \ldots, \ell\}</m>.</li>
+      <li>Spherical harmonics <m>Y_\ell^m</m> are the position-space eigenstates of <m>\LL^2</m> and <m>L_z</m>.</li>
+      <li>Spin <m>\SS</m> is intrinsic angular momentum with the same commutation algebra but possibly half-integer quantum numbers.</li>
+      <li>Electrons have spin-1/2, represented by Pauli matrices and the states <m>\ket{\uparrow}</m> and <m>\ket{\downarrow}</m>.</li>
+      <li>The Stern-Gerlach experiment demonstrates quantization and noncommutativity of angular momentum measurements.</li>
+      <li>Addition of angular momenta <m>\LL_1 + \LL_2</m> produces eigenvalues <m>\hbar^2 j(j+1)</m> with <m>j</m> ranging over allowed values.</li>
+      <li>Spin and statistics are connected: integer spin implies bosons, half-integer spin implies fermions.</li>
     </ul>
   </section>
   <exercises>
     <title>Exercises</title>
-    <exercise><statement><p>Exercise 1</p></statement></exercise>
-    <exercise><statement><p>Exercise 2</p></statement></exercise>
+    <exercise xml:id="exer-ch05-pauli">
+      <statement>
+        <p>Verify the commutation relations of the Pauli matrices: <m>[\sigma_i, \sigma_j] = 2i\epsilon_{ijk}\sigma_k</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch05-eigenspinor">
+      <statement>
+        <p>Find the eigenstates and eigenvalues of <m>S_x</m> for a spin-1/2 particle in terms of <m>\ket{\uparrow}</m> and <m>\ket{\downarrow}</m>.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch05-ladder">
+      <statement>
+        <p>Using the ladder operators <m>L_\pm</m>, derive the action on <m>\ket{\ell, m}</m> and show that the eigenvalues of <m>\LL^2</m> must be <m>\hbar^2 \ell(\ell+1)</m> for <m>\ell</m> an integer or half-integer.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch05-sg-sequence">
+      <statement>
+        <p>A beam of spin-1/2 particles is prepared in the state <m>\ket{\uparrow}_z</m>. It passes through a Stern-Gerlach apparatus oriented at angle <m>\theta</m> from the z-axis. What fraction emerges in the spin-up state?</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch05-addition">
+      <statement>
+        <p>Two particles with <m>j_1 = 1</m> and <m>j_2 = 1/2</m> are combined. What are the possible total angular momentum quantum numbers <m>j</m> for the composite system?</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch05-advance">
+      <statement>
+        <p><em>Challenge.</em> The total angular momentum of two electrons is <m>\JJ = \SS_1 + \SS_2</m>. Construct the singlet state <m>\ket{S=0, M_S=0}</m> and the triplet states <m>\ket{S=1, M_S=0, \pm 1}</m> in terms of the individual spin states.</p>
+      </statement>
+    </exercise>
   </exercises>
 </chapter>
