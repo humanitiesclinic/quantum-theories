@@ -4,32 +4,77 @@
 <!-- This is where you can define macros and other book-wide -->
 <!-- settings. -->
 <docinfo xmlns:xi="http://www.w3.org/2001/XInclude">
-  <!-- A unique name for the book in a catalog; for example, see https://pretextbook.org/catalog.html and https://runestone.academy/ns/books/index. It contains a simple lowercase string with no dashes or other special characters. See https://pretextbook.org/doc/guide/html/sec-publishing-to-runestone-academy.html for more information. -->
-  <document-id>changeme</document-id>
-  <!-- A brief description for the book in a catalog; see the links above. The @shelf is used only when publishing to Runestone; see https://runestone.academy/ns/books/index for a list of valid values. You must copy these @shelf names exactly, including capitalization. -->
-  <blurb shelf="AP Computer Science"> A simple string (no markup is allowed) to describe your book. </blurb>
+  <!-- Unique document identifier -->
+  <document-id>quantum-theories-missing-big-picture</document-id>
+  
+  <!-- Catalog blurb -->
+  <blurb shelf="Physics">Quantum theory books abound, but readers are left in a fragmented maze. This course provides a unified framework by emphasizing quantum theories' goal: predict time evolution of states and observables. Systematically explores 11 dimensions: formalism, relativity, particle number, picture, state purity, system openness, spin, mass, approximation method, classical limit, and solution technique.</blurb>
 
-
-  <!-- The next three lines are likely for mature projects only: -->
-
-  <!-- <brandlogo url="" source="images/cover.png"/> -->
+  <!-- Optional brand logo and covers -->
+  <!-- <brandlogo url="https://quantum-theories.org" source="images/logo.png"/> -->
   <!-- <covers front="images/front.pdf" back="images/back.pdf"/> -->
-  <!-- <document-id>unique-book-id</document-id> -->
 
-  <!-- macros for defining latex math shortcuts. It is good practice -->
-  <!-- to define these semantically, so that the macro relates to what-->
-  <!-- it defines. -->
-  <macros> \newcommand{\N}{\mathbb N} \newcommand{\Z}{\mathbb Z} \newcommand{\Q}{\mathbb Q} \newcommand{\R}{\mathbb R} </macros>
+  <!-- Publisher information (optional) -->
+  <publishing>
+    <source>
+      <directories external=".." generated="generated-assets" />
+    </source>
+  </publishing>
 
-  <!-- If you put any latex-image elements you can include preambles -->
-  <!-- for those in the next element. -->
-  <latex-image-preamble> \usepackage{tikz, pgfplots} \usetikzlibrary{positioning,matrix,arrows} \usetikzlibrary{shapes,decorations,shadows,fadings,patterns} \usetikzlibrary{decorations.markings} </latex-image-preamble>
+  <!-- Macros for quantum notation and mathematics -->
+  <macros>
+    % Standard number sets
+    \newcommand{\N}{\mathbb N}
+    \newcommand{\Z}{\mathbb Z}
+    \newcommand{\Q}{\mathbb Q}
+    \newcommand{\R}{\mathbb R}
+    \newcommand{\C}{\mathbb C}
+    
+    % Quantum mechanics notation
+    \newcommand{\ket}[1]{\left|#1\right\rangle}
+    \newcommand{\bra}[1]{\left\langle #1\right|}
+    \newcommand{\braket}[2]{\left\langle #1|#2\right\rangle}
+    \newcommand{\ketbra}[2]{\left|#1\right\rangle\left\langle #2\right|}
+    \newcommand{\expect}[1]{\left\langle #1 \right\rangle}
+    \newcommand{\expval}[3]{\left\langle #1 | #2 | #3 \right\rangle}
+    \newcommand{\comm}[2]{\left[#1, #2\right]}
+    \newcommand{\anticomm}[2]{\left\{#1, #2\right\}}
+    \newcommand{\norm}[1]{\left\|#1\right\|}
+    
+    % Common operators
+    \newcommand{\HH}{\hat{H}}
+    \newcommand{\pp}{\hat{\mathbf{p}}}
+    \newcommand{\rr}{\hat{\mathbf{r}}}
+    \newcommand{\AA}{\hat{A}}
+    \newcommand{\BB}{\hat{B}}
+    \newcommand{\LL}{\hat{\mathbf{L}}}
+    \newcommand{\SS}{\hat{\mathbf{S}}}
+    \newcommand{\II}{\hat{I}}
+    \newcommand{\PP}{\hat{P}}
+    \newcommand{\UU}{\hat{U}}
+    
+    % Other symbols
+    \newcommand{\hbar}{\hbar}
+    \newcommand{\del}{\nabla}
+    \newcommand{\del2}{\nabla^2}
+    \newcommand{\Hilbert}{\mathcal{H}}
+    \newcommand{\Fock}{\mathcal{F}}
+  </macros>
 
-  <!-- It is possible to rename elements: -->
-  <!-- <rename element="assemblage" xml:lang="en-US">Summary</rename> -->
+  <!-- Preamble for TikZ and other graphics packages -->
+  <latex-image-preamble>
+    \usepackage{tikz, pgfplots, amssymb, amsmath}
+    \usetikzlibrary{positioning, matrix, arrows, shapes, decorations, shadows, fadings, patterns}
+    \usetikzlibrary{decorations.markings}
+    \pgfplotsset{compat=1.18}
+  </latex-image-preamble>
 
-  <!-- Specify the default type of cross reference: -->
+  <!-- Custom element names (optional) -->
+  <rename element="objectives" xml:lang="en-US">Learning Goals</rename>
+  <rename element="outcomes" xml:lang="en-US">Learning Outcomes</rename>
+  <rename element="assemblage" xml:lang="en-US">Key Concept</rename>
+
+  <!-- Default cross-reference format -->
   <!-- <cross-references text="type-global" /> -->
-
 
 </docinfo>

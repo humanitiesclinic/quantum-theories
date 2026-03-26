@@ -1,32 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This frontmatter division will contain all content before the -->
-<!-- first chapter. Fill in and comment/uncomment to see how this -->
-<!-- works. -->
+<!-- Frontmatter for Quantum Theories: The Missing Big Picture -->
 
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
+  <!-- Title page with authors and date -->
   <titlepage>
     <author>
-      <personname>You</personname>
-      <department>Your department</department>
-      <institution>Your institution</institution>
+      <personname>The Unified Framework Collective</personname>
     </author>
-    <date>
-      <today />
-    </date>
+    <date>2024</date>
   </titlepage>
 
+  <!-- Dedication page -->
+  <dedication>
+    <p>To all students who found themselves lost in the fragmented maze of quantum mechanics, and to those who seek the unifying thread that connects all quantum theories.</p>
+  </dedication>
+
+  <!-- Epigraph page -->
+  <epigraph>
+    <quote>The underlying physical laws necessary for the mathematical theory of a large part of physics and the whole of chemistry are thus completely known, and the difficulty is only that the exact application of these laws leads to equations much too complicated to be soluble.</quote>
+    <attribution>Paul Dirac, 1929</attribution>
+  </epigraph>
+
+  <!-- Preface -->
+  <preface xml:id="preface">
+    <title>Preface</title>
+    
+    <p>Quantum mechanics is often presented as a collection of disconnected topics: the Schrödinger equation in introductory courses, the Dirac equation in advanced quantum mechanics, path integrals in field theory, density matrices in statistical mechanics, and quantum algorithms in computer science. Students and researchers alike can feel lost in this fragmented landscape, struggling to see the connections between these various formulations.</p>
+
+    <p>This textbook offers a different approach. We present quantum theory through a unified framework based on a simple observation: <em>all quantum theories fundamentally describe the time evolution of states and observables</em>. Once this principle is recognized, the apparent complexity dissolves into systematic variations along eleven key dimensions.</p>
+
+    <p>These eleven dimensions span:
+      <ol>
+        <li><em>Formalism</em> (operator vs. path integral)</li>
+        <li><em>Relativity</em> (non-relativistic, special, general)</li>
+        <li><em>Particle number</em> (single, fixed-<m>N</m>, Fock space)</li>
+        <li><em>Picture</em> (Schrödinger, Heisenberg, interaction)</li>
+        <li><em>State purity</em> (pure vs. mixed)</li>
+        <li><em>System</em> (closed vs. open)</li>
+        <li><em>Spin</em> (spinless, <m>1/2</m>, arbitrary)</li>
+        <li><em>Mass</em> (massive vs. massless)</li>
+        <li><em>Approximation</em> (exact, perturbative, linearized)</li>
+        <li><em>Classical limit</em> (quantum, semiclassical, classical)</li>
+        <li><em>Solutions</em> (analytical, approximate, numerical)</li>
+      </ol>
+    </p>
+
+    <p>By systematically exploring these dimensions, starting from the simplest case (the non-relativistic Schrödinger equation) and building up to the most complex (quantum field theory and quantum gravity), we provide a roadmap through the quantum landscape.</p>
+
+    <section>
+      <title>Who This Book Is For</title>
+      <p>This textbook is designed for:</p>
+      <ul>
+        <li><em>Advanced undergraduates</em> who have completed introductory quantum mechanics and wish to understand the broader landscape</li>
+        <li><em>Graduate students</em> beginning research in quantum physics, chemistry, or related fields</li>
+        <li><em>Researchers</em> seeking a unified perspective on quantum theory</li>
+        <li><em>Self-learners</em> with strong mathematical backgrounds who want to master quantum theory systematically</li>
+      </ul>
+    </section>
+
+    <section>
+      <title>Prerequisites</title>
+      <p>We assume readers have:</p>
+      <ul>
+        <li>Solid understanding of linear algebra (vector spaces, matrices, eigenvalues)</li>
+        <li>Multivariable calculus and differential equations</li>
+        <li>Basic exposure to quantum mechanics (at least the Schrödinger equation)</li>
+        <li>Some familiarity with classical mechanics and electromagnetism</li>
+      </ul>
+    </section>
+
+    <section>
+      <title>How to Use This Book</title>
+      <p>The book is organized into six parts:</p>
+      
+      <p><em>Part I: Foundations</em> establishes the basic framework and introduces the simplest quantum system.</p>
+      
+      <p><em>Part II: Dimension Variations</em> explores how changing each dimension transforms the theory.</p>
+      
+      <p><em>Part III: Approximation Methods</em> provides tools for solving real problems.</p>
+      
+      <p><em>Part IV: Advanced Topics</em> covers relativistic quantum mechanics and field theory.</p>
+      
+      <p><em>Part V: Solution Techniques</em> focuses on practical computational methods.</p>
+      
+      <p><em>Part VI: Unification and Applications</em> synthesizes everything into the complete framework.</p>
+
+      <p>Each chapter includes:</p>
+      <ul>
+        <li><em>Learning Goals</em> stating what you should understand</li>
+        <li><em>Key Concept boxes</em> highlighting central ideas</li>
+        <li><em>Worked examples</em> demonstrating applications</li>
+        <li><em>Exercises</em> ranging from straightforward to challenging</li>
+        <li><em>Chapter Summaries</em> for review and study</li>
+      </ul>
+
+      <p>You may not need to read every chapter in order. If you have already studied the non-relativistic Schrödinger equation, you might skip Chapter 2 and focus on the variations in later chapters. However, Chapters 1 and 3 (on the framework and mathematics) provide essential context throughout.</p>
+    </section>
+
+    <section>
+      <title>Pedagogical Features</title>
+      <p><strong>Concept Boxes:</strong> These highlight key definitions, theorems, and unifying ideas. They appear set off from the text and are designed for easy reference.</p>
+      
+      <p><strong>Examples:</strong> Worked examples show how to apply concepts to concrete problems, with full mathematical steps.</p>
+      
+      <p><strong>Remarks:</strong> Additional commentary provides context, historical notes, or connections to other fields.</p>
+      
+      <p><strong>Exercises:</strong> Problems range from straightforward (designed to build confidence) to challenging (for advanced students or independent study). Solutions to selected exercises are provided in an appendix.</p>
+      
+      <p><strong>Summaries:</strong> Each chapter ends with a bullet-point summary of main ideas, useful for review.</p>
+    </section>
+
+    <section>
+      <title>Acknowledgments</title>
+      <p>We are grateful to the many students whose questions inspired this unified approach, to our colleagues who provided valuable feedback on drafts, and to the quantum physics community for developing the deep understanding we attempt to synthesize here.</p>
+
+      <p>This project emerges from the recognition that quantum mechanics is fundamentally elegant and unified—not fragmented—when viewed through the lens of time evolution. We hope this textbook helps readers discover that elegance.</p>
+
+      <p><em>The Authors</em><br/>
+      January 2024</p>
+    </section>
+  </preface>
+
+  <!-- Colophon with copyright and publishing details -->
   <colophon>
+    <p><em>Quantum Theories: The Missing Big Picture</em><br/>
+    A Unified Framework for Understanding Quantum Evolution</p>
+
+    <p>Copyright <copyright/> 2024 The Unified Framework Collective</p>
+
+    <p>This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <url href="http://creativecommons.org/licenses/by-sa/4.0/">creativecommons.org/licenses/by-sa/4.0</url></p>
+
+    <p><strong>First Edition</strong></p>
+
+    <p>ISBN (when assigned): 978-0-XXXXX-XXX-X (paperback)<br/>
+    ISBN (when assigned): 978-0-XXXXX-XXX-X (ebook)</p>
+
+    <p><strong>Website:</strong> <url href="https://quantum-theories.org/">quantum-theories.org</url><br/>
+    <strong>Email:</strong> contact@quantum-theories.org</p>
+
+    <p><strong>Typeset in</strong> PreTeXt<br/>
+    <strong>Compiled:</strong> <today/></p>
 
     <website>
-      <url href="https://pretextbook.org">My Website</url>
+      <url href="https://pretextbook.org">Created with PreTeXt</url>
     </website>
-
-    <copyright>
-      <year>2020<ndash />2023</year>
-      <holder>You</holder>
-      <shortlicense> This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. To view a copy of this license, visit <url href="http://creativecommons.org/licenses/by-sa/4.0/" visual="creativecommons.org/licenses/by-sa/4.0"> CreativeCommons.org</url>
-      </shortlicense>
-    </copyright>
   </colophon>
+
 </frontmatter>
 

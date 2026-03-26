@@ -1,19 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <!-- we first include a file which contains the docinfo element: -->
+  <!-- Include document-wide metadata and macros -->
   <xi:include href="./docinfo.ptx" />
 
-  <book xml:id="my-great-book">
-    <title>My Great Book</title>
-    <subtitle>An example to get you started</subtitle>
+  <book xml:id="quantum-theories-complete">
+    <title>Quantum Theories: The Missing Big Picture</title>
+    <subtitle>A Unified Framework for Understanding Quantum Evolution</subtitle>
 
     <!-- Include frontmatter -->
     <xi:include href="./frontmatter.ptx" />
 
-    <!-- Include chapters -->
-    <xi:include href="./ch-chapter-title.ptx" />
+    <!-- ============================================================ -->
+    <!-- PART I: FOUNDATIONS -->
+    <!-- ============================================================ -->
+    <part xml:id="part-foundations">
+      <title>Foundations: The Schrödinger Equation as Bedrock</title>
+      <introduction>
+        <p>This part establishes the foundation of quantum mechanics. We introduce the unifying 11-dimensional framework, explore the simplest quantum system, and develop the mathematical machinery that underlies all of quantum theory. By the end of Part I, you will understand the central organizing principle: all quantum theories describe time evolution of states and observables.</p>
+      </introduction>
+      
+      <xi:include href="./ch01-universal-language.ptx" />
+      <xi:include href="./ch02-schrodinger-equation.ptx" />
+      <xi:include href="./ch03-mathematical-foundations.ptx" />
+      
+      <conclusion>
+        <p>Part I has built the conceptual and mathematical framework. We now turn to systematic variations along the 11 dimensions, beginning with different ways to represent the same physics.</p>
+      </conclusion>
+    </part>
 
+    <!-- ============================================================ -->
+    <!-- PART II: DIMENSION VARIATIONS -->
+    <!-- ============================================================ -->
+    <part xml:id="part-dimensions">
+      <title>Dimension Variations: Building the Quantum Landscape</title>
+      <introduction>
+        <p>Now that we have established the foundations, we systematically explore how changing each of the 11 dimensions transforms quantum mechanics. These chapters show that what appears to be many different theories are actually the same theory viewed from different angles.</p>
+      </introduction>
+      
+      <xi:include href="./ch04-pictures.ptx" />
+      <xi:include href="./ch05-spin-angular-momentum.ptx" />
+      <xi:include href="./ch06-identical-particles.ptx" />
+      <xi:include href="./ch07-perturbation-theory.ptx" />
+      
+      <conclusion>
+        <p>With these dimension variations established, we are ready to tackle new dimensions: what happens when states are mixed, systems are open, and we need new mathematical frameworks?</p>
+      </conclusion>
+    </part>
+
+    <!-- ============================================================ -->
+    <!-- PART III: EXTENDED FORMALISM -->
+    <!-- ============================================================ -->
+    <part xml:id="part-extended">
+      <title>Extended Formalism: Beyond Pure States and Closed Systems</title>
+      <introduction>
+        <p>The foundations and dimension variations assumed isolated systems with complete knowledge (pure states). Real quantum systems are neither isolated nor fully observable. This part extends the formalism to density matrices, open systems, and environmental decoherence. We also develop path integrals—an alternative formalism revealing different aspects of quantum mechanics.</p>
+      </introduction>
+      
+      <xi:include href="./ch08-density-matrices.ptx" />
+      <xi:include href="./ch09-open-systems.ptx" />
+      <xi:include href="./ch10-path-integrals.ptx" />
+      
+      <conclusion>
+        <p>With extended formalisms in place, we move to relativistic quantum mechanics, where special and general relativity fundamentally transform the theory.</p>
+      </conclusion>
+    </part>
+
+    <!-- ============================================================ -->
+    <!-- PART IV: RELATIVISTIC AND FIELD THEORY -->
+    <!-- ============================================================ -->
+    <part xml:id="part-relativistic">
+      <title>Relativistic and Field Theory Quantum Mechanics</title>
+      <introduction>
+        <p>When we require Lorentz invariance, quantum mechanics transforms dramatically. Particles must be created and annihilated, the Hilbert space becomes infinite-dimensional, and the theory necessarily becomes a field theory. This part covers special relativistic quantum mechanics, the Dirac equation, and foundational concepts of quantum field theory.</p>
+      </introduction>
+      
+      <xi:include href="./ch11-relativistic-quantum.ptx" />
+      <xi:include href="./ch12-quantum-field-theory.ptx" />
+      <xi:include href="./ch13-quantum-information.ptx" />
+      
+      <conclusion>
+        <p>With quantum field theory as a foundation, we turn to practical solution methods: both analytic approximations and numerical techniques.</p>
+      </conclusion>
+    </part>
+
+    <!-- ============================================================ -->
+    <!-- PART V: SOLUTION TECHNIQUES -->
+    <!-- ============================================================ -->
+    <part xml:id="part-methods">
+      <title>Solution Techniques: From WKB to Numerics</title>
+      <introduction>
+        <p>Knowing the theory is one thing; solving actual problems is another. This part covers practical methods: WKB approximation and semiclassical methods for understanding tunneling and barrier penetration, numerical approaches including variational methods and tensor networks, and special insights from classical limit behavior.</p>
+      </introduction>
+      
+      <xi:include href="./ch14-semiclassical.ptx" />
+      <xi:include href="./ch15-numerical-methods.ptx" />
+      <xi:include href="./ch16-classical-limit.ptx" />
+      
+      <conclusion>
+        <p>With all techniques in hand, we synthesize the entire 11-dimensional framework into a unified picture and explore applications across physics and chemistry.</p>
+      </conclusion>
+    </part>
+
+    <!-- ============================================================ -->
+    <!-- PART VI: UNIFICATION AND APPLICATIONS -->
+    <!-- ============================================================ -->
+    <part xml:id="part-unification">
+      <title>Unification and Applications: The Complete Framework</title>
+      <introduction>
+        <p>In this final part, we step back to see the complete picture. Every quantum theory—from the hydrogen atom to quantum field theory to quantum information—is a specific point in our 11-dimensional space. We show how this framework unifies disparate phenomena and conclude with applications across domains: chemistry, condensed matter, particle physics, and quantum technology.</p>
+      </introduction>
+      
+      <xi:include href="./ch17-complete-framework.ptx" />
+      <xi:include href="./ch18-applications.ptx" />
+      
+      <conclusion>
+        <p>We have completed our journey through quantum theory. What began as fragmented seems now unified. This is the power of the 11-dimensional framework: it shows that quantum mechanics, for all its apparent complexity, is fundamentally elegant and coherent.</p>
+      </conclusion>
+    </part>
 
     <!-- Include backmatter -->
     <xi:include href="./backmatter.ptx" />
