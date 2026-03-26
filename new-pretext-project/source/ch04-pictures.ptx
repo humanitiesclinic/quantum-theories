@@ -1,30 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter xml:id="ch04-pictures" xmlns:xi="http://www.w3.org/2001/XInclude">
   <title>Pictures of Quantum Mechanics (Dimension 4)</title>
-  <introduction>
-    <p>One of the most elegant features of quantum mechanics is that time dependence can be placed in different locations: in the states, in the operators, or split between both. The Schrödinger, Heisenberg, and interaction pictures are all mathematically equivalent, merely different perspectives on the same physics. Understanding all three and how to transform between them is essential for mastering quantum mechanics.</p>
-  </introduction>
-  <section><title>The Schrödinger Picture</title>
-    <p>In the Schrödinger picture, states evolve while operators remain constant: <m>\ket{\psi_S(t)} = U(t)\ket{\psi_S(0)}</m>. The Schrödinger equation governs state evolution: <m>i\hbar d\ket{\psi_S}/dt = \HH_S\ket{\psi_S}</m>.</p>
-  </section>
-  <section><title>The Heisenberg Picture</title>
-    <p>In the Heisenberg picture, operators evolve while states are constant: <m>\AA_H(t) = U^\dagger(t)\AA_S U(t)</m>. The Heisenberg equation of motion governs operator evolution: <m>d\AA_H/dt = (i/\hbar)[\HH, \AA_H]</m>.</p>
-  </section>
-  <section><title>The Interaction Picture</title>
-    <p>For time-dependent perturbations, the interaction picture splits the Hamiltonian: <m>\HH = \HH_0 + \HH_{\text{int}}(t)</m>. Both states and operators evolve: <m>i\hbar d\ket{\psi_I}/dt = \HH_I(t)\ket{\psi_I}</m>. This picture is natural for perturbation theory.</p>
-  </section>
-  <section><title>Chapter Summary</title>
+  <objectives>
     <ul>
-      <li>Three pictures are mathematically equivalent, differ only in bookkeeping of time dependence</li>
-      <li>Schrödinger: States evolve, operators static</li>
-      <li>Heisenberg: Operators evolve, states static</li>
-      <li>Interaction: Both evolve, useful for perturbation theory</li>
-      <li>Expectation values identical in all pictures</li>
+      <li>Understand the Schrödinger, Heisenberg, and interaction pictures as equivalent representations of the same dynamics.</li>
+      <li>Derive how states and operators transform between pictures.</li>
+      <li>Use the Heisenberg equation of motion to connect quantum and classical dynamics.</li>
+      <li>Recognize when the interaction picture is the natural language for perturbation theory.</li>
+      <li>Apply picture changes to concrete systems such as two-level systems and the harmonic oscillator.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>The fourth dimension of our framework concerns where we choose to place time dependence. This may look at first like a matter of notation, but it is far more important than bookkeeping. Different pictures foreground different structures. The Schrödinger picture emphasizes preparation and evolution of states, the Heisenberg picture emphasizes motion of observables, and the interaction picture isolates the part of the dynamics that is genuinely difficult. All three are physically equivalent, but they encourage different ways of thinking and different computational strategies.</p>
+    <p>This flexibility is one of the hallmarks of quantum theory. A theory whose content depended on a particular picture would be deeply suspect. Instead, the freedom to shift time dependence by unitary transformations shows that physical predictions live in expectation values, probabilities, and correlations, not in the arbitrary choice of representation. In this chapter we develop the three standard pictures in detail and place them in the wider logic of the eleven-dimensional map.</p>
+  </introduction>
+  <section xml:id="sec-ch04-schrodinger">
+    <title>The Schrödinger Picture</title>
+    <p>In the Schrödinger picture, states evolve while operators associated with observables are fixed unless they possess explicit time dependence. This is the picture introduced first in most courses because it tracks directly with the language of state preparation. If the system begins in a state <m>\ket{\psi_S(0)}</m>, then at time <m>t</m> the state is</p>
+    <me>
+      \ket{\psi_S(t)} = U(t,t_0)\ket{\psi_S(t_0)}.
+    </me>
+    <p>For a time-independent Hamiltonian the evolution operator is simply</p>
+    <me>
+      U(t,t_0)=e^{-i\HH (t-t_0)/\hbar}.
+    </me>
+    <p>The equation of motion for the state is the time-dependent Schrödinger equation,</p>
+    <me>
+      i\hbar \frac{d}{dt}\ket{\psi_S(t)}=\HH\ket{\psi_S(t)}.
+    </me>
+    <p>Expectation values are computed in the familiar way,</p>
+    <me>
+      \langle A\rangle_t=\bra{\psi_S(t)}\AA_S\ket{\psi_S(t)}.
+    </me>
+    <p>This picture is natural when discussing wave packets, collapse postulates, or state preparation protocols. It is especially effective for isolated systems with simple spectra, because energy eigenstates evolve by phase multiplication alone.</p>
+    <remark>
+      <p>The Schrödinger picture aligns most naturally with the language of kets, superpositions, and probability amplitudes. For many students it therefore feels the most "physical," but that intuition is pedagogical rather than fundamental.</p>
+    </remark>
+  </section>
+  <section xml:id="sec-ch04-heisenberg">
+    <title>The Heisenberg Picture</title>
+    <p>The Heisenberg picture begins from the observation that the same expectation values can be computed if we transfer the time dependence from the state to the operators. Define</p>
+    <me>
+      \ket{\psi_H} = U^{\dagger}(t,t_0)\ket{\psi_S(t)}=\ket{\psi_S(t_0)}.
+    </me>
+    <p>The Heisenberg state is constant; it is just the Schrödinger state frozen at the reference time. Operators now evolve according to</p>
+    <me>
+      \AA_H(t)=U^{\dagger}(t,t_0)\AA_S U(t,t_0).
+    </me>
+    <p>Differentiate this expression and use <m>i\hbar \frac{dU}{dt}=\HH U</m> together with its adjoint. For operators with no explicit time dependence one finds</p>
+    <me>
+      i\hbar \frac{d\AA_H}{dt}=[\AA_H,\HH].
+    </me>
+    <p>If <m>\AA</m> has explicit time dependence, then the full equation becomes</p>
+    <me>
+      i\hbar \frac{d\AA_H}{dt}=[\AA_H,\HH]+i\hbar \left(\frac{\partial \AA}{\partial t}\right)_H.
+    </me>
+    <p>This is the Heisenberg equation of motion. Its formal resemblance to Hamilton's equations is not accidental. In the classical limit, commutators become <m>i\hbar</m> times Poisson brackets, so the Heisenberg picture offers the cleanest route to the correspondence principle.</p>
+    <example xml:id="ex-ch04-free-particle">
+      <title>Free Particle Motion</title>
+      <statement>
+        <p>Consider a free particle with Hamiltonian <m>\HH=\pp^2/(2m)</m>. The Heisenberg equations are</p>
+        <me>
+          \frac{d\rr_H}{dt}=\frac{i}{\hbar}[\HH,\rr_H]=\frac{\pp_H}{m},
+        </me>
+        <me>
+          \frac{d\pp_H}{dt}=\frac{i}{\hbar}[\HH,\pp_H]=0.
+        </me>
+        <p>Integrating gives</p>
+        <me>
+          \pp_H(t)=\pp_H(0), \qquad \rr_H(t)=\rr_H(0)+\frac{\pp_H(0)}{m}t.
+        </me>
+        <p>The form is identical to the classical solution. What remains quantum is not the structure of the equations but the noncommutativity of the initial operators.</p>
+      </statement>
+    </example>
+    <subsection xml:id="sec-ch04-conserved">
+      <title>Conserved Quantities</title>
+      <p>An observable is conserved when its Heisenberg operator is constant in time. If <m>\partial \AA/\partial t=0</m>, then the conservation condition is simply</p>
+      <me>
+        [\AA,\HH]=0.
+      </me>
+      <p>This is the quantum analog of a symmetry-generated constant of motion. The Heisenberg picture therefore makes symmetry arguments especially transparent. Angular momentum conservation, particle-number conservation in nonrelativistic theories, and charge conservation in field theory are all naturally expressed in this language.</p>
+    </subsection>
+  </section>
+  <section xml:id="sec-ch04-interaction">
+    <title>The Interaction Picture</title>
+    <p>The interaction picture is designed for Hamiltonians of the form</p>
+    <me>
+      \HH = \HH_0 + \HH_{\text{int}}(t),
+    </me>
+    <p>where <m>\HH_0</m> is solvable and <m>\HH_{\text{int}}</m> is treated as a perturbation. One removes the evolution generated by <m>\HH_0</m> and leaves only the interaction to drive the state. Define</p>
+    <me>
+      \ket{\psi_I(t)}=e^{i\HH_0(t-t_0)/\hbar}\ket{\psi_S(t)},
+    </me>
+    <p>and for operators</p>
+    <me>
+      \AA_I(t)=e^{i\HH_0(t-t_0)/\hbar}\AA_S e^{-i\HH_0(t-t_0)/\hbar}.
+    </me>
+    <p>The interaction-picture Hamiltonian is</p>
+    <me>
+      \HH_I(t)=e^{i\HH_0(t-t_0)/\hbar}\HH_{\text{int}}(t)e^{-i\HH_0(t-t_0)/\hbar}.
+    </me>
+    <p>The states obey</p>
+    <me>
+      i\hbar \frac{d}{dt}\ket{\psi_I(t)}=\HH_I(t)\ket{\psi_I(t)}.
+    </me>
+    <p>This equation resembles the Schrödinger equation, but it only contains the interaction term. That makes it ideal for perturbation theory, scattering amplitudes, time-dependent transitions, and quantum optics.</p>
+    <subsection xml:id="sec-ch04-dyson">
+      <title>The Dyson Series</title>
+      <p>The time-evolution operator in the interaction picture satisfies</p>
+      <me>
+        i\hbar \frac{d}{dt}U_I(t,t_0)=\HH_I(t)U_I(t,t_0),
+      </me>
+      <p>with <m>U_I(t_0,t_0)=\II</m>. Iterating the integral form yields</p>
+      <me>
+        U_I(t,t_0)=\II-\frac{i}{\hbar}\int_{t_0}^{t}\HH_I(t_1)\,dt_1+\left(\frac{-i}{\hbar}\right)^2\int_{t_0}^{t}dt_1\int_{t_0}^{t_1}dt_2\,\HH_I(t_1)\HH_I(t_2)+\cdots.
+      </me>
+      <p>This is the Dyson series. In field theory it becomes the gateway to Feynman diagrams; in atomic physics it becomes time-dependent perturbation theory; in quantum information it describes driven qubits and control pulses.</p>
+    </subsection>
+    <example xml:id="ex-ch04-rabi">
+      <title>Driven Two-Level System</title>
+      <statement>
+        <p>Take <m>\HH_0=\frac{\hbar\omega_0}{2}\sigma_z</m> and <m>\HH_{\text{int}}(t)=\hbar\Omega\cos(\omega t)\sigma_x</m>. In the interaction picture the operator <m>\sigma_x</m> develops oscillatory factors generated by <m>\HH_0</m>. This isolates the near-resonant terms and motivates the rotating-wave approximation. The interaction picture is therefore not just algebraically convenient; it reveals the physically relevant slow dynamics.</p>
+      </statement>
+    </example>
+  </section>
+  <section xml:id="sec-ch04-equivalence">
+    <title>Equivalence of the Pictures</title>
+    <p>The three pictures are related by unitary transformations, so they must agree on all measurable quantities. For example,</p>
+    <me>
+      \bra{\psi_S(t)}\AA_S\ket{\psi_S(t)}
+      =
+      \bra{\psi_H}\AA_H(t)\ket{\psi_H}
+      =
+      \bra{\psi_I(t)}\AA_I(t)\ket{\psi_I(t)}.
+    </me>
+    <p>The interpretation is important: quantum theory does not privilege one allocation of time dependence over another. What is physically meaningful is the network of probabilities, expectation values, and correlations, not the representational choice used to compute them.</p>
+    <p>This equivalence also clarifies the relation between the fourth dimension of our framework and the others. Changing picture does not move us to a new physical theory in the way changing relativity or particle number does. Instead, it changes the coordinate system we use inside a fixed point of the eleven-dimensional space. Nevertheless, this "mere" change of representation can make the difference between an intractable calculation and a manageable one.</p>
+  </section>
+  <section xml:id="sec-ch04-which-picture">
+    <title>Which Picture Should One Use?</title>
+    <p>No picture is universally best. Each is adapted to a class of problems.</p>
+    <ul>
+      <li><em>Schrödinger picture:</em> best for state preparation, wave packets, measurement probabilities, and direct time evolution from initial data.</li>
+      <li><em>Heisenberg picture:</em> best for conserved quantities, symmetry arguments, correlation functions, and quantum-classical comparisons.</li>
+      <li><em>Interaction picture:</em> best for perturbation theory, driven systems, scattering, radiation-matter coupling, and weak interactions.</li>
+    </ul>
+    <p>In practice, advanced work often moves fluidly between pictures. One may formulate the theory in Heisenberg language, compute perturbatively in the interaction picture, and then present final intuition in Schrödinger language. Mastery means not merely knowing the formulas, but recognizing the computational and conceptual leverage each picture provides.</p>
+  </section>
+  <section xml:id="sec-ch04-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>The fourth dimension of the framework asks where time dependence is placed: in states, in operators, or in both.</li>
+      <li>In the Schrödinger picture, states evolve and operators are fixed.</li>
+      <li>In the Heisenberg picture, operators evolve according to <m>i\hbar\,d\AA_H/dt=[\AA_H,\HH]</m> and states are fixed.</li>
+      <li>In the interaction picture, free evolution generated by <m>\HH_0</m> is removed and the remaining interaction drives the state.</li>
+      <li>All three pictures are related by unitary transformations and therefore give identical physical predictions.</li>
+      <li>The Heisenberg picture makes the classical limit especially transparent, while the interaction picture is the natural setting for perturbation theory.</li>
     </ul>
   </section>
   <exercises>
     <title>Exercises</title>
-    <exercise><statement><p>Show that expectation values are the same in all three pictures.</p></statement></exercise>
-    <exercise><statement><p>For free particle, derive the Heisenberg equation of motion and show classical equations of motion emerge.</p></statement></exercise>
+    <exercise xml:id="exer-ch04-identity">
+      <statement>
+        <p>Show directly from the definitions that expectation values of a fixed observable are identical in the Schrödinger and Heisenberg pictures.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch04-harmonic">
+      <statement>
+        <p>For the harmonic oscillator, derive the Heisenberg equations for <m>\hat{x}</m> and <m>\hat{p}</m>, solve them, and compare the result with classical motion.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch04-explicit-time">
+      <statement>
+        <p>Suppose an observable <m>\AA(t)</m> has explicit time dependence. Derive the full Heisenberg equation including the partial derivative term and interpret the two contributions physically.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch04-dyson">
+      <statement>
+        <p>Starting from the interaction-picture Schrödinger equation, derive the first three terms of the Dyson series.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch04-rabi">
+      <statement>
+        <p>A two-level system is driven by a resonant field. Explain why the interaction picture is more natural than the Schrödinger picture for deriving Rabi oscillations.</p>
+      </statement>
+    </exercise>
+    <exercise xml:id="exer-ch04-advanced">
+      <statement>
+        <p><em>Challenge.</em> Show that if a unitary transformation is itself time dependent, then the transformed Hamiltonian acquires an additional term. Interpret this result as the quantum analog of fictitious forces in accelerated classical frames.</p>
+      </statement>
+    </exercise>
   </exercises>
 </chapter>
