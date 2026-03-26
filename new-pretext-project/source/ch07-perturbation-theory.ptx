@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch07-perturbation-theory" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Perturbation Theory (Dimension 9)</title>
+  <objectives>
+    <ul>
+      <li>Master time-independent perturbation theory for energy corrections.</li>
+      <li>Understand first and second-order corrections to eigenvalues and eigenstates.</li>
+      <li>Develop time-dependent perturbation theory for transitions.</li>
+      <li>Apply Fermi's Golden Rule to calculate transition rates.</li>
+      <li>Recognize when perturbation theory is valid and its limitations.</li>
+    </ul>
+  </objectives>
+  <introduction>
+    <p>Dimension nine asks: how do we solve the equations? For most interesting quantum systems, exact solutions do not exist. Perturbation theory is the workhorse approximation: we split the Hamiltonian as <m>\HH = \HH_0 + V</m> where <m>\HH_0</m> is solvable and <m>V</m> is small, then expand solutions in powers of <m>V</m>. This systematic expansion underlies most practical quantum mechanics: calculating atomic spectra, molecular bonding, scattering processes, and quantum electrodynamics.</p>
+  </introduction>
+  <section xml:id="sec-ch07-time-independent">
+    <title>Time-Independent Perturbation Theory</title>
+    <p>Suppose <m>\HH_0</m> has known eigenvalues and eigenstates: <m>\HH_0 \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}}</m>. The full Hamiltonian is <m>\HH = \HH_0 + \lambda V</m>, where <m>\lambda \ll 1</m> is a small dimensionless coupling.</p>
+    <p>Expand the eigenstates and energies as power series in <m>\lambda</m>:</p>
+    <me>
+      \ket{n} = \ket{n^{(0)}} + \lambda \ket{n^{(1)}} + \lambda^2 \ket{n^{(2)}} + \cdots,
+    </me>
+    <me>
+      E_n = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots.
+    </me>
+    <p><em>First-order energy correction:</em></p>
+    <me>
+      E_n^{(1)} = \langle n^{(0)} | V | n^{(0)} \rangle.
+    </me>
+    <p><em>Second-order energy correction:</em></p>
+    <me>
+      E_n^{(2)} = \sum_{k \ne n} \frac{|\langle k^{(0)} | V | n^{(0)} \rangle|^2}{E_n^{(0)} - E_k^{(0)}}.
+    </me>
+    <p>Higher orders follow by iteration. The series converges when <m>\lambda |V| \ll |E_n^{(0)} - E_k^{(0)}|</m> for all <m>k \ne n</m>.</p>
+  </section>
+  <section xml:id="sec-ch07-applications">
+    <title>Applications to Atoms and Molecules</title>
+    <p><em>Fine structure:</em> Relativistic corrections split degenerate levels by order <m>\alpha^2</m> (where <m>\alpha \approx 1/137</m> is the fine-structure constant).</p>
+    <p><em>Stark effect:</em> An electric field <m>E</m> creates a perturbation <m>V = -e E z</m>, shifting atomic levels quadratically (second-order) for nondegenerate states.</p>
+    <p><em>Zeeman effect:</em> A magnetic field causes splitting proportional to <m>B</m> (first-order) due to <m>V = -\mu \cdot B</m>.</p>
+    <p><em>Molecular vibrations:</em> Perturbation theory explains how molecular bonds stiffen and vibrational frequencies shift when molecular geometry changes.</p>
+  </section>
+  <section xml:id="sec-ch07-time-dependent">
+    <title>Time-Dependent Perturbation Theory</title>
+    <p>For time-dependent perturbations <m>V(t)</m>, we work in the interaction picture. The transition probability from state <m>n</m> to state <m>m</m> (with <m>m \ne n</m>) to first order is</p>
+    <me>
+      P_{n \to m}(t) = \left| \frac{1}{i\hbar} \int_0^t V_{mn}(t') e^{i\omega_{mn} t'} dt' \right|^2,
+    </me>
+    <p>where <m>V_{mn}(t) = \langle m^{(0)} | V(t) | n^{(0)} \rangle</m> and <m>\omega_{mn} = (E_m^{(0)} - E_n^{(0)})/\hbar</m>.</p>
+  </section>
+  <section xml:id="sec-ch07-fermi">
+    <title>Fermi's Golden Rule</title>
+    <p>For a constant perturbation turned on abruptly at <m>t=0</m>, the transition <em>rate</em> (probability per unit time) is</p>
+    <me>
+      \Gamma_{n \to m} = \frac{2\pi}{\hbar} |\langle m | V | n \rangle|^2 \rho(E_m),
+    </me>
+    <p>where <m>\rho(E_m)</m> is the density of final states. This formula is remarkably universal and applies to scattering, decay, and absorption processes.</p>
+  </section>
+  <section xml:id="sec-ch07-summary">
+    <title>Chapter Summary</title>
+    <ul>
+      <li>Perturbation theory systematically expands solutions in powers of a small coupling <m>\lambda V</m>.</li>
+      <li>First-order energy correction is the expectation value of <m>V</m> in the unperturbed state.</li>
+      <li>Second-order correction involves virtual transitions to intermediate states.</li>
+      <li>Time-dependent perturbation theory describes transitions driven by time-varying forces.</li>
+      <li>Fermi's Golden Rule gives the transition rate in terms of matrix elements and density of states.</li>
+    </ul>
+  </section>
+  <exercises>
+    <title>Exercises</title>
+    <exercise><statement><p>Using first-order perturbation theory, calculate the energy shift of a hydrogen atom in a weak electric field (Stark effect).</p></statement></exercise>
+    <exercise><statement><p>Derive Fermi's Golden Rule starting from first-order time-dependent perturbation theory for a time-independent perturbation.</p></statement></exercise>
+    <exercise><statement><p>For a harmonic oscillator with an added linear perturbation <m>V = \lambda x</m>, calculate the first and second-order energy shifts to the ground state.</p></statement></exercise>
+  </exercises>
+</chapter>
