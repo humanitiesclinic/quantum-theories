@@ -39,8 +39,8 @@
       </introduction>
       
       <xi:include href="./ch04-pictures.ptx" />
-      <xi:include href="./ch05-spin-angular-momentum.ptx" />
-      <xi:include href="./ch06-identical-particles.ptx" />
+      <xi:include href="./ch05-spin-and-angular-momentum-dimension-7-.ptx" />
+      <xi:include href="./ch06-identical-particles-and-many-body-systems-dimension-3-.ptx" />
       <xi:include href="./ch07-perturbation-theory.ptx" />
       
       <conclusion>
@@ -76,8 +76,8 @@
       </introduction>
       
       <xi:include href="./ch11-relativistic-quantum.ptx" />
-      <xi:include href="./ch12-quantum-field-theory.ptx" />
-      <xi:include href="./ch13-quantum-information.ptx" />
+      <xi:include href="./ch12-qft.ptx" />
+      <xi:include href="./ch13-quantum-info.ptx" />
       
       <conclusion>
         <p>With quantum field theory as a foundation, we turn to practical solution methods: both analytic approximations and numerical techniques.</p>
@@ -93,8 +93,8 @@
         <p>Knowing the theory is one thing; solving actual problems is another. This part covers practical methods: WKB approximation and semiclassical methods for understanding tunneling and barrier penetration, numerical approaches including variational methods and tensor networks, and special insights from classical limit behavior.</p>
       </introduction>
       
-      <xi:include href="./ch14-semiclassical.ptx" />
-      <xi:include href="./ch15-numerical-methods.ptx" />
+      <xi:include href="./ch14-wkb.ptx" />
+      <xi:include href="./ch15-numerical.ptx" />
       <xi:include href="./ch16-classical-limit.ptx" />
       
       <conclusion>
@@ -111,7 +111,7 @@
         <p>In this final part, we step back to see the complete picture. Every quantum theory—from the hydrogen atom to quantum field theory to quantum information—is a specific point in our 11-dimensional space. We show how this framework unifies disparate phenomena and conclude with applications across domains: chemistry, condensed matter, particle physics, and quantum technology.</p>
       </introduction>
       
-      <xi:include href="./ch17-complete-framework.ptx" />
+      <xi:include href="./ch17-framework.ptx" />
       <xi:include href="./ch18-applications.ptx" />
       
       <conclusion>
