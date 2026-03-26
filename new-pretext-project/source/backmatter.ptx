@@ -1,23 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Backmatter for Quantum Theories: The Missing Big Picture -->
 
-<!-- This file contains all of the "backmatter" material -->
-<!-- In comments, we show examples of how to have hints to divisional -->
-<!-- excercies appear in a section, and then their -->
-<!-- solutions in the next. Then there is an appendix -->
-<!-- with all notation generated, and finally the index. -->
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="backmatter">
-  <title>Backmatter</title>
 
-  <!-- <solutions divisional="hint"> <title>Selected Hints</title> </solutions> -->
+  <!-- Appendix A: Notation -->
+  <appendix xml:id="appendix-notation">
+    <title>Notation and Conventions</title>
+    <section>
+      <title>Quantum Notation</title>
+      <ul>
+        <li><m>\ket{\psi}</m>: state vector (ket)</li>
+        <li><m>\bra{\psi}</m>: dual vector (bra)</li>
+        <li><m>\braket{\phi}{\psi}</m>: inner product</li>
+        <li><m>\AA, \HH, \LL, \SS</m>: operators</li>
+        <li><m>\expect{\AA}</m>: expectation value</li>
+        <li><m>\comm{\AA}{\BB}</m>: commutator</li>
+      </ul>
+    </section>
+  </appendix>
 
-  <!-- <solutions divisional="solution"> <title>Selected Solutions</title> </solutions> -->
+  <!-- Appendix B: Mathematical Tools -->
+  <appendix xml:id="appendix-math">
+    <title>Essential Mathematical Tools</title>
+    <section>
+      <title>Linear Algebra</title>
+      <p>Vector spaces, eigenvalues, matrix diagonalization, tensor products, functional analysis.</p>
+    </section>
+    <section>
+      <title>Special Functions</title>
+      <p>Hermite, Legendre, Bessel functions, and spherical harmonics used throughout.</p>
+    </section>
+  </appendix>
 
-  <!-- <appendix> <title>List of Symbols</title> <notation-list/> </appendix> -->
+  <!-- Appendix C: Constants -->
+  <appendix xml:id="appendix-constants">
+    <title>Physical Constants and Conversion Factors</title>
+    <section>
+      <title>Fundamental Constants</title>
+      <ul>
+        <li><m>\hbar = 1.054 \times 10^{-34}</m> J·s</li>
+        <li><m>c = 3 \times 10^8</m> m/s</li>
+        <li><m>m_e = 9.109 \times 10^{-31}</m> kg</li>
+        <li><m>a_0 = 0.529 \text{ Å}</m> (Bohr radius)</li>
+      </ul>
+    </section>
+  </appendix>
 
-  <!-- <index> <title>Index</title> <index-list/> </index> -->
+  <!-- Appendix D: Solutions -->
+  <appendix xml:id="appendix-solutions">
+    <title>Solutions to Selected Exercises</title>
+    <introduction>
+      <p>Detailed solutions to selected exercises marked with a star throughout the textbook.</p>
+    </introduction>
+    <section>
+      <title>Part I Solutions</title>
+      <p>Solutions to foundational problems from Chapters 1-3.</p>
+    </section>
+    <section>
+      <title>Part II and Beyond</title>
+      <p>Solutions to advanced exercises.</p>
+    </section>
+  </appendix>
 
-  <colophon>
-    <p> This book was authored in <pretext />. </p>
-  </colophon>
+  <!-- Bibliography -->
+  <references xml:id="references">
+    <title>Bibliography and Further Reading</title>
+    <introduction>
+      <p>This bibliography provides classic references that established quantum mechanics and modern treatments offering additional perspectives.</p>
+    </introduction>
+    <section>
+      <title>Classic References</title>
+      <p>Foundational texts: Dirac, von Neumann, Landau and Lifshitz, and others.</p>
+    </section>
+    <section>
+      <title>Modern Textbooks</title>
+      <p>Contemporary quantum mechanics texts at various levels.</p>
+    </section>
+    <section>
+      <title>Specialized Topics</title>
+      <p>References for: relativistic quantum mechanics, quantum field theory, quantum information, mathematical physics.</p>
+    </section>
+  </references>
+
+  <!-- Glossary -->
+  <glossary xml:id="glossary">
+    <title>Glossary of Terms</title>
+    <gi><title>Angular Momentum</title><p>Intrinsic or orbital rotational property, quantized in units of <m>\hbar</m>.</p></gi>
+    <gi><title>Born Rule</title><p>Probability <m>P(a_n) = |\braket{a_n}{\psi}|^2</m> of measuring eigenvalue.</p></gi>
+    <gi><title>Boson</title><p>Integer spin particle with symmetric wavefunction.</p></gi>
+    <gi><title>Commutator</title><p><m>[\AA, \BB] = \AA\BB - \BB\AA</m>, measures non-commutativity.</p></gi>
+    <gi><title>Decoherence</title><p>Loss of quantum coherence to environment.</p></gi>
+    <gi><title>Eigenvalue</title><p>Possible measurement outcome for observable.</p></gi>
+    <gi><title>Entanglement</title><p>Correlation in composite systems beyond product states.</p></gi>
+    <gi><title>Fermion</title><p>Half-integer spin particle with antisymmetric wavefunction.</p></gi>
+    <gi><title>Fock Space</title><p>Hilbert space for variable particle number.</p></gi>
+    <gi><title>Hamiltonian</title><p>Total energy operator <m>\HH = \hat{T} + \hat{V}</m>.</p></gi>
+    <gi><title>Hilbert Space</title><p>Complete complex vector space for quantum states.</p></gi>
+    <gi><title>Pauli Exclusion</title><p>No two fermions in identical quantum state.</p></gi>
+    <gi><title>Perturbation Theory</title><p>Approximation in powers of small coupling.</p></gi>
+    <gi><title>Schrödinger Equation</title><p>Master equation: <m>i\hbar d\ket{\psi}/dt = \HH\ket{\psi}</m>.</p></gi>
+    <gi><title>Spin</title><p>Intrinsic angular momentum, purely quantum.</p></gi>
+    <gi><title>Tunneling</title><p>Quantum particle penetration into classically forbidden region.</p></gi>
+    <gi><title>Uncertainty Principle</title><p><m>\Delta A \cdot \Delta B \geq \frac{\hbar}{2}|\expect{[\AA, \BB]}|</m>.</p></gi>
+  </glossary>
+
 </backmatter>
-

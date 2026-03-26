@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="ch04-pictures" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Pictures of Quantum Mechanics (Dimension 4)</title>
+  <introduction>
+    <p>One of the most elegant features of quantum mechanics is that time dependence can be placed in different locations: in the states, in the operators, or split between both. The Schrödinger, Heisenberg, and interaction pictures are all mathematically equivalent, merely different perspectives on the same physics. Understanding all three and how to transform between them is essential for mastering quantum mechanics.</p>
+  </introduction>
+  <section><title>The Schrödinger Picture</title>
+    <p>In the Schrödinger picture, states evolve while operators remain constant: <m>\ket{\psi_S(t)} = U(t)\ket{\psi_S(0)}</m>. The Schrödinger equation governs state evolution: <m>i\hbar d\ket{\psi_S}/dt = \HH_S\ket{\psi_S}</m>.</p>
+  </section>
+  <section><title>The Heisenberg Picture</title>
+    <p>In the Heisenberg picture, operators evolve while states are constant: <m>\AA_H(t) = U^\dagger(t)\AA_S U(t)</m>. The Heisenberg equation of motion governs operator evolution: <m>d\AA_H/dt = (i/\hbar)[\HH, \AA_H]</m>.</p>
+  </section>
+  <section><title>The Interaction Picture</title>
+    <p>For time-dependent perturbations, the interaction picture splits the Hamiltonian: <m>\HH = \HH_0 + \HH_{\text{int}}(t)</m>. Both states and operators evolve: <m>i\hbar d\ket{\psi_I}/dt = \HH_I(t)\ket{\psi_I}</m>. This picture is natural for perturbation theory.</p>
+  </section>
+  <section><title>Chapter Summary</title>
+    <ul>
+      <li>Three pictures are mathematically equivalent, differ only in bookkeeping of time dependence</li>
+      <li>Schrödinger: States evolve, operators static</li>
+      <li>Heisenberg: Operators evolve, states static</li>
+      <li>Interaction: Both evolve, useful for perturbation theory</li>
+      <li>Expectation values identical in all pictures</li>
+    </ul>
+  </section>
+  <exercises>
+    <title>Exercises</title>
+    <exercise><statement><p>Show that expectation values are the same in all three pictures.</p></statement></exercise>
+    <exercise><statement><p>For free particle, derive the Heisenberg equation of motion and show classical equations of motion emerge.</p></statement></exercise>
+  </exercises>
+</chapter>
