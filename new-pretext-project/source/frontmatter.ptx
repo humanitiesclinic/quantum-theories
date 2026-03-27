@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Frontmatter for Quantum Theories: The Missing Big Picture -->
+<!-- Frontmatter for Quantum Theories - The Missing Big Picture -->
 
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
   <!-- Title page with authors and date -->
@@ -131,7 +131,7 @@
 
   <!-- Colophon with copyright and publishing details -->
   <colophon>
-    <p><em>Quantum Theories: The Missing Big Picture</em><br/>
+    <p><em>Quantum Theories - The Missing Big Picture</em><br/>
     A Unified Framework for Understanding Quantum Evolution</p>
 
     <p>Copyright <copyright/> 2024 The Unified Framework Collective</p>

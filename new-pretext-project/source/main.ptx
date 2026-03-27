@@ -5,7 +5,7 @@
   <xi:include href="./docinfo.ptx" />
 
   <book xml:id="quantum-theories-complete">
-    <title>Quantum Theories: The Missing Big Picture</title>
+    <title>Quantum Theories - The Missing Big Picture</title>
     <subtitle>A Unified Framework for Understanding Quantum Evolution</subtitle>
 
     <!-- Include frontmatter -->
