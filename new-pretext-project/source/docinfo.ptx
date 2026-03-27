@@ -7,6 +7,9 @@
   <!-- Unique document identifier -->
   <document-id>quantum-theories-missing-big-picture</document-id>
   
+  <!-- ISBN -->
+  <isbn>9781105465901</isbn>
+  
   <!-- Catalog blurb -->
   <blurb shelf="Physics">Quantum theory books abound, but readers are left in a fragmented maze. This course provides a unified framework by emphasizing quantum theories' goal: predict time evolution of states and observables. Systematically explores 11 dimensions: formalism, relativity, particle number, picture, state purity, system openness, spin, mass, approximation method, classical limit, and solution technique.</blurb>
 
