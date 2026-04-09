@@ -135,6 +135,10 @@
     statcounter-security="0123456"/> -->
   </html>
 
+  <epub>
+    <!-- EPUB-specific options for remote resource handling -->
+  </epub>
+
   <!-- To use WeBWorK, you need a server.  -->
   <!-- <webwork server="https://webwork-ptx.aimath.org"> -->
 </publication>

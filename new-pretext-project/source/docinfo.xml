@@ -60,7 +60,6 @@
     \newcommand{\UU}{\hat{U}}
     
     % Other symbols
-    \newcommand{\hbar}{\hbar}
     \newcommand{\del}{\nabla}
     \newcommand{\del2}{\nabla^2}
     \newcommand{\Hilbert}{\mathcal{H}}
