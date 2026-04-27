@@ -55,78 +55,68 @@
 
     <p>By systematically exploring these dimensions, starting from the simplest case (the non-relativistic Schrödinger equation) and building up to the most complex (quantum field theory and quantum gravity), we provide a roadmap through the quantum landscape.</p>
 
-    <subsection>
-      <title>Who This Book Is For</title>
-      <p>This textbook is designed for:</p>
-      <ul>
-        <li><em>Advanced undergraduates</em> who have completed introductory quantum mechanics and wish to understand the broader landscape</li>
-        <li><em>Graduate students</em> beginning research in quantum physics, chemistry, or related fields</li>
-        <li><em>Researchers</em> seeking a unified perspective on quantum theory</li>
-        <li><em>Self-learners</em> with strong mathematical backgrounds who want to master quantum theory systematically</li>
-      </ul>
-    </subsection>
+    <p><strong>Who This Book Is For</strong></p>
+    <p>This textbook is designed for:</p>
+    <ul>
+      <li><em>Advanced undergraduates</em> who have completed introductory quantum mechanics and wish to understand the broader landscape</li>
+      <li><em>Graduate students</em> beginning research in quantum physics, chemistry, or related fields</li>
+      <li><em>Researchers</em> seeking a unified perspective on quantum theory</li>
+      <li><em>Self-learners</em> with strong mathematical backgrounds who want to master quantum theory systematically</li>
+    </ul>
 
-    <subsection>
-      <title>Prerequisites</title>
-      <p>We assume readers have:</p>
-      <ul>
-        <li>Solid understanding of linear algebra (vector spaces, matrices, eigenvalues)</li>
-        <li>Multivariable calculus and differential equations</li>
-        <li>Basic exposure to quantum mechanics (at least the Schrödinger equation)</li>
-        <li>Some familiarity with classical mechanics and electromagnetism</li>
-      </ul>
-    </subsection>
+    <p><strong>Prerequisites</strong></p>
+    <p>We assume readers have:</p>
+    <ul>
+      <li>Solid understanding of linear algebra (vector spaces, matrices, eigenvalues)</li>
+      <li>Multivariable calculus and differential equations</li>
+      <li>Basic exposure to quantum mechanics (at least the Schrödinger equation)</li>
+      <li>Some familiarity with classical mechanics and electromagnetism</li>
+    </ul>
 
-    <subsection>
-      <title>How to Use This Book</title>
-      <p>The book is organized into six parts:</p>
-      
-      <p><em>Part I: Foundations</em> establishes the basic framework and introduces the simplest quantum system.</p>
-      
-      <p><em>Part II: Dimension Variations</em> explores how changing each dimension transforms the theory.</p>
-      
-      <p><em>Part III: Approximation Methods</em> provides tools for solving real problems.</p>
-      
-      <p><em>Part IV: Advanced Topics</em> covers relativistic quantum mechanics and field theory.</p>
-      
-      <p><em>Part V: Solution Techniques</em> focuses on practical computational methods.</p>
-      
-      <p><em>Part VI: Unification and Applications</em> synthesizes everything into the complete framework.</p>
+    <p><strong>How to Use This Book</strong></p>
+    <p>The book is organized into six parts:</p>
+    
+    <p><em>Part I: Foundations</em> establishes the basic framework and introduces the simplest quantum system.</p>
+    
+    <p><em>Part II: Dimension Variations</em> explores how changing each dimension transforms the theory.</p>
+    
+    <p><em>Part III: Approximation Methods</em> provides tools for solving real problems.</p>
+    
+    <p><em>Part IV: Advanced Topics</em> covers relativistic quantum mechanics and field theory.</p>
+    
+    <p><em>Part V: Solution Techniques</em> focuses on practical computational methods.</p>
+    
+    <p><em>Part VI: Unification and Applications</em> synthesizes everything into the complete framework.</p>
 
-      <p>Each chapter includes:</p>
-      <ul>
-        <li><em>Learning Goals</em> stating what you should understand</li>
-        <li><em>Key Concept boxes</em> highlighting central ideas</li>
-        <li><em>Worked examples</em> demonstrating applications</li>
-        <li><em>Exercises</em> ranging from straightforward to challenging</li>
-        <li><em>Chapter Summaries</em> for review and study</li>
-      </ul>
+    <p>Each chapter includes:</p>
+    <ul>
+      <li><em>Learning Goals</em> stating what you should understand</li>
+      <li><em>Key Concept boxes</em> highlighting central ideas</li>
+      <li><em>Worked examples</em> demonstrating applications</li>
+      <li><em>Exercises</em> ranging from straightforward to challenging</li>
+      <li><em>Chapter Summaries</em> for review and study</li>
+    </ul>
 
-      <p>You may not need to read every chapter in order. If you have already studied the non-relativistic Schrödinger equation, you might skip Chapter 2 and focus on the variations in later chapters. However, Chapters 1 and 3 (on the framework and mathematics) provide essential context throughout.</p>
-    </subsection>
+    <p>You may not need to read every chapter in order. If you have already studied the non-relativistic Schrödinger equation, you might skip Chapter 2 and focus on the variations in later chapters. However, Chapters 1 and 3 (on the framework and mathematics) provide essential context throughout.</p>
 
-    <subsection>
-      <title>Pedagogical Features</title>
-      <p><strong>Concept Boxes:</strong> These highlight key definitions, theorems, and unifying ideas. They appear set off from the text and are designed for easy reference.</p>
-      
-      <p><strong>Examples:</strong> Worked examples show how to apply concepts to concrete problems, with full mathematical steps.</p>
-      
-      <p><strong>Remarks:</strong> Additional commentary provides context, historical notes, or connections to other fields.</p>
-      
-      <p><strong>Exercises:</strong> Problems range from straightforward (designed to build confidence) to challenging (for advanced students or independent study). Solutions to selected exercises are provided in an appendix.</p>
-      
-      <p><strong>Summaries:</strong> Each chapter ends with a bullet-point summary of main ideas, useful for review.</p>
-    </subsection>
+    <p><strong>Pedagogical Features</strong></p>
+    <p><strong>Concept Boxes:</strong> These highlight key definitions, theorems, and unifying ideas. They appear set off from the text and are designed for easy reference.</p>
+    
+    <p><strong>Examples:</strong> Worked examples show how to apply concepts to concrete problems, with full mathematical steps.</p>
+    
+    <p><strong>Remarks:</strong> Additional commentary provides context, historical notes, or connections to other fields.</p>
+    
+    <p><strong>Exercises:</strong> Problems range from straightforward (designed to build confidence) to challenging (for advanced students or independent study). Solutions to selected exercises are provided in an appendix.</p>
+    
+    <p><strong>Summaries:</strong> Each chapter ends with a bullet-point summary of main ideas, useful for review.</p>
 
-    <subsection>
-      <title>Acknowledgments</title>
-      <p>We are grateful to the many students whose questions inspired this unified approach, to our colleagues who provided valuable feedback on drafts, and to the quantum physics community for developing the deep understanding we attempt to synthesize here.</p>
+    <p><strong>Acknowledgments</strong></p>
+    <p>We are grateful to the many students whose questions inspired this unified approach, to our colleagues who provided valuable feedback on drafts, and to the quantum physics community for developing the deep understanding we attempt to synthesize here.</p>
 
-      <p>This project emerges from the recognition that quantum mechanics is fundamentally elegant and unified—not fragmented—when viewed through the lens of time evolution. We hope this textbook helps readers discover that elegance.</p>
+    <p>This project emerges from the recognition that quantum mechanics is fundamentally elegant and unified—not fragmented—when viewed through the lens of time evolution. We hope this textbook helps readers discover that elegance.</p>
 
-      <p><em>The Authors</em><br/>
-      January 2024</p>
-    </subsection>
+    <p><em>The Authors</em><br/>
+    January 2024</p>
   </preface>
 
   <!-- Colophon with copyright and publishing details -->
