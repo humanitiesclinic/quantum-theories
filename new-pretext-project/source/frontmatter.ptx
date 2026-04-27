@@ -55,7 +55,7 @@
 
     <p>By systematically exploring these dimensions, starting from the simplest case (the non-relativistic Schrödinger equation) and building up to the most complex (quantum field theory and quantum gravity), we provide a roadmap through the quantum landscape.</p>
 
-    <section>
+    <subsection>
       <title>Who This Book Is For</title>
       <p>This textbook is designed for:</p>
       <ul>
@@ -64,9 +64,9 @@
         <li><em>Researchers</em> seeking a unified perspective on quantum theory</li>
         <li><em>Self-learners</em> with strong mathematical backgrounds who want to master quantum theory systematically</li>
       </ul>
-    </section>
+    </subsection>
 
-    <section>
+    <subsection>
       <title>Prerequisites</title>
       <p>We assume readers have:</p>
       <ul>
@@ -75,9 +75,9 @@
         <li>Basic exposure to quantum mechanics (at least the Schrödinger equation)</li>
         <li>Some familiarity with classical mechanics and electromagnetism</li>
       </ul>
-    </section>
+    </subsection>
 
-    <section>
+    <subsection>
       <title>How to Use This Book</title>
       <p>The book is organized into six parts:</p>
       
@@ -103,9 +103,9 @@
       </ul>
 
       <p>You may not need to read every chapter in order. If you have already studied the non-relativistic Schrödinger equation, you might skip Chapter 2 and focus on the variations in later chapters. However, Chapters 1 and 3 (on the framework and mathematics) provide essential context throughout.</p>
-    </section>
+    </subsection>
 
-    <section>
+    <subsection>
       <title>Pedagogical Features</title>
       <p><strong>Concept Boxes:</strong> These highlight key definitions, theorems, and unifying ideas. They appear set off from the text and are designed for easy reference.</p>
       
@@ -116,9 +116,9 @@
       <p><strong>Exercises:</strong> Problems range from straightforward (designed to build confidence) to challenging (for advanced students or independent study). Solutions to selected exercises are provided in an appendix.</p>
       
       <p><strong>Summaries:</strong> Each chapter ends with a bullet-point summary of main ideas, useful for review.</p>
-    </section>
+    </subsection>
 
-    <section>
+    <subsection>
       <title>Acknowledgments</title>
       <p>We are grateful to the many students whose questions inspired this unified approach, to our colleagues who provided valuable feedback on drafts, and to the quantum physics community for developing the deep understanding we attempt to synthesize here.</p>
 
@@ -126,7 +126,7 @@
 
       <p><em>The Authors</em><br/>
       January 2024</p>
-    </section>
+    </subsection>
   </preface>
 
   <!-- Colophon with copyright and publishing details -->
